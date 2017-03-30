@@ -15,7 +15,7 @@
     {% endfor %}
   </section>
 
-  {% include '_partials/pagination.swig' %}
+  {# include '_partials/pagination.swig' #}
 {% endblock %}
 
 {% block sidebar %}
