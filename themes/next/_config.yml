@@ -44,7 +44,7 @@ menu:
   #tags: /tags
   #sitemap: /sitemap.xml
   #commonweal: /404.html
-  subscribe: /subscribe
+  subscribe: http://subscribe.weekly.ccns.io
 
 
 # Enable/Disable menu icons.
