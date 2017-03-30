@@ -69,3 +69,7 @@ theme: landscape
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type:
+
+index_generator:
+  per_page: 1
+  order_by: -date
