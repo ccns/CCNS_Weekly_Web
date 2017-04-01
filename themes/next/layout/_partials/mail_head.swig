@@ -8,6 +8,6 @@
 {% if theme.vendors.fontawesome %}
   {% set font_awesome_uri = theme.vendors.fontawesome %}
 {% endif %}
-<link href="{{ config.url }}{{ font_awesome_uri }}" rel="stylesheet" type="text/css" />
+<link href="{{ font_awesome_uri }}" rel="stylesheet" type="text/css" />
 
-<link href="{{ config.url }}{{ url_for(theme.css) }}/main.css?v={{ theme.version }}" rel="stylesheet" type="text/css" />
+<link href="{{ url_for(theme.css) }}/main.css?v={{ theme.version }}" rel="stylesheet" type="text/css" />

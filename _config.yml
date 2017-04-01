@@ -68,7 +68,8 @@ theme: next
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type:
+- type: mailchimp
+  api_key: hello
 
 index_generator:
   per_page: 3
