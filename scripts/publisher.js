@@ -1,6 +1,7 @@
 var juice = require('juice');
 var fs = require('fs');
 var Mailchimp = require('mailchimp-api-v3')
+var minify = require('html-minifier').minify;
 
 hexo.extend.generator.register('mail', function(locals){
   var config = this.config;
@@ -17,7 +18,12 @@ hexo.extend.deployer.register('mailchimp', function(args){
   var from_name = args.from_name;
   var reply_to = args.reply_to;
   juice.juiceFile('public/mail.html', {}, function(err, html){
-    fs.writeFileSync('mail_c.html', html);
+    var html = minify(html, {
+      collapseBooleanAttributes: true,
+      collapseWhitespace: true,
+      minifyCSS: true,
+    })
+    fs.writeFileSync('public/mail_c.html', html);
     var title = /<title>(.*)<\/title>/.exec(html)[1];
     var campaign_id;
     mailchimp.post('/campaigns', {
@@ -36,7 +42,7 @@ hexo.extend.deployer.register('mailchimp', function(args){
     }).then(function(results) {
       return mailchimp.post('/campaigns/'+campaign_id+'/actions/send')
     }).catch(function(err) {
-      console.log(err);
+      console.error(err);
       throw new Error(err);
     })
   })
