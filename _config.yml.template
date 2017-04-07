@@ -12,9 +12,9 @@ timezone: Asia/Taipei
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: 
+url: http://weekly.ccns.io/
 root: /
-permalink: :id/
+permalink: :title/
 permalink_defaults:
 
 # Directory
@@ -70,10 +70,13 @@ theme: next
 deploy:
 - type: mailchimp
   api_key: 
-  list_id:
-  from_name:
+  list_id: 
+  from_name: NCKU CCNS
   reply_to: 
+- type: git
+  repo: git@github.com:ccns/CCNS_Weekly_Web
+  branch: gh-pages
 
 index_generator:
-  per_page: 3
+  per_page: 1
   order_by: -date
