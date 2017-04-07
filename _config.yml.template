@@ -12,7 +12,7 @@ timezone: Asia/Taipei
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://localhost:4000
+url: 
 root: /
 permalink: :id/
 permalink_defaults:
@@ -69,10 +69,10 @@ theme: next
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
 - type: mailchimp
-  api_key: 14426327f8cfad0278a4584a92f58565-us15
-  list_id: 00bfa7a2cb
-  from_name: NCKU CCNS
-  reply_to: team6612@gmail.com
+  api_key: 
+  list_id:
+  from_name:
+  reply_to: 
 
 index_generator:
   per_page: 3
