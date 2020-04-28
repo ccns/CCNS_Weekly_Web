@@ -7,4 +7,10 @@ date: 2020-04-28 21:55:04
 
 編輯群
 ---
-* [DC] [Blog](https://blog.danielchen.cc/) [LinkedIn](https://linkedin.com/in/d4n1el/)
+* [DC] [Blog](https://blog.danielchen.cc/) [GitHub](https://github.com/d4n1elchen) [LinkedIn](https://linkedin.com/in/d4n1el/)
+* [Rain]
+* [gholk]
+* [raiso]
+* [LanKuDot]
+* [TsundereChen]
+* [Ian]
