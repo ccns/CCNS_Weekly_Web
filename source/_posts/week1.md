@@ -11,7 +11,7 @@ date: 2020-04-28 22:01:44
 
 ## [專欄] SRE Works
 ### [[English] Nginx SSL configuration - fullchain.pem vs cert.pem]( https://blog.tsunderechen.io/2020/04/nginx-ssl-certificate-fullchain-vs-cert/) -- TsundereChen
-A note from a warning message created by curl, also take a look at the differences between `fullchain` and `cert`
+A note because of a warning message created by curl, this note will take a look at the differences between `fullchain` and `cert`
 
 ## 隨機性技術隨筆
 ### [[翻譯] 為什麼學界應使用自由軟體](http://gholk.github.io/school-should-use-free-software.html) -- gholk
