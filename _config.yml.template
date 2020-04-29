@@ -81,7 +81,7 @@ deploy:
 #   api_key: 
 #   list_id: 
 #   from_name: NCKU CCNS
-#   reply_to: 
+#   reply_to: weekly@ccns.ncku.edu.tw
 - type: git
   repo: git@github.com:ccns/CCNS_Weekly_Web
   branch: gh-pages
