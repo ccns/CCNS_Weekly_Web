@@ -25,10 +25,10 @@ A note from a warning message created by curl, also take a look at the differenc
 我他媽的怎麼會知道。
 
 ## 文章分享
-### [利用 race condition 爆打各大防毒軟體](https://www.rack911labs.com/research/exploiting-almost-every-antivirus-software/) -- HexRabbit
+### [[英文] 利用 race condition 爆打各大防毒軟體](https://www.rack911labs.com/research/exploiting-almost-every-antivirus-software/) -- HexRabbit
 最近安全研究人員發現利用 symlink 與檔案的互相切換所造成的 race condition 能夠誘導防毒軟體誤刪系統重要檔案，進而使系統崩潰造成 DoS(Denial of Service) 攻擊或甚至是權限提升。
 ### [外星人來襲，人類岌岌可危](https://www.theguardian.com/world/2020/apr/27/pentagon-releases-three-ufo-videos-taken-by-us-navy-pilots) -- HexRabbit
-五角大廈於上周一釋出的聲明中證實數段從 2004 - 2015 年間洩漏的不明飛行物影片是真有其事，而隔天 NHK 也報導日本自衛隊正在制定遭遇不明飛行物時的相關對策
+五角大廈於上周一釋出的聲明中證實數段從 2004 - 2015 年間洩漏的不明飛行物影片是真有其事，而隔天 NHK 也報導日本自衛隊正在制定遭遇不明飛行物時的相關對策。
 ### [星巴克咖啡廳辦公室](https://mp.weixin.qq.com/s/7w37DCil0e0JprpnIfa3zg?fbclid=IwAR01LgBvpGn-zqSwKFls2nKmScF8y-12ANWgmR3EAa_PvpCTDXyt7p_3e2E) -- Rain
 隨著新的世代人才進入工作職場，也帶入了對於工作不同的嚮往與定義。在工作與生活的界線逐漸消失之時，不少餐飲巨頭也悄悄的進場布局，期望在不久未來能占有人們日常生活中的一席之地。星巴克正是其中之一，挾帶著龐大的品牌優勢，搭上疫情造成的 WFH 風氣，積極投入新時代工作環境的構築。
 ### [Google 大砍行銷預算](https://www.inside.com.tw/article/19615-google-to-cut-marketing-budgets-hiring-freeze-expected) -- Rain
