@@ -64,6 +64,15 @@ pagination_dir: page
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: next
+feed:
+  type:
+    - atom
+    - rss2
+  path: 
+    - atom.xml
+    - rss2.xml
+  limit: 5
+  content: true
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
