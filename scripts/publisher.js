@@ -3,6 +3,14 @@ var fs = require('fs');
 var Mailchimp = require('mailchimp-api-v3')
 var minify = require('html-minifier').minify;
 
+function getNextSchedule(weekday, hour, offset) {
+  var next = new Date();
+  next.setDate(next.getUTCDate() + (weekday + 7 - next.getUTCDay()) % 7);
+  next.setUTCHours(hour, 0, 0);
+  next.setTime(next.getTime() + (-offset*60*60*1000));
+  return next;
+}
+
 hexo.extend.generator.register('mail', function(locals){
   var config = this.config;
   var posts = locals.posts.sort(config.index_generator.order_by);
@@ -17,6 +25,7 @@ hexo.extend.deployer.register('mailchimp', function(args){
   var list_id = args.list_id;
   var from_name = args.from_name;
   var reply_to = args.reply_to;
+  var campaign_id;
   juice.juiceFile('public/mail.html', {}, function(err, html){
     var html = minify(html, {
       collapseBooleanAttributes: true,
@@ -25,7 +34,6 @@ hexo.extend.deployer.register('mailchimp', function(args){
     })
     fs.writeFileSync('public/mail_c.html', html);
     var title = /<title>(.*)<\/title>/.exec(html)[1];
-    var campaign_id;
     mailchimp.post('/campaigns', {
       "recipients": {
         "list_id": list_id
