@@ -15,10 +15,10 @@ A note because of a warning message created by curl, this note will take a look 
 
 ## 隨機性技術隨筆
 ### [[翻譯] 為什麼學界應使用自由軟體](http://gholk.github.io/school-should-use-free-software.html) -- gholk
-自由軟體開放原始碼，適合教學，並培養學生的公民意識。
+自由軟體開放原始碼，適合教學，並引領學生對軟體自由背後意義的思考。
 本文翻譯 gnu 的文章，再加上自己的改寫。
 大學時候翻的，但後來大學時的 blog 被學校收掉了，現在再重上架到自己的 blog。
-### [編輯器之神: Vim](https://docs.google.com/presentation/d/1vG92EIYHy663cG-jt7tIVLGtIwEhK2B10cBpYdvPhbg/edit?usp=sharing) -- HexRabbit, Sou
+### [[簡報] 編輯器之神: Vim](https://docs.google.com/presentation/d/1vG92EIYHy663cG-jt7tIVLGtIwEhK2B10cBpYdvPhbg/edit?usp=sharing) -- HexRabbit, Sou
 我之前的預設編輯器是 Vim，而我設 mapping 的原則是：「幹你娘設爆」
 沒錯，就是幹你娘設爆，老子才不管甚麼 recursive mapping 三小的，每次設的就是蝦姬芭一大坨。inoremap 不夠用就設成 map，嫌 map 五個鍵不夠就乾脆貼整個 linux kernel 的代碼順便編譯執行。按鍵一按直接觸發 OOM，跟把整個工作站的 RAM 全拔下來沒兩樣。
 我還記得，我那個月用 Vim 寫程式 25 天，老闆跑來跟我說，這個月公司斷電重開了 26 次，你有頭緒嗎？
