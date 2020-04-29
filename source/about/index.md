@@ -7,10 +7,17 @@ date: 2020-04-28 21:55:04
 
 編輯群
 ---
+##### 固定作者
 * [DC] [Blog](https://blog.danielchen.cc/) [GitHub](https://github.com/d4n1elchen) [LinkedIn](https://linkedin.com/in/d4n1el/)
+* [LanKuDot] [Blog](https://airfishqi.blogspot.com/) [GitHub](https://github.com/LanKuDot) [Twitter](https://twitter.com/LanKuDot)
+* [gholk] [Blog](//gholk.github.io)
+* [HexRabbit]
+* [iid]
 * [Rain]
-* [gholk]
-* [raiso]
-* [LanKuDot]
+
+##### 共同編輯
 * [TsundereChen]
+* [raiso]
 * [Ian]
+* [Sou]
+* [R2]
