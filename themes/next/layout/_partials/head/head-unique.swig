@@ -1,4 +1,4 @@
-{{ open_graph() }}
+{{ open_graph({image: '/images/ccns-icon-180x180.png'}) }}
 
 {{ canonical() }}
 
