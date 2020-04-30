@@ -33,7 +33,3 @@ A note because of a warning message created by curl, this note will take a look 
 隨著新的世代人才進入工作職場，也帶入了對於工作不同的嚮往與定義。在工作與生活的界線逐漸消失之時，不少餐飲巨頭也悄悄的進場布局，期望在不久未來能占有人們日常生活中的一席之地。星巴克正是其中之一，挾帶著龐大的品牌優勢，搭上疫情造成的 WFH 風氣，積極投入新時代工作環境的構築。
 ### [Google 大砍行銷預算](https://www.inside.com.tw/article/19615-google-to-cut-marketing-budgets-hiring-freeze-expected) -- Rain
 武漢肺炎重創全球經濟，連科技巨頭 Google 也沒能避開這波衝擊大砍預算。
-
----
-
-這是由成大網路愛好社 CCNS 所推出的週刊，目前為雙週更新一次，裡面的文章都是由本社團裡面的編輯們自己所撰寫的文章，或在週刊發行期間內所挑選出來的優質文章，加上由編輯們撰寫的註解及評論，文章主要與科技相關，不過如果有編輯覺得值得推薦的非科技相關文章也會刊載，如果有任何建議，歡迎發送 E-Mail 到 weekly@ccns.ncku.edu.tw ，或是直接私訊到 [CCNS 電腦與網路愛好社](https://www.facebook.com/ncku.ccns/)，最後，歡迎分享此週刊！
