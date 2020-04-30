@@ -214,10 +214,10 @@
     {%- if theme.related_posts.enable and (theme.related_posts.display_in_home or not is_index) %}
       {{ partial('_partials/post/post-related.swig') }}
     {%- endif %}
+    
+    {{- next_inject('postBodyEnd') }}
 
     {%- if not is_index %}
-      {{- next_inject('postBodyEnd') }}
-
       {%- if post.reward_settings.enable %}
         {{ partial('_partials/post/post-reward.swig') }}
       {%- endif %}
