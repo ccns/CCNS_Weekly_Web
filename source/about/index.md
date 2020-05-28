@@ -12,11 +12,11 @@ date: 2020-04-28 21:55:04
 * [LanKuDot] [Blog](https://airfishqi.blogspot.com/) / [GitHub](https://github.com/LanKuDot) / [Twitter](https://twitter.com/LanKuDot)
 * [gholk] [Blog](//gholk.github.io)
 * [HexRabbit] [Blog](//blog.hexrabbit.io) / [Github](//github.com/HexRabbit)
-* [IID]
+* [IID] [Blog](https://hackmd.io/@IID/IID-Heap) / [GitHub](https://github.com/IepIweidieng)
 * [Rain]
 
 ### 共同編輯
-* [TsundereChen]
+* [TsundereChen] [Blog](https://blog.tsunderechen.io) / [GitHub](https://github.com/TsundereChen)
 * [raiso]
 * [Ian]
 * [Sou]
