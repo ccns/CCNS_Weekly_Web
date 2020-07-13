@@ -21,9 +21,9 @@ jobs:
         run: npm install
       - name: Add next post
         run: tools/new_post.sh
-      - name: Commit files
-        run: |
-          git config --local user.email "ccns@ccns.ncku.edu.tw"
-          git config --local user.name "CCNS"
-          git add --all
-          git commit -m "Init next post" -a
+      - name: Push changes
+        uses: actions-go/push@master
+        with:
+          commit-message: '[Auto] Init next post'
+          ref: preview
+          remote: origin
