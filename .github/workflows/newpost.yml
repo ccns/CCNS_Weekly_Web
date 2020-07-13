@@ -1,0 +1,34 @@
+name: Add next post
+
+on: 
+  push:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          ref: preview
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{runner.OS}}-${{hashFiles('**/package-lock.json')}}
+      - name: Install packages
+        run: npm install
+      - name: Add next post
+        run: tools/new_post.sh
+      - name: Commit files
+        run: |
+          git config --local user.email "ccns@ccns.ncku.edu.tw"
+          git config --local user.name "CCNS"
+          git add --all
+          git commit -m "[Auto] Init next post" -a
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: preview

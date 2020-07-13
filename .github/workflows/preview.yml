@@ -2,7 +2,7 @@ name: Hexo Build and Deploy
 
 on: 
   push:
-    branches: [master]
+    branches: [preview]
 
 jobs:
   build:
@@ -11,7 +11,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
         with:
-          ref: master
+          ref: preview
       - name: Cache node modules
         uses: actions/cache@v1
         with:
@@ -19,7 +19,8 @@ jobs:
           key: ${{runner.OS}}-${{hashFiles('**/package-lock.json')}}
       - uses: d4n1elchen/github-actions-hexo@master
         with:
-          config: ${{secrets.PUBLISH_CONFIG}}
+          config: ${{secrets.PREVIEW_CONFIG}}
           deploykey: ${{secrets.DEPLOY_KEY}}
           username: CCNS
           email: ccns@ccns.ncku.edu.tw
+          
