@@ -2,7 +2,7 @@ name: Add next post
 
 on: 
   push:
-    branches: [preview]
+    branches: [master]
 
 jobs:
   build:
@@ -26,7 +26,7 @@ jobs:
           git config --local user.email "ccns@ccns.ncku.edu.tw"
           git config --local user.name "CCNS"
           git add --all
-          git commit -m "Init next post" -a
+          git commit -m "[Auto] Init next post" -a
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
