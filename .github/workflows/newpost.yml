@@ -17,5 +17,12 @@ jobs:
         with:
           path: node_modules
           key: ${{runner.OS}}-${{hashFiles('**/package-lock.json')}}
+      - name: Install packages
+        run: npm install
       - name: Add next post
         run: tools/new_post.sh
+      - name: Commit files
+        run: |
+          git config --local user.email "ccns@ccns.ncku.edu.tw"
+          git config --local user.name "CCNS"
+          git commit -m "Init next post" -a
