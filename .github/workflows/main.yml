@@ -2,7 +2,7 @@ name: Hexo Build and Deploy
 
 on: 
   push:
-    branches: [preview]
+    branches: [master]
 
 jobs:
   build:
@@ -19,7 +19,7 @@ jobs:
           key: ${{runner.OS}}-${{hashFiles('**/package-lock.json')}}
       - uses: d4n1elchen/github-actions-hexo@master
         with:
-          config: ${{secrets.PREVIEW_CONFIG}}
+          config: ${{secrets.PUBLISH_CONFIG}}
           deploykey: ${{secrets.DEPLOY_KEY}}
           username: CCNS
           email: ccns@ccns.ncku.edu.tw
