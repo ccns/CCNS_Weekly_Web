@@ -25,4 +25,5 @@ jobs:
         run: |
           git config --local user.email "ccns@ccns.ncku.edu.tw"
           git config --local user.name "CCNS"
+          git add --all
           git commit -m "Init next post" -a
