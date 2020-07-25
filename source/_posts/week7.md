@@ -19,3 +19,6 @@ One of the responsibilities of a backend engineer is to keep the data organized 
 
 ### [產品經理的核心能力－框架思維](https://medium.com/growing-vision/framework-53b9362c6a66) -- Rain
 Project Manager 的技能樹可謂五花八門的令人驚奇，但在這之中是否存在這那麼一個核心競爭力？既能宏觀的洞察產業風向，又能顧及到未來市場變化的佈局，文章中作者所描述的「框架思維」正式在討論著這樣的思維模式如何引領產品與團隊脫穎而出。
+
+### [用JavaScript自己做POS出單功能](https://medium.com/@r3850355/%E7%94%A8javascript%E8%87%AA%E5%B7%B1%E5%81%9Apos%E5%87%BA%E5%96%AE%E5%8A%9F%E8%83%BD-ad54b6640477) -- gholk
+POS系統是現代商店中用來處理訂單、結帳的電子系統，基本的功能有列印收據、追蹤訂單、統計商品等。作者 RenZhou 身為一個轉職開飲料店的全端工程師，決定自幹一套 POS 系統。對於商業邏輯、 gui 介面等都能以 web 技術解決，而文中主要描述的問題為列印收據時需要與印表機打交道的問題。最後作者使用它牌的驅動程式與 linux 上的 cups 列印伺服器來處理列印問題， cups 使用基於 http 的 ipp 協議，因此能方便的與 node.js 後端互動，也有現成的 npm 套件可供使用。
