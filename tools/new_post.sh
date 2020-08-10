@@ -7,3 +7,5 @@ next_post="week$nextN"
 
 echo Creating $next_post ...
 node_modules/.bin/hexo new post $next_post
+
+echo "::set-env name=NEXT_POST::$next_post"

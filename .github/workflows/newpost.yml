@@ -32,3 +32,10 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: preview
+      - name: Pull request
+        uses: repo-sync/pull-request@v2
+        with:
+          source_branch: "preview"
+          destination_branch: "master"
+          pr_title: "${{ env.NEXT_POST }}"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
