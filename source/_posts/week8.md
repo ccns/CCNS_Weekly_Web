@@ -1,5 +1,5 @@
 ---
-title: 'pyenv 的設定與 node_module 的深度'
+title: 'Week #8 - pyenv 的設定與 node_module 的深度'
 tags:
   - weekly
 date: 2020-08-03 09:00:00
