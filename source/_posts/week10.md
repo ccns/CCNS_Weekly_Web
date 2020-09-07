@@ -9,6 +9,10 @@ date: 2020-09-07 09:00:00
 ### [Testing serverless with serverless](https://blog.tsunderechen.io/2020/07/testing-serverless-code-with-serverless/)
 Recently I was assigned a task related to serverless coding, I was looking for ways to test the code locally. Thank god I found serverless, a program that solved lots of serverless problems.
 
+## [專欄] Game
+### [手刻 pygame 矩形碰撞 (中篇) - 碰撞後反彈](https://airfishqi.blogspot.com/2019/07/blog-post.html) -- LanKuDot
+碰撞發生後就要決定反彈的方向，以為可以透過碰撞發生時的相對位置決定，然而事情沒有那麼簡單。當矩形跑很快的時候，就會出現神奇的反彈情況。
+
 ## [專欄] Random Life Journal
 
 ## [COSCUP & SITCON 會後心得隨筆](https://medium.com/random-life-journal/coscup-sitcon-%E6%9C%83%E5%BE%8C%E5%BF%83%E5%BE%97%E9%9A%A8%E7%AD%86-59572f5ca73c?source=friends_link&sk=428c4c742e32e764cd77fdfd5b5af062) -- Rain
@@ -22,3 +26,6 @@ Recently I was assigned a task related to serverless coding, I was looking for w
 
 ### [My thoughts on Uber FX](https://ewanvalentine.io/my-thoughts-on-uber-fx/) -- Rain
 隨著軟體服務規模成長，組成完整功能的模組也越來越多，包含 broker, database, web-server, cache 等等琳瑯滿目，彼此之間相互的依賴性也隨之爆炸性增長。為了避免過高的耦合性，在程式設計中時常倚賴相依性注入 (dependency injection) 來解決，但仍會有許多初始化、建立連線、中止連線等等任務需要做細膩的先後順序排程。Uber 對此提供了一個輕量型的開源工具來解決問題，本篇文章作者將會介紹在 Go 語言開發時使用相依性注入所需注意的重點，以及 Uber FX 的簡易使用教學。
+
+### [研發商該如何看待台灣手機遊戲市場？](https://medium.com/that-game-designer/%E8%A9%B2%E5%A6%82%E4%BD%95%E7%9C%8B%E5%BE%85%E5%8F%B0%E7%81%A3%E6%89%8B%E6%A9%9F%E9%81%8A%E6%88%B2%E5%B8%82%E5%A0%B4-224def386748) -- gholk
+台灣市場規模雖不如日本、南韓，更遠不如中國，但人民易於接受不同文化，也沒有中國的遊戲審查制度，仍是十分有發展性的市場。作者歸類出台灣手機遊戲市場的幾大特徵：風格接受廣泛、品質要求高、品牌忠誠度低、遊戲內容消耗快、勝者全拿，最後總結出給開發者的幾點建議。
