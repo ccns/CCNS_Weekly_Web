@@ -7,7 +7,7 @@ date: 2020-09-21 03:20:29
 
 ## [專欄] SRE works
 
-### [Tuning web server for more connections](https://blog.tsunderechen.io/2020/07/tuning-web-server-for-more-connections/)
+### [Tuning web server for more connections](https://blog.tsunderechen.io/2020/07/tuning-web-server-for-more-connections/) -- TC
 Having a poorly performed web server? With some simple tuning, you can have a web server that performed much better!
 
 ## 隨機性技術隨筆
