@@ -21,3 +21,5 @@ date: 2020-04-28 21:55:04
 * [Ian]
 * [Sou]
 * [R2]
+* [amikai] [Blog](https://amikai.github.io) / [GitHub](https://github.com/amikai)
+
