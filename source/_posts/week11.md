@@ -5,6 +5,48 @@ tags:
 date: 2020-09-21 03:20:29
 ---
 
+各位先進大家好，今天也有吃好吃的早餐嗎？來看看這期有什麼文章分享吧～
+
+因為學期開始了，之後社團有什麼活動也會在 Weekly 裡面宣傳，歡迎校內外的夥伴們參加唷
+
+## 社團活動宣傳
+
+【CCNS Chatbot Q&A 比賽】
+CCNS chatbot 是曾經是一名軟體工程師，
+他非常注重自己的程式碼品質，
+時常規劃各種測試來確保服務功能正常運作，
+除此之外他也非常注重使用者的品質，
+知識量不足的人是無法使用他的服務的。
+
+不幸的是因為上個月加班了 888 小時，
+他已經從軟體工程師升級成 chatbot 了。
+但他仍然貫徹他的原則，
+準備了各式各樣的題目來考驗玩家的知識量，
+總積分前三名的玩家將會在社團大會獲得獨家獎品！
+
+【Discord Chatbot】
+加入 CCNS Discord 的 qa-quiz 頻道
+https://discord.gg/rMhEuv
+透過以下指令 tag 機器人並開始遊戲
+@escho /start
+也可以使用 /help 指令查看有哪些指令可用
+
+【Telegram Chatbot】
+點擊連結加 chatbot 好友
+https://t.me/ccnsbot
+
+【netcat 版本】
+apt install netcat
+nc quiz-server.ccns.io 20924
+或是使用 https://quiz-term.ccns.io 體驗
+
+【Leaderboard 排行榜】
+https://leaderboard.ccns.io/
+
+【期初社團大會資訊】
+時間：9/24 (四) 晚上七點 (會提早半小時開放場地)
+地點：成功大學資訊系館 4201
+
 ## [專欄] SRE works
 
 ### [Tuning web server for more connections](https://blog.tsunderechen.io/2020/07/tuning-web-server-for-more-connections/) -- TC
