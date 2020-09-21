@@ -21,4 +21,4 @@ vi 內建基本的書籤功能 `m` ，能快速在檔案中的不同位置，甚
 原文作者 amikai 是一位對 vim 十分有愛的 neovim 使用者，常在 ccns discord 聊天室中推坑 vim 的各種 plug-in 與分享調校心得。
       
 ### [[簡報] 適用網頁的中文排版慣例](https://speakerdeck.com/bobbytung/ji-ge-zhong-wen-pai-ban-jue-qiao-you-xiao-gai-shan-yue-du-ti-yan) -- gholk
-W3C 正在徵求各國文字的排版習慣，好定義出能滿足各語言需求的 CSS 規格。（例如 `::first-leter`，就是為英文排版習慣中段落首字加大而創造的偽元素。）在東亞方塊字文化圈中，中日韓的規格草案相繼出爐。這份是出席 W3C 的台灣出版專家 _董福興_ 在 2016 年 MOPCON 上的簡報。
+W3C 正在徵求各國文字的排版習慣，好定義出能滿足各語言需求的 CSS 規格。（例如 `::first-letter`，就是為英文排版習慣中段落首字加大而創造的偽元素。）在東亞方塊字文化圈中，中日韓的規格草案相繼出爐。這份是出席 W3C 的台灣出版專家 _董福興_ 在 2016 年 MOPCON 上的簡報。
