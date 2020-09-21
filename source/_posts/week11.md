@@ -26,7 +26,7 @@ CCNS chatbot 是曾經是一名軟體工程師，
 
 【Discord Chatbot】
 加入 CCNS Discord 的 qa-quiz 頻道
-https://discord.gg/rMhEuv
+https://discord.ccns.io/
 透過以下指令 tag 機器人並開始遊戲
 @escho /start
 也可以使用 /help 指令查看有哪些指令可用
