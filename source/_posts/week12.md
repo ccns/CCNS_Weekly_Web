@@ -18,6 +18,10 @@ vim 高效率編輯的背後，operator, motion, text object 的配合功不可�
 During my search for job opportunities in the past few weeks, I found that the frequency of the keyword “GraphQL” appears in the description of vacancies has become much higher than last year. Although I am an engineer accustomed to REST, my strong curiosity still drives me to give it a try.
 
 ## 隨機性技術隨筆
+
+### [Entropy、Cross-Entropy 與 KL-Divergence (1) ](https://blog.danielchen.cc/2019/06/19/Entropy%E3%80%81Cross-Entropy-%E8%88%87-KL-Divergence-1/#more) -- DC
+Cross-Entropy 在 ML 中是一個常見的損失評估函數，本文從 Entropy 開始探討資訊熵背後的動機，延伸至 Cross-Entroy，並解釋為何 Cross-Entropy 為何常被使用作 Loss function。
+
 ## 文章分享
 
 ### [【PM總動員】如何為產品注入玩心？Fourdesire 遊戲化設計的五個心法](https://medium.com/3pm-lab/%E5%A6%82%E4%BD%95%E7%82%BA%E7%94%A2%E5%93%81%E6%B3%A8%E5%85%A5%E7%8E%A9%E5%BF%83-%E4%BA%94%E5%80%8B%E5%BF%83%E6%B3%95%E5%88%86%E4%BA%AB-e73b40d3113e) -- Rain
@@ -40,3 +44,6 @@ UserKnownHostsFile /dev/null
 # f is for -f like ln -f, meaning do not warning or ask.
 alias sshf='ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
 ```
+
+### [函數式程式設計風格](http://coolshell.cn/articles/10822.html) -- gholk
+近年吹起了一股函數式程式設計風潮，主要是硬體的進步，讓過去已十分完善的理論能實作。文內介紹了各大主流語言中實作的函數式風格，下次不妨嘗試，用函數的方式去思考；描述幹什麼，而非怎麼幹。
