@@ -2,7 +2,7 @@
 title: 'Week #13 - 任何 bug 或 feature 在被觀察前，都處在 feature 與 bug 的疊加態中'
 tags:
   - weekly
-date: 2020-10-19 10:
+date: 2020-10-19 10:00:00
 ---
 
 ## [專欄] Random Life Journal
