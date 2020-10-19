@@ -19,7 +19,7 @@ During my search for job opportunities in the past few weeks, I found that the f
 
 ## 隨機性技術隨筆
 
-### [Entropy、Cross-Entropy 與 KL-Divergence (1) ](https://blog.danielchen.cc/2019/06/19/Entropy%E3%80%81Cross-Entropy-%E8%88%87-KL-Divergence-1/#more) -- DC
+### [Entropy、Cross-Entropy 與 KL-Divergence (1) ](https://blog.danielchen.cc/2019/06/19/entropy-cross-entropy-and-KL-divergence-1/) -- DC
 Cross-Entropy 在 ML 中是一個常見的損失評估函數，本文從 Entropy 開始探討資訊熵背後的動機，延伸至 Cross-Entroy，並解釋為何 Cross-Entropy 為何常被使用作 Loss function。
 
 ## 文章分享
