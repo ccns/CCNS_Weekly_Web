@@ -15,7 +15,7 @@ Driven by the curiosity of database tunning, I have taken some time to study how
 ### [簡單將 node.js 或其它腳本語言的函數包裝成執行檔](http://gholk.github.io/linux-wrap-node-js-in-shell.html) -- gholk
 有時一些 npm 的套件沒有提供命令列的呼叫介面， 或是想用的功能在 node.js 裡就能做到， 懶的另外用 apt 裝可執行檔的程式。 這時就能用 node 的 -e 選項直接執行一小段程式， 可以簡單直接把參數放到指令裡，或透過 argv 傳， 使用上還可以把整段程式設成 alias 或者寫成 shell script。 這種用法也可以適用於 python perl 等其它直譯式語言。
 
-### [Entropy、Cross-Entropy 與 KL-Divergence (2) ](https://blog.danielchen.cc/2020/05/20/Entropy%E3%80%81Cross-Entropy-%E8%88%87-KL-Divergence-2/) -- DC
+### [Entropy、Cross-Entropy 與 KL-Divergence (2) ](https://blog.danielchen.cc/2020/05/20/entropy-cross-entropy-and-KL-divergence-2/) -- DC
 延續上一篇 Cross-Entropy 的介紹，本文介紹了 KL-Divergence 以及其直觀解釋、應用、還有相關的問題。
 
 ## 文章分享
