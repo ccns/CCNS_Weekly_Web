@@ -1,8 +1,8 @@
 ---
-title: 'CCNS 今天要出刊，為了學術用途'
+title: 'Week #15 - CCNS 今天要出刊，為了學術用途'
 tags:
   - weekly
-date: 2020-11-16 10:10:00
+date: 2020-11-17 10:00:00
 ---
 
 ## [專欄] Random Life Journal
