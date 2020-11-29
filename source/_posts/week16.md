@@ -1,5 +1,5 @@
 ---
-title: 'Week #15 - CCNS 今天要出刊，為了學術用途'
+title: 'Week #16 - 會在 Linux/MacOS 用 PuTTY 的都是什麼人'
 tags:
   - weekly
 date: 2020-11-30 10:00:00
