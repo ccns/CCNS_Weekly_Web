@@ -6,7 +6,7 @@ date: 2020-11-30 10:00:00
 ---
 
 ## [專欄] Random Life Journal
-### [Compose dependency injection with Uber Fx](https://medium.com/random-life-journal/compose-dependency-injection-with-uber-fx-300b414d9e9e?source=friends_link&sk=1d8cb11caa0d93fd06ed433bc7f2ecbd) -- Rain
+### [[English] Compose dependency injection with Uber Fx](https://medium.com/random-life-journal/compose-dependency-injection-with-uber-fx-300b414d9e9e?source=friends_link&sk=1d8cb11caa0d93fd06ed433bc7f2ecbd) -- Rain
 Consider a well-modulize project structure, we certainly take the advantage of the flexibility which empowers us to change or extend at less limit. Unfortunately, the complexity of communication between modules increases rapidly with the developing process.
 
 ## 隨機性技術隨筆
