@@ -14,7 +14,7 @@ Consider a well-modulize project structure, we certainly take the advantage of t
 ### [[English] Python RESTful API Server for Apache Hive](https://medium.com/random-technical-note/python-restful-api-server-for-apache-hive-6bc52ad991ba?source=friends_link&sk=3300b7ed443f8e59e8d5220b4fa4cc4b) -- Rain
 Continue from the previous note Associate Apache Hive Client with HDFS, this time I will share the design and implementation of RESTful API Server, which will act as an interface for user access Apache Hive without raw sql command.
 
-### 以 pv 控制 pipe 的速度 -- gholk
+### [以 pv 控制 pipe 的速度](http://gholk.github.io/shell-pipe-speed-pv.html) -- gholk
 因為想控制某些程式的傳輸速度， 所以想找找看有沒有 linux 命令 能像節流閥那樣串在管道中就能限制通過的流量， 就找到一個叫 pv 的小工具， 不只是節流閥，還可以做流量統計。 隔天想想其實也可以自己用 shell script 寫一個土炮版本的。
 
 
