@@ -6,6 +6,11 @@ date: 2020-12-14 10:00:00
 ---
 
 
+## [專欄] Random Life Journal
+### [[English] Integrate Stripe with Python Django Elegantly](https://medium.com/random-life-journal/integrate-stripe-with-python-django-elegantly-f0c4848f2b13?source=friends_link&sk=e9dbec14fe7048c04d0db90d8b8df296) -- Rain
+Recently I was responsible for the integration of Stripe online payment service, and take some notes about workflow planning and SDK usage details. Stripe would be highly recommended for the payment tasks due to its software-engineering-friendly SDK, the succinct interface and complete documentation also helpful during my development.
+
+
 ## [專欄] Game
 
 ### [來作遊戲阿 - EP. 1 系列簡介](https://youtu.be/SAM1_CcvPDI) - LanKuDot
@@ -25,4 +30,7 @@ date: 2020-12-14 10:00:00
 
 ### [tinyTorrent: 从头写一个 Deno 的 BitTorrent 下载器](https://cjting.me/2020/10/31/tinytorrent-a-deno-bt-downloader/) -- gholk
 bit torrent 是一種 p2p 的檔案分享協議，可以解決中心伺服器在下載量過大時頻寬負擔過重的問題。Jesse Li 的 [Building a BitTorrent client from the ground up in Go](https://blog.jse.li/posts/torrent/) 讲述了如何用 Go 开发一个 BT 的下载器。内容涉及到 BT 协议以及下载器的代码设计，思路清晰，值得一读。作者因此受到啟發，也自己用 deno 開發了一個 bit torrent 下載器，練習 deno 的使用。
+
+### [金融保險科技公司 OneDegree 工作半年心得](https://hulitw.medium.com/working-at-onedegree-378a0401130e) -- Rain
+作者 Huli 為已有多年經驗的前端工程師，時常透過寫作分享在軟體工程成長之路上的所見所聞。即使對於技術已經頗有深入研究，其文筆仍能寫的淺顯易懂讓各個等級的讀者都頗有共鳴，強烈推薦對於工作煩惱或是職涯發展議題感興趣的讀者閱讀。
 
