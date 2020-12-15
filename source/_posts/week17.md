@@ -25,7 +25,7 @@ Recently I was responsible for the integration of Stripe online payment service,
 
 ## 文章分享
 
-### [真．資料團隊與分工](https://blog.v123582.tw/2020/10/18/%E7%9C%9F%E3%83%BB%E8%B3%87%E6%96%99%E5%9C%98%E9%9A%8A%E8%88%87%E5%88%86%E5%B7%A5/) -- DC
+### [真．資料團隊與分工](https://blog.v123582.tw/2020/10/31/%E7%9C%9F%E3%83%BB%E8%B3%87%E6%96%99%E5%9C%98%E9%9A%8A%E8%88%87%E5%88%86%E5%B7%A5/) -- DC
 在整個資料科學/機器學習商業應用的情境中通常橫跨了不同的領域與專業，因此在實際的環境下一個專案需要比一般的應用更多的人合作來完成，本文介紹了根據作者自己本身經驗所統整出的資料科學團隊分工。
 
 ### [tinyTorrent: 从头写一个 Deno 的 BitTorrent 下载器](https://cjting.me/2020/10/31/tinytorrent-a-deno-bt-downloader/) -- gholk
