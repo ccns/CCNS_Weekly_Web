@@ -18,8 +18,6 @@ Recently I was assigned a task related to serverless coding, I was looking for w
 ## [COSCUP & SITCON 會後心得隨筆](https://medium.com/random-life-journal/coscup-sitcon-%E6%9C%83%E5%BE%8C%E5%BF%83%E5%BE%97%E9%9A%A8%E7%AD%86-59572f5ca73c?source=friends_link&sk=428c4c742e32e764cd77fdfd5b5af062) -- Rain
 這兩週前後分別去 COSCUP 和 SITCON 兩場技術研討會擔任講者，分享了一些技術和經驗給有一面之緣的聽眾。仔細想想從高二到現在，已經參與技術社群四年多了，擔任過會眾、工作人員及講者三種角色，對很多事物也有了更深層的體悟和感想。大會的前後幾天也把握機會和許久未見的朋友聚了聚，交流彼此的近況和想法，頓時再次充滿了對技術與生活的熱忱。趁著記憶猶新之時隨筆幾段，讓演講者的身份再多一份經驗分享的價值，希望能幫上對技術研討會感興趣的你。
 
-## 隨機性技術隨筆
-
 ## 文章分享
 ### [最黑暗的界面時代來臨 網頁設計準備好了嗎？](https://blog.user.today/dark-mode-web-design/) -- gholk
 不要誤會，雖然 css/js 界一直很黑暗與混亂，但這裡的黑暗指的是近年來重新流行的暗色主題。文中探討了 css 規範對應暗色主題的流行而新增的 media query 檢測，與多種瀏覽器既有暗色主題的實作行為，最後提出一些在網站實作暗色主題時需要注意的地方。
