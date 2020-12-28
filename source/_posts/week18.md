@@ -5,7 +5,11 @@ tags:
 date: 2020-12-28 09:51:34
 ---
 
-## [專欄] ???
+## [專欄] Game
+
+### [來作遊戲阿 - EP. 2 思考遊戲機制，找出功能](https://youtu.be/AgCrHtz2yOs) - LanKuDot
+
+在上一集確定遊戲製作的目標後，接著就是找出實現遊戲機制所需要的功能，但別急著想到什麼就作什麼，先坐下來，好好規劃，找出要作的功能，才方便規劃實作順序
 
 ## 隨機性技術隨筆
 ### [在 shell 中管理檔案描述符](http://gholk.github.io/shell-file-descriptor-eval.html) -- gholk
@@ -23,3 +27,7 @@ linux shell 中可以使用 0 到 9 的 file descriptor 檔案描述符來控制
 
 ### [Minimal safe Bash script template](https://betterdev.blog/minimal-safe-bash-script-template/?fbclid=IwAR17YYI1q8pwTZ0wky-en_vx8iQa8QHFsN4S6lZ5FsRpFFypIm7jTwpy9rA) -- Rain
 Bach scripts 對於工程師來說可說是輕量又方便的工具，不論是連接不同程式的輸入與輸出、在 CI CD 中連接多個步驟之間的膠水程式、或是把一連串啟動程式的指令打包好都相當的實用。但是 Bash scripts 在撰寫上並沒有太過於嚴格的規範，大多數人也都僅止於執行結果正確的階段而已，但這很可能在不知不覺中對系統持續造成負面影響，比如沒有被好好處理的錯誤以及四散的中間產物檔案等等。作者透過一個簡潔的 Bash scripts template 來舉例，一一探討在撰寫時有哪些需要注意的細節。
+
+### [[筆記] API 設計概念 - 下篇](https://airfishqi.blogspot.com/2020/07/api_12.html) - LanKuDot
+
+延續上篇，下篇紀錄演講下半場的內容，主要為類別設計與函式設計的概念。
