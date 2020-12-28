@@ -27,7 +27,6 @@ linux shell 中可以使用 0 到 9 的 file descriptor 檔案描述符來控制
 
 ### [Minimal safe Bash script template](https://betterdev.blog/minimal-safe-bash-script-template/?fbclid=IwAR17YYI1q8pwTZ0wky-en_vx8iQa8QHFsN4S6lZ5FsRpFFypIm7jTwpy9rA) -- Rain
 Bach scripts 對於工程師來說可說是輕量又方便的工具，不論是連接不同程式的輸入與輸出、在 CI CD 中連接多個步驟之間的膠水程式、或是把一連串啟動程式的指令打包好都相當的實用。但是 Bash scripts 在撰寫上並沒有太過於嚴格的規範，大多數人也都僅止於執行結果正確的階段而已，但這很可能在不知不覺中對系統持續造成負面影響，比如沒有被好好處理的錯誤以及四散的中間產物檔案等等。作者透過一個簡潔的 Bash scripts template 來舉例，一一探討在撰寫時有哪些需要注意的細節。
-
-### [[筆記] API 設計概念 - 下篇](https://airfishqi.blogspot.com/2020/07/api_12.html) - LanKuDot
-
-延續上篇，下篇紀錄演講下半場的內容，主要為類別設計與函式設計的概念。
+      
+### [神奇的 &lambda; 表達式](http://www.jianshu.com/p/e7db2f50b012) -- gholk
+&lambda; 表達式是函數式程式設計中的核心觀念。在 &lambda; 系統中，每個表達式都是一個函數，也只接受一個函數作為參數，並返回一個單參的函數。透過 &lambda; 表達式，邱奇在 1936 年證明出 **判定性問題** 是無法解決的。（以上文字參考自維基百科，但不要看維基的解釋，那不是學數學或程式語言的根本看不懂。）讓我們透過本文一窺如何利用 &lambda; 表達式描述、證明問題。
