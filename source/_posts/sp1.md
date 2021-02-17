@@ -57,7 +57,7 @@ VR 已經不是什麼新東西了，但是去年 Raiso 同學自己買了一套 
 
 雖然這社團本來就很宅，但去年 HoloEN 的出現讓這社團又油又宅，自從 Gura 出道以來社團多了好多 Ho 山孝子，社團的 Discord 還為此開設了 #vtuber 和 #vtuber-notify 頻道。
 
-{% asset_img amelia.jpg %}
+{% asset_img amelia.png %}
 
 ### 聖誕交換禮物
 
