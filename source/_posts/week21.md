@@ -6,7 +6,19 @@ date: 2021-03-15 02:19:11
 ---
 
 ## [專欄] ???
+
 ## 隨機性技術隨筆
+
+### 使用 tor 代理 dns 查詢
+近年大眾開始關心明文 dns 查詢時造成的隱私洩露問題，
+tor 網路具有代理 dns 查詢的功能，能夠將 dns 查詢流量去識別化。
+但由於權限問題，有時這個 tor dns 沒辦法開在 dns 慣例的 53 埠，
+在 android 上可以藉由 [DNSChanger] 修改 dns server 為 localhost:5353，
+而 debian 上我還沒找到方法讓系統走非標準埠，
+所以作法是直接讓 tor 開在 53。
+
+[DNSChanger]: https://play.google.com/store/apps/details?id=com.frostnerd.dnschanger
+
 ## 文章分享
 
 ### [被跨平台作者忽略的標準連結【一】：為什麼標準連結仍然重要](https://leafwind.tw/2018/10/13/why-canonical-link-is-still-important/#%E9%82%A3%E4%BB%80%E9%BA%BC%E6%98%AF%E6%A8%99%E6%BA%96%E9%80%A3%E7%B5%90%EF%BC%88Canonical_Link%EF%BC%89%EF%BC%9F) -- gholk
