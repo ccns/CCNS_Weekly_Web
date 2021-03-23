@@ -5,8 +5,6 @@ tags:
 date: 2021-03-15 02:19:11
 ---
 
-## [專欄] ???
-
 ## 隨機性技術隨筆
 
 ### 使用 tor 代理 dns 查詢
@@ -36,3 +34,6 @@ tor 網路具有代理 dns 查詢的功能，能夠將 dns 查詢流量去識別
 ### [Introduction to modern network load balancing and proxying](https://blog.envoyproxy.io/introduction-to-modern-network-load-balancing-and-proxying-a57f6ff80236)
 
 隨著軟體服務的規模與量體越趨龐大，基於水平擴展、部分容錯以及效能上的需求，許多服務採用了多節點的方式組成 Cluster 加以應對。為了能實現最理想且穩定的工作量分流，負責接收所有流量並加以轉發的 Load Balancer 成了一大焦點，其選擇流量轉發節點的演算法大大的影響 Clustering 方案是否有效發揮其作用。本篇文章作者將從 Load Balancing 的原理開始，逐步拆解 L4, L7 負載平衡的限制與差異，同時點出諸如 multiple requests in one connection, sticky session 等等多種在 Clustering 策略下所潛藏的問題及解決方案。
+
+### [[Neovim]Vimconf.live: Neovim Builtin LSP](https://www.youtube.com/watch?v=C9X5VF9ASac) -- amikai
+在網路上偶然看到 Vimconf.live 2020 ，或許是因為疫情的關係，此 conf 皆是遠端演講。其中我最感興趣的事 TJ DeVries 的這場演講，不再是講老套的 vim 議題，而是帶你快速聊節 neovim builtin LSP 的歷史、設計哲學、以及使用方式。
