@@ -2,7 +2,7 @@
 title: 'Week #20 - less is better than more'
 tags:
   - weekly
-date: 2021-02-17 02:50:18
+date: 2021-03-02 10:18:36
 ---
 
 ## [專欄] Game
@@ -26,7 +26,7 @@ docker 在專案部署上解掉了環境不同所多出的成本和問題。除�
 如果你不是個只會 CRUD 的 Database 菜雞的話，你應該有遇過許多在 Data Storage 上 OLTP、OLAP、Horizontal-Scalibility、Replication、ACID 等等各方面特性與實作方式的問題與研究。然而 Database 一旦上線開始接收 Production 資料後，便會因為資料丟失或結構被破壞的風險導致無法輕易更換技術，這意味著我們需要在初期投入足夠的時間來思考何種 Database 與團隊當時的情境和未來的發展方向最為相符。文中的作者以在 17 Media 服務經驗，比較目前生態系中多種被採用的 Databse 以及分享自身在工作時的情境會如何做選擇。
 
 ### [[英文] ninja: 簡易編譯系統介紹](https://jvns.ca/blog/2020/10/26/ninja--a-simple-way-to-do-builds/) -- gholk
-對 ninja 漸進式編譯系統的簡單介紹。如果你覺得 make 太複雜，那可以試試現代的編譯工具 ninja 。 ninja 如同 make 與 autoconf ，也有許多工具如 meson ，是產生 ninja 的程式作為輸出，再用 ninja 編譯出最終結果。
+對 ninja 漸進式編譯系統的簡單介紹。如果你覺得 make 太複雜，那可以試試現代的編譯工具 ninja。ninja 如同 make 與 autoconf，也有許多工具如 meson，是產生 ninja 的程式作為輸出，再用 ninja 編譯出最終結果。
 
 ### [Google Chrome 的顯示完整 URL 的方式又改了...](https://blog.gslin.org/archives/2020/10/17/9754/google-chrome-%e7%9a%84%e9%a1%af%e7%a4%ba%e5%ae%8c%e6%95%b4-url-%e7%9a%84%e6%96%b9%e5%bc%8f%e5%8f%88%e6%94%b9%e4%ba%86/) -- DC
-google 爸爸覺得讓使用者看到長長一串網址太危險了，網址複雜的語法可能會引起一般人的程式恐慌症，所以一直嘗試要把網址以更 *安全* *易懂* 的方式顯示。這次 google 的新點子是把網址列最前面的協議名稱和 www 子域名藏起來。文中除了靠北 google ，也介紹如何關掉這個功能 (~~bug~~ feature)。
+google 爸爸覺得讓使用者看到長長一串網址太危險了，網址複雜的語法可能會引起一般人的程式恐慌症，所以一直嘗試要把網址以更 *安全* *易懂* 的方式顯示。這次 google 的新點子是把網址列最前面的協議名稱和 www 子域名藏起來。文中除了靠北 google，也介紹如何關掉這個功能 (~~bug~~ feature)。
