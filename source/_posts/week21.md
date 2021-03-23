@@ -7,15 +7,8 @@ date: 2021-03-15 02:19:11
 
 ## 隨機性技術隨筆
 
-### 使用 tor 代理 dns 查詢
-近年大眾開始關心明文 dns 查詢時造成的隱私洩露問題，
-tor 網路具有代理 dns 查詢的功能，能夠將 dns 查詢流量去識別化。
-但由於權限問題，有時這個 tor dns 沒辦法開在 dns 慣例的 53 埠，
-在 android 上可以藉由 [DNSChanger] 修改 dns server 為 localhost:5353，
-而 debian 上我還沒找到方法讓系統走非標準埠，
-所以作法是直接讓 tor 開在 53。
-
-[DNSChanger]: https://play.google.com/store/apps/details?id=com.frostnerd.dnschanger
+### [使用 tor 代理 dns 查詢](https://gholk.github.io/tor-dns-howto.html) -- Gholk
+近年大眾開始關心明文 dns 查詢時造成的隱私洩露問題，tor 網路具有代理 dns 查詢的功能，能夠將 dns 查詢流量去識別化。但由於權限問題，有時這個 tor dns 沒辦法開在 dns 慣例的 53 埠，在 android 上可以藉由 [DNSChanger](https://play.google.com/store/apps/details?id=com.frostnerd.dnschanger) 修改 dns server 為 localhost:5353，而 debian 上我還沒找到方法讓系統走非標準埠，所以作法是直接讓 tor 開在 53。
 
 ### [Mock out dependencies while testing in Python](https://speakerdeck.com/rainrainwu/mock-out-dependencies-while-testing-in-python)
 在近代軟體開發流程中，我們時常會需要透過執行測試來確保程式運作的正確性，其中不乏大家耳熟能詳的 unit test, integration test 等等。但測試的本質仍是檢測程式執行玩後的結果，其中相關的邏輯都是會被執行到的，然而這在商業運轉中卻衍生了許多問題。比如測試時頻繁呼叫到需要付費的第三方 API, 連接與其他為服務共用的資料庫，抑或是執行檔案刪除或是上傳等等較難以回溯的操作。本篇文章為 CCNS 109 下學期騎出社員大會中的小型社課，講者將會介紹在測試時有效利用依賴注入的技巧隔離測試邏輯，以避免各種悲劇狀況的技巧以及適用尚需注意的風險
