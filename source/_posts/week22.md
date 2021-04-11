@@ -16,5 +16,8 @@ date: 2021-04-12 06:55:42
 ## 隨機性技術隨筆
 ## 文章分享
 
+### [[Vim]You don’t need more than one cursor in vim](https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db) - amikai
+Multi-cursor 強大的編輯功能，讓你同時可以一次編輯文件的多個位置，而這個功能也被 vscode 和 sublime... 等編輯器所支援。但在 vim 裡真的需要這個功能嗎，本篇文章作者講述了使用 Multi-cursor 的情境？並且透過 vim builtin 的操作達到同樣的效果，並且用他的觀點為文章取了 You don’t need more than one cursor in vim。這篇文章從很常使用的編輯情境切入，不管有沒有使用過 multi-cursor 都建議一讀。
+
 ### [安全背后: 浏览器是如何校验证书的](https://cjting.me/2021/03/02/how-to-validate-tls-certificate/) -- gholk
 现如今的 Web，HTTPS 早已经成为标配，启用 HTTPS 的核心是一个叫做 **证书** 的东西。不知道大家之前是否有留意到，有時浏览器会提示「您的链接不是私密链接」，这其实就是因为該網站的证书有问题。如果点击「继续前往」，它会提示你下载安装它的根证书。根證書是「信任链」的根，我们的手机、电脑、电视机的操作系统中都预装了 CA 的根证书，他们是所有信任构建的基石。接下来，只要设计一个体系，能够证明 A 证书签发了 B 证书即可。这样对于收到的任何一个证书，顺藤摸瓜，只要最上面的根证书在系统中存在，即可证明该证书有效。
