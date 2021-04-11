@@ -12,6 +12,16 @@ date: 2021-04-12 06:55:42
 本簡報目的是用更簡潔明瞭的方式，讓沒碰過 Linux 或碰過但對於一般 BBS 架站欠缺經驗的使用者，初步體驗把一個 BBS 站架起來原來是那麼簡潔且樸實無華，也希望藉此提升更多人參與 PttBBS 開源專案的意願，讓這個非營利性質的專案與相關 BBS 生態能夠延續下去
 
 ## 隨機性技術隨筆
+
+### [Amadues](https://docs.google.com/presentation/d/1lx_vdd3SxNX4uAPoDHfTBav2Pfd7Y1Km/edit#slide=id.p10) -- raiso
+
+> 從妄想中我們可以預知未來
+> 從現在起我們可以建構未來
+> 然而這個名為未來的漸近線
+> 會來？
+
+本篇簡報為 CCNS 109 學年下學期的定期聚演講內容，講者將會介紹自己所知道的腦科學進展。內容包括：有名的實驗、神經元模型、收集訊號的方式、Spiking Neural Network。
+
 ## 文章分享
 
 ### [[Vim]You don’t need more than one cursor in vim](https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db) - amikai
