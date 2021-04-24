@@ -1,11 +1,9 @@
 ---
-title: 'Week #? - ???'
+title: 'Week #23 - ???'
 tags:
   - weekly
-date: 2021-04-12 02:37:12
+date: 2021-04-24 23:30:00
 ---
-
-
 
 ## [專欄] Random Life Journal
 
