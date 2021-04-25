@@ -1,5 +1,5 @@
 ---
-title: 'Week #23 - 自由不是離開某套軟體、某種系統，而是找到自由'
+title: 'Week #23 - Hey! My Friend! 修 code 路比寫 code 還難～'
 tags:
   - weekly
 date: 2021-04-26 10:30:00
@@ -32,7 +32,7 @@ date: 2021-04-26 10:30:00
 
 公開信及其附件中提到他的性別歧視行為，以及對於成年與未成年性行為的發言、懷有唐氏症的嬰兒是否該被生下來、跨性別指稱方式等議題，發言皆不甚恰當。截至 UTC 時間 2021/3/28 4pm，聯署人數已經來到 2784 人。紅帽公司也宣佈[停止對自由軟體基金會的捐款與貢獻參與](https://www.redhat.com/en/blog/red-hat-statement-about-richard-stallmans-return-free-software-foundation-board)。後續造成 [Stallman 於 2019 年一度請辭 FSF 與 MIT](https://www.fsf.org/news/richard-m-stallman-resigns) 職位後再度請辭。即使後來有相關支持者以同樣做法發公開信後，Stallman 隨即再度回到崗位，但此事件在開源社群造成的後續爭論，以及對於性別議題價值觀的分歧，恐怕短時間內難以平復。
 
-### [究竟是什么让 Go 语言成为恶意软件作者的最爱](https://tonybai.com/2021/03/07/go-malware-round-up-2020/)
+### [究竟是什么让 Go 语言成为恶意软件作者的最爱](https://tonybai.com/2021/03/07/go-malware-round-up-2020/) -- gholk
 近期安全技术公司 Intezer 发布了一份名为《Year of the Gopher, A 2020 Go Malware Round-Up》的报告，该报告称在过去几年中，安全人员发现的用 Go 编写的新恶意软件几乎增加了 2000%，这一标题迅速引爆程序员社区，有人唾弃 Go 踏入“歧途”，也有人膜拜 Go 的 niubility：能被黑客看中和使用的都是精华！
 
 > Rob：最大的惊喜是当我们得知 Go 被用于编写恶意软件时。您无法控制谁将使用您的作品或他们将如何使用它。
