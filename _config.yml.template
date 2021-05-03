@@ -74,6 +74,12 @@ feed:
   limit: 5
   content: true
 
+search:
+  path: search.xml
+  field: post
+  content: true
+  format: raw
+
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
