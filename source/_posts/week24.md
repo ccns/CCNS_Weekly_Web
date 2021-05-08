@@ -8,9 +8,16 @@ date: 2021-04-26 03:41:53
 本輯周刊開始，我們在周刊網站增加了搜尋功能，搜尋功能位在導欄列的右側，可進行歷期周刊內文的全文搜尋；搜尋前會下載 100K 左右的全文內容，有流量限制的讀者可能要注意。
 
 ## [專欄] ???
+
 ## 隨機性技術隨筆
+
 ### 用 steam 的 proton 執行 windows exe -- gholk
+
 偶爾會用 wine 在 linux 下跑 exe 玩遊戲，但相容性還是有些問題。steam 之前為了推 steam linux， 在 wine 之上改良了一個 proton，相容性好很多，適合拿來玩遊戲。 我是裝 steam for linux 後，再用 steam 裝了 proton。 如果想不透過 steam 用 proton 跑 exe 檔案， 可以直接執行 proton 執行檔： `"~/.steam/steam/steamapps/common/Proton 5.13/proton" run game.exe` ， 另外要再設一個環境變數 `STEAM_COMPAT_DATA_PATH` 指定 proton 存資料的資料夾。
+
+### [CCNS 鏡像站使用說明](https://mirror.ccns.ncku.edu.tw) - r2
+
+CCNS 鏡像站成立已經有好一陣子，也陸續回報至各開源社群分享給有需要的人。有鑑於週遭的人仍然還是不太清楚如何善用此服務，目前初步使用 mkdocs 文件生成器搭配 readthedocs 主題建立了一個基本的使用說明頁面，有待有興趣利用此服務的成大學生或各界人士有一個可以摸索的依據。
 
 ## 文章分享
 
