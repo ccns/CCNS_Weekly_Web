@@ -28,6 +28,4 @@ CCNS 鏡像站成立已經有好一陣子，也陸續回報至各開源社群分
 
 ### [Rocky Linux 8.3 RC1 Available Now](https://rockylinux.org/news/rocky-linux-8-3-rc1-release/)
 
-由當初的 CentOS Project 創立者再次發起，以取代 CentOS 地位目的，繼承傳統 CentOS 精神的 RockyLinux，終於釋出 8.3-RC1 測試版本了！
-需要注意的是目前仍處於測試階段，套件發布的部分目前仍以 Rocky Linux 自己的 CDN 為散佈的管道(官方表示歡迎申請 mirror)。
-之後於何時發行正式版本，以及相關容器、雲端映像檔，仍待後續官方發布！有興趣的 Linux 使用者歡迎協助測試以及參與社群回饋！
+由當初的 CentOS Project 創立者再次發起，以取代 CentOS 地位目的，繼承傳統 CentOS 精神的 RockyLinux，終於釋出 8.3-RC1 測試版本了！ 需要注意的是目前仍處於測試階段，套件發布的部分目前仍以 Rocky Linux 自己的 CDN 為散佈的管道(官方表示歡迎申請 mirror)。 之後於何時發行正式版本，以及相關容器、雲端映像檔，仍待後續官方發布！有興趣的 Linux 使用者歡迎協助測試以及參與社群回饋！
