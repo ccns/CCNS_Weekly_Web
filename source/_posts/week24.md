@@ -11,7 +11,7 @@ date: 2021-05-10 08:00:00
 
 ## 隨機性技術隨筆
 
-### 用 steam 的 proton 執行 windows exe -- gholk
+### [用 steam 的 proton 執行 windows exe](http://gholk.github.io/linux-proton-wine-outside-steam.html) -- gholk
 
 偶爾會用 wine 在 linux 下跑 exe 玩遊戲，但相容性還是有些問題。steam 之前為了推 steam linux， 在 wine 之上改良了一個 proton，相容性好很多，適合拿來玩遊戲。 我是裝 steam for linux 後，再用 steam 裝了 proton。 如果想不透過 steam 用 proton 跑 exe 檔案， 可以直接執行 proton 執行檔： `"~/.steam/steam/steamapps/common/Proton 5.13/proton" run game.exe` ， 另外要再設一個環境變數 `STEAM_COMPAT_DATA_PATH` 指定 proton 存資料的資料夾。
 
