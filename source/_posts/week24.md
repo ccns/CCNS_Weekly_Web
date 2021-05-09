@@ -7,8 +7,6 @@ date: 2021-05-10 08:00:00
 
 本輯周刊開始，我們在周刊網站增加了搜尋功能，搜尋功能位在導欄列的右側，可進行歷期周刊內文的全文搜尋；搜尋前會下載 100K 左右的全文內容，有流量限制的讀者可能要注意。
 
-## [專欄] ???
-
 ## 隨機性技術隨筆
 
 ### [用 steam 的 proton 執行 windows exe](http://gholk.github.io/linux-proton-wine-outside-steam.html) -- gholk
@@ -29,3 +27,6 @@ CCNS 鏡像站成立已經有好一陣子，也陸續回報至各開源社群分
 ### [Rocky Linux 8.3 RC1 Available Now](https://rockylinux.org/news/rocky-linux-8-3-rc1-release/) - r2
 
 由當初的 CentOS Project 創立者再次發起，以取代 CentOS 地位目的，繼承傳統 CentOS 精神的 RockyLinux，終於釋出 8.3-RC1 測試版本了！ 需要注意的是目前仍處於測試階段，套件發布的部分目前仍以 Rocky Linux 自己的 CDN 為散佈的管道(官方表示歡迎申請 mirror)。 之後於何時發行正式版本，以及相關容器、雲端映像檔，仍待後續官方發布！有興趣的 Linux 使用者歡迎協助測試以及參與社群回饋！
+
+### [Serverless Architecture Patterns in AWS](https://waswani.medium.com/serverless-architecture-patterns-in-aws-edeab0e46a32) 
+具有高擴展彈性與低維護成本的 Serverless 技術在這個需要持續緊跟市場腳步的時代越來越吸引軟體工程界的關注，作者在本篇文章中會簡單列出七個常見的 Serverless 架構並簡述其適合情境。
