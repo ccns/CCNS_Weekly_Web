@@ -5,7 +5,9 @@ tags:
 date: 2021-05-10 13:33:33
 ---
 
-本期周刊因為稿件不足，因此原創文章只選了二篇。另外本期開始，我們在周刊網站增加了搜尋功能，搜尋功能位在導欄列的右側，可進行歷期周刊內文的全文搜尋；搜尋前會下載 100K 左右的全文內容，有流量限制的讀者可能要注意。
+本期周刊因為稿件不足，因此原創文章只選了二篇，故再多選一篇分享湊足六篇。
+
+另外本期開始，我們在周刊網站增加了搜尋功能，搜尋功能位在導欄列的右側，可進行歷期周刊內文的全文搜尋；搜尋前會下載 100K 左右的全文內容，有流量限制的讀者可能要注意。
 
 ## 隨機性技術隨筆
 
@@ -30,3 +32,6 @@ CCNS 鏡像站成立已經有好一陣子，也陸續回報至各開源社群分
 
 ### [Serverless Architecture Patterns in AWS](https://waswani.medium.com/serverless-architecture-patterns-in-aws-edeab0e46a32) -- Rain
 具有高擴展彈性與低維護成本的 Serverless 技術在這個需要持續緊跟市場腳步的時代越來越吸引軟體工程界的關注，作者在本篇文章中會簡單列出七個常見的 Serverless 架構並簡述其適合情境。
+
+### [WhatsApp and most alternatives share the same problem](https://stuker.com/2021/whatsapp-and-most-alternatives-share-the-same-problem/) -- gholk
+手機上各類即時通訊軟體的共同問題，就是都只支援在同一個軟體中的使用者互相溝通；對照下，不管你是用 yahoo 或 google 的 email，都可以互相寄信；或者是無論用中華電信或台灣大哥大，都可以互相撥打電話與傳送簡訊。文中提到了 matrix 這個聯邦式的開放協議，理論上只要同樣使用 matrix，不同的 app 與 server 間仍可以互通。法國與德國政府均有計劃開發基於 matrix 的 app。類似的協議還有 xmpp。
