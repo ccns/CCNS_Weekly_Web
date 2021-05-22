@@ -15,6 +15,9 @@ BRH 看板閱讀紀錄系統是 MapleBBS 3 所使用的看板閱讀紀錄系統�
 ### [對下一代即時通訊系統的想像](http://gholk.github.io/instant-message-app-future-work.html) -- gholk
 現代智慧型手機上的即時通訊軟體都有許多體制上的缺陷， 包含不自由、不安全、侵犯隱私、依賴中心伺服器等。 自由軟體界蠻重視這些議題，也都有提出對應的解決方法， 本文介紹我自己的理解與對應的軟體。
 
+### [[筆記] API 設計概念 - 下篇](https://airfishqi.blogspot.com/2020/07/api_12.html) - LanKuDot
+之前為了 python 專案要提供 module API 給使用者使用，而去搜尋相關資料，找到這場 Google 的演講 - 「How To Design A Good API and Why it Matters」。當中提到平常寫程式就是一種 API 設計，因而覺得演講中的概念對於寫程式的觀念相當有幫助，所以將其整理成兩篇筆記。延續[上篇](https://weekly.ccns.io/week9/)，本篇為下篇，紀錄演講下半場的內容，主要為類別設計與函式設計的概念。
+
 ## 文章分享
 ### [[翻譯] 即時通大戰 Chat Wars(上篇)](https://www.ptt.cc/bbs/Translate-CS/M.1398461158.A.34D.html) -- gholk
 > 這篇文章主要是在談早期 MSN vs AOL 的大戰。這場大戰其實結果還滿清楚的，MSN 打倒了 AOL Instant Messenger(AIM)，成為未來十年內最成功的 IM(Instant Messenger)。這篇文章提到的不止是商場策略，而且還提到了許多技術方面的東西，尤其是 Microsoft 怎麼「破解」AOL Service Server。
