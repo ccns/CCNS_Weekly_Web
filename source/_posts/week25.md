@@ -22,4 +22,4 @@ BRH 看板閱讀紀錄系統是 MapleBBS 3 所使用的看板閱讀紀錄系統�
 ### [[翻譯] 即時通大戰 Chat Wars(上篇)](https://www.ptt.cc/bbs/Translate-CS/M.1398461158.A.34D.html) -- gholk
 > 這篇文章主要是在談早期 MSN vs AOL 的大戰。這場大戰其實結果還滿清楚的，MSN 打倒了 AOL Instant Messenger(AIM)，成為未來十年內最成功的 IM(Instant Messenger)。這篇文章提到的不止是商場策略，而且還提到了許多技術方面的東西，尤其是 Microsoft 怎麼「破解」AOL Service Server。
 
-這不是我翻的，只是分享。也不要問我下篇在哪，太監了（下面沒有了），自己去看原文。
+這不是我翻的，只是分享。原作者說下篇存在他的 one drive 帳號裡，然後不小心被 ms 鎖起來了，所以就沒有下篇了，只能去看原文。
