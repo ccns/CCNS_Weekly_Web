@@ -12,7 +12,7 @@ date: 2021-06-06 19:44:44
 
 ## [專欄] Random Life Journal
 ### [The concepts behind the built-in indexes of PostgreSQL](https://medium.com/random-life-journal/the-concepts-behind-the-built-in-indexes-of-postgresql-e5a35c63098b?source=friends_link&sk=b3fe287920e06a7f961122e58b38a0cc) -- Rain
-記得兩三年前第一次接觸 database 時，面對提出 query 速度過慢的問題總是會反射性地回應「建立 index」。當時一直以為 index 就只有 binary search tree 一種實作方式而已。後來看過越來越多不同的產品及案例，各自的資料庫內所儲存的資料都有所不同，因此意識到 binary search tree 並不是萬用解法，並開始研究各種不同 index 背後的設計思維。
+記得兩三年前第一次接觸 database 時，面對 query 速度過慢的問題總是會反射性回應「建立 index」。當時一直以為 index 就只有 binary search tree 一種實作方式而已。後來看過越來越多不同的產品及案例，各自的資料庫內所儲存的資料都有所不同，因此意識到 binary search tree 並不是萬用解法，並開始研究各種不同 index 背後的設計思維。
 
 ## 隨機性技術隨筆
 ### [在 Debian/Ubuntu 等 Linux 發行版下簡易打包軟體 – 以 SAC 為例](https://sean0921.github.io/2021/06/06/sac-debian-packaging/) -- r2
@@ -21,7 +21,7 @@ Linux 發行版基本上就是一個「拼裝車」，將各個不同來源的�
 ## 文章分享
 
 ### [Lessons from Building Observability Tools at Netflix](https://netflixtechblog.com/lessons-from-building-observability-tools-at-netflix-7cfafed6ab17) -- Rain
-越是複雜的系統，行為追蹤上就越有挑戰，尤其是版圖橫跨世界的 Big Tech companies 所建構的系統，連企業內部的資深員工在演講時也多次坦言沒有任何一位工程師能理解整個系統架構。在面對這樣的一個近似於黑箱的龐大服務時，該如何準確地擷取關鍵資訊，並將其轉換成有助於判斷目前情況的資訊，是個非常值得研究的課題。本文作者將針對 log ingestion, request tracing, metrics analysis 等等方面來分享在打造工具時所遭遇的難點與對應的解決方案。
+越是複雜的系統，行為追蹤上就越有挑戰，尤其是版圖橫跨世界的 Big Tech companies 所建構的系統，連企業內部的資深員工在演講時也多次坦言沒有任何一位工程師能理解整個系統架構。在面對這樣的一個近似於黑箱的龐大服務時，該如何準確擷取關鍵資訊，並將其轉換成有助於判斷當下情況的資訊，是個非常值得研究的課題。本文作者將針對 log ingestion, request tracing, metrics analysis 等等方面來分享在打造工具時所遭遇的難點與對應的解決方案。
 
 ### [從 Freenode 脫離以及 IRC 新秀 Libera.Chat](https://gugod.org/2021/05/freenode-exodus-and-libera-chat/) -- gholk
 freenode 是長年以來被多數開源與自由軟體社群所用的 IRC 網，也是 g0v 當初起創之時的所在地。不過最近顯然經歷了不少風雨。在 5/19 時天地變色。
