@@ -15,3 +15,5 @@ date: 2021-06-20 13:48:15
 ### [[英文] 聯邦制的權限管理：以 gnome 社群的 matrix 為例](https://blog.ergaster.org/post/20210610-sovereignty-federated-system-gnome/) -- gholk
 gnome 社群並沒有定義出正式的聊天平台。 最近他們決定架設 matrix，但在管理上碰到了一些問題。 他們的 matrix 是開放註冊的，不屬於 gnome 社群的人也可以註冊， 取得一個 `@xxxxx:gnome.org` 的帳號，帶來了身份識別問題。 他們一開始也並未限制頻道地址命名空間， 所有使用者都能建立 `#xxxxx:gnome.org` 的頻道。 他們還遭遇了某些頻道自治的問題。 最後，他們遷移到了 matrix 的託管平台 EMS 上。
 
+該部落格還有一些有關 gnome matrix 的文章。
+
