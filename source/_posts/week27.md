@@ -5,7 +5,10 @@ tags:
 date: 2021-06-20 13:48:15
 ---
 
-## [專欄] ???
+## [專欄] Random Life Journal
+### [The Advanced Challenge of Load Balancing](https://medium.com/geekculture/the-advanced-challenge-of-load-balancing-6f6ef5f36ec4?source=friends_link&sk=c4fda7731a4d115c07b0693f43492101) -- Rain
+這幾年處理 Load Balancing 相關問題的一些心得，若要能實現任意的分配流量的話必須滿足一些前提，其中一個就是所有 server 都必須是 stateless，如此一來一個 request 在每一台 server 的處理邏輯才會相同。然而很多用於提昇效能的技術如 Session 和 WebSocket 都會增加一些變數，直接套用市面上常見的 Load Balancer 而沒有進一步去研讀文件的話，很可能會忽略一些關鍵問題，進而導致服務運作異常的潛在風險。
+
 ## 隨機性技術隨筆
 ### [matrix 菜鳥使用心得](http://gholk.github.io/ccns-matrix-luser-review.html) -- gholk
 一直想架一個自由的即時通訊軟體， 之前 [大概研究了幾個自由的 im](http://gholk.github.io/instant-message-app-future-work.html) ， 最後因為有社團的資源可以蹭，所以架了聯邦制的 im matrix。matrix 在架構上介於 discord（或 slack）與 irc 的中間， 但因為聯邦制和注重隱私，又多了一些不便。 加上很多功能還在開發中，會少一些功能，需要手動操作。 目前要直接從 discord 搬過來 matrix 會不太方便。 本文介紹了 matrix 的基本概念、使用經驗、與 discord 的比較， 最後是如何以 restful api 管理伺服器。
@@ -17,3 +20,5 @@ gnome 社群並沒有定義出正式的聊天平台。 最近他們決定架設 
 
 該部落格還有一些有關 gnome matrix 的文章。
 
+### [Alpine, Slim, Stretch, Buster, Jessie, Bullseye — What are the Differences in Docker Images?](https://medium.com/swlh/alpine-slim-stretch-buster-jessie-bullseye-bookworm-what-are-the-differences-in-docker-62171ed4531d) -- Rain
+如果你也是一名熟悉容器化服務的開發者，那麼你肯定曾經遇過打包 image 時該如何選用 base image 的問題，有些已經幫你裝了許多好用的工具讓你打包速度提升不少，但也因此體積較為龐大，有些則是有著非常小的體積，但也因為對他的不熟悉而不確定裡面是不是缺了什中要的公具。以 Go 語言的 docker image 來說，official 的完整版是 800+ MB，如果你是用一些公有雲提供商的免費額度虛擬機器，那麼相當於直接把可用儲存空間佔掉一半左右，選擇另個更輕量的肯定是明智之舉。本篇作者會分享常見的 docker image tag 後綴意涵，幫助大家更好的選擇需要的 base iamge。
