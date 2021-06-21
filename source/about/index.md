@@ -13,13 +13,13 @@ date: 2020-04-28 21:55:04
 * [gholk] [Blog](//gholk.github.io)
 * [HexRabbit] [Blog](//blog.hexrabbit.io) / [Github](//github.com/HexRabbit)
 * [IID] [Blog](https://hackmd.io/@IID/IID-Heap) / [GitHub](https://github.com/IepIweidieng)
-* [Rain]
+* [Rain] [Blog](https://rain-wu.medium.com/)
 
 ### 共同編輯
 * [TsundereChen] [Blog](https://blog.tsunderechen.io) / [GitHub](https://github.com/TsundereChen)
 * [raiso]
 * [Ian]
 * [Sou]
-* [R2] [Blog](https://sean0921.github.io) / [GitHub](https://github.com/holishing) / [My Personal Git Repo](https://cgit.clam.ml/)
+* [r2] [Blog](https://sean0921.github.io) / [GitHub](https://github.com/holishing) / [My Personal Git Repo](https://cgit.clam.ml/)
 * [amikai] [Blog](https://amikai.github.io) / [GitHub](https://github.com/amikai)
 
