@@ -27,4 +27,4 @@ gnome 社群並沒有定義出正式的聊天平台。 最近他們決定架設 
 本篇技術簡報分享主要介紹了 rootfs 在 Linux 組成、Linux 開機的地位，以及如何用 FHS (檔案系統階層標準) 規範 rootfs 的架構，從各個發行版的既有資源建立 rootfs，藉由 chroot 進入 rootfs 的方式。概念看似基本，但對於想要理解容器化基礎，或是建立更為客製化的 Linux 發行版，瞭解並對照其他 Unix 家族組成架構的來說，卻是不可或缺的。另外理解 chroot 的概念也能在本地 console 操作的 Linux 機器無法開機時，快速嘗試出有效的救援方案。
 
 ### [Alpine, Slim, Stretch, Buster, Jessie, Bullseye — What are the Differences in Docker Images?](https://medium.com/swlh/alpine-slim-stretch-buster-jessie-bullseye-bookworm-what-are-the-differences-in-docker-62171ed4531d) -- Rain
-如果你也是一名熟悉容器化服務的開發者，那麼你肯定曾經遇過打包 image 時該如何選用 base image 的問題，有些已經幫你裝了許多好用的工具讓你打包速度提升不少，但也因此體積較為龐大，有些則是有著非常小的體積，但也因為對他的不熟悉而不確定裡面是不是缺了什中要的公具。以 Go 語言的 docker image 來說，official 的完整版是 800+ MB，如果你是用一些公有雲提供商的免費額度虛擬機器，那麼相當於直接把可用儲存空間佔掉一半左右，選擇另個更輕量的肯定是明智之舉。本篇作者會分享常見的 docker image tag 後綴意涵，幫助大家更好的選擇需要的 base iamge。
+如果你也是一名熟悉容器化服務的開發者，那麼你肯定曾經遇過打包 image 時該如何選用 base image 的問題，有些已經幫你裝了許多好用的工具讓你打包速度提升不少，但也因此體積較為龐大，有些則是有著非常小的體積，但也因為對他的不熟悉而不確定裡面是不是缺了什麼重要的工具。以 Go 語言的 docker image 來說，official 的完整版是 800+ MB，如果你是用一些公有雲提供商的免費額度虛擬機器，那麼相當於直接把可用儲存空間佔掉一半左右，選擇另個更輕量的肯定是明智之舉。本篇作者會分享常見的 docker image tag 後綴意涵，幫助大家更好的選擇需要的 base image。
