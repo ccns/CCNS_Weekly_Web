@@ -15,7 +15,7 @@ date: 2021-06-06 19:44:44
 記得兩三年前第一次接觸 database 時，面對 query 速度過慢的問題總是會反射性回應「建立 index」。當時一直以為 index 就只有 binary search tree 一種實作方式而已。後來看過越來越多不同的產品及案例，各自的資料庫內所儲存的資料都有所不同，因此意識到 binary search tree 並不是萬用解法，並開始研究各種不同 index 背後的設計思維。
 
 ## 隨機性技術隨筆
-### [在 Debian/Ubuntu 等 Linux 發行版下簡易打包軟體 – 以 SAC 為例](https://sean0921.github.io/2021/06/06/sac-debian-packaging/) -- r2
+### [在 Debian/Ubuntu 等 Linux 發行版下簡易打包軟體 – 以 SAC 為例](https://sean0921.github.io/2021/06/05/sac-debian-packaging/) -- r2
 Linux 發行版基本上就是一個「拼裝車」，將各個不同來源的專案原始碼組合成一個多用途的「通用作業系統」。我們將以地震學軟體 SAC 為例，說明如何簡單利用「套件打包」的機制，藉由既有的軟體打包管理工具，來更有秩序地管理發行版內的軟體。
 
 ## 文章分享
