@@ -37,4 +37,4 @@ Android 手機的備份檔案，常見的有 tar，也有整個檔案系統的�
 
 ### [Bedtime Stories For Children: Storage Engines (pub-ver)](https://docs.google.com/presentation/d/14KkpQamsTSxhvliYUUXOGAQ_C61v0BHsefZ344HUGB8/edit?fbclid=IwAR2neFF1P8kcdk_afCYRGljXuqLIOnI_cAEANwGoVHx7X-RtJ0LxWcwU0E0#slide=id.p) -- Rain
 
-還在把 Database 當作儲藏室在用嗎？其底層儲存資料的原理其實大有學問，本篇作者將以幼稚園小孩床邊故事的風格來深入淺出 storage engine 的發展以及各個情境的取捨。
+還在把 database 當作儲藏室在用嗎？其底層儲存資料的原理其實大有學問。本篇作者將以幼稚園小孩床邊故事的風格來深入淺出地介紹 storage engine 的發展以及在各個情境下的取捨。
