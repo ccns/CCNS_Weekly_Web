@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="ccns-weekly">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/ccns-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/ccns-icon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/ccns-icon-16x16.png">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"weekly.ccns.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="[專欄] 電子布告欄系統與近代網路次文化發展史從文章網址格式揪出假冒 ptt 網站的業配文 – r2看似隨機的文章編碼網址，竟然是追查 ptt 文章來源的重要線索? 讓我們抽絲剝繭裡面的規則，並用來判斷我們在網路上看到的「鄉民分享文章」是真是假吧！ 以 js 實作 ptt 文章 id 到網址的解碼器 – gholk文章 id 是 ptt 官方用來唯一索引單一一篇文章的方式。在 ptt 介面中可以簡">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Week #4 - 一種名為變數名稱選擇困難的病">
+<meta property="og:url" content="http://weekly.ccns.io/week4/index.html">
+<meta property="og:site_name" content="CCNS 週刊">
+<meta property="og:description" content="[專欄] 電子布告欄系統與近代網路次文化發展史從文章網址格式揪出假冒 ptt 網站的業配文 – r2看似隨機的文章編碼網址，竟然是追查 ptt 文章來源的重要線索? 讓我們抽絲剝繭裡面的規則，並用來判斷我們在網路上看到的「鄉民分享文章」是真是假吧！ 以 js 實作 ptt 文章 id 到網址的解碼器 – gholk文章 id 是 ptt 官方用來唯一索引單一一篇文章的方式。在 ptt 介面中可以簡">
+<meta property="og:locale">
+<meta property="og:image" content="http://weekly.ccns.io/images/ccns-icon-180x180.png">
+<meta property="article:published_time" content="2020-06-09T01:53:40.000Z">
+<meta property="article:modified_time" content="2021-07-05T12:48:49.330Z">
+<meta property="article:author" content="NCKU CCNS">
+<meta property="article:tag" content="weekly">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://weekly.ccns.io/images/ccns-icon-180x180.png">
+
+<link rel="canonical" href="http://weekly.ccns.io/week4/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'ccns-weekly'
+  };
+</script>
+
+  <title>Week #4 - 一種名為變數名稱選擇困難的病 | CCNS 週刊</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165012295-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-165012295-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="CCNS 週刊" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="CCNS 週刊" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">CCNS 週刊</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>最新一期</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives" rel="section"><i class="fa fa-archive fa-fw"></i>歷史期數</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ccns-weekly">
+    <link itemprop="mainEntityOfPage" href="http://weekly.ccns.io/week4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="NCKU CCNS">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CCNS 週刊">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Week #4 - 一種名為變數名稱選擇困難的病
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-06-09 09:53:40" itemprop="dateCreated datePublished" datetime="2020-06-09T09:53:40+08:00">2020-06-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-07-05 20:48:49" itemprop="dateModified" datetime="2021-07-05T20:48:49+08:00">2021-07-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="專欄-電子布告欄系統與近代網路次文化發展史"><a href="#專欄-電子布告欄系統與近代網路次文化發展史" class="headerlink" title="[專欄] 電子布告欄系統與近代網路次文化發展史"></a>[專欄] 電子布告欄系統與近代網路次文化發展史</h2><h3 id="從文章網址格式揪出假冒-ptt-網站的業配文-–-r2"><a href="#從文章網址格式揪出假冒-ptt-網站的業配文-–-r2" class="headerlink" title="從文章網址格式揪出假冒 ptt 網站的業配文 – r2"></a><a target="_blank" rel="noopener" href="https://www.ptt.cc/bbs/PttNewhand/M.1587818778.A.1E7.html">從文章網址格式揪出假冒 ptt 網站的業配文</a> – r2</h3><p>看似隨機的文章編碼網址，竟然是追查 ptt 文章來源的重要線索? 讓我們抽絲剝繭裡面的規則，並用來判斷我們在網路上看到的「鄉民分享文章」是真是假吧！</p>
+<h3 id="以-js-實作-ptt-文章-id-到網址的解碼器-–-gholk"><a href="#以-js-實作-ptt-文章-id-到網址的解碼器-–-gholk" class="headerlink" title="以 js 實作 ptt 文章 id 到網址的解碼器 – gholk"></a><a target="_blank" rel="noopener" href="http://gholk.github.io/ptt-article-id-decoder.html">以 js 實作 ptt 文章 id 到網址的解碼器</a> – gholk</h3><p>文章 id 是 ptt 官方用來唯一索引單一一篇文章的方式。在 ptt 介面中可以簡單用 <code>#</code> 字號由文章 id 找出文章，但現今日常使用中也常使用 ptt 網頁版的網址來唯一索引文章。本文簡單介紹 ptt 文章 id 的編碼原理，並以 js 實作出將文章 id 解碼為 ptt 網頁版網址的功能。能夠在瀏覽器中將文章 id 附加在在網址後，以類似短網址自動跳轉的方式使用。</p>
+<h2 id="隨機性技術隨筆"><a href="#隨機性技術隨筆" class="headerlink" title="隨機性技術隨筆"></a>隨機性技術隨筆</h2><h3 id="從今天開始自幹金手指-–-HexRabbit"><a href="#從今天開始自幹金手指-–-HexRabbit" class="headerlink" title="從今天開始自幹金手指 – HexRabbit"></a><a target="_blank" rel="noopener" href="https://blog.hexrabbit.io/2020/06/14/gotta-CHEAT-em-all">從今天開始自幹金手指</a> – HexRabbit</h3><p>GBA/NDS 是我們這代人的快樂童年回憶，不過破不了關的時候可就不太愉快了。這次就讓我們帶著懷舊的心情與感動，翻出早已棄置房間一角的掌上遊戲機來重溫這個破關利器的原理吧！</p>
+<h2 id="文章分享"><a href="#文章分享" class="headerlink" title="文章分享"></a>文章分享</h2><h3 id="苹果往事：乔布斯和-iPod-的诞生-–-gholk"><a href="#苹果往事：乔布斯和-iPod-的诞生-–-gholk" class="headerlink" title="苹果往事：乔布斯和 iPod 的诞生 – gholk"></a><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2020/04/ipod-history.html">苹果往事：乔布斯和 iPod 的诞生</a> – gholk</h3><p>介紹賈伯斯回歸蘋果後，擬定的一系列瞄準多媒體的市場戰略，到推出 iPod 的過程。我家裡一台十年以上的 windows pc，竟然有一張 pci 到火線的介面卡，可見當時 apple 推出的火線規格的強大。</p>
+<h3 id="DNS-blocklist-to-block-unnecessary-connections-to-Xiaomi-–-DC"><a href="#DNS-blocklist-to-block-unnecessary-connections-to-Xiaomi-–-DC" class="headerlink" title="DNS blocklist to block unnecessary connections to Xiaomi – DC"></a><a target="_blank" rel="noopener" href="https://pastebin.com/KtY4RT6w">DNS blocklist to block unnecessary connections to Xiaomi</a> – DC</h3><p>雖然小米早已是慣犯，每次都承諾會改善，但最近又有資安專家跳出來證實小米手機和小米瀏覽器仍然會偷傳資料到位於中國的伺服器，這份 DNS 黑名單是網友整理出來資料傳送可能的網域，可將其加入 pi.hole 等 DNS blocker 防止資料被偷</p>
+<h3 id="UX於大規模敏捷開發-SAFe-Agile-實踐和心得-–-Rain"><a href="#UX於大規模敏捷開發-SAFe-Agile-實踐和心得-–-Rain" class="headerlink" title="UX於大規模敏捷開發(SAFe Agile)實踐和心得 – Rain"></a><a target="_blank" rel="noopener" href="https://medium.com/uxeastmeetswest/ux%E6%96%BC%E5%A4%A7%E8%A6%8F%E6%A8%A1%E6%95%8F%E6%8D%B7%E9%96%8B%E7%99%BC-safe-agile-%E5%AF%A6%E8%B8%90%E5%92%8C%E5%BF%83%E5%BE%97-78d2c9d52929">UX於大規模敏捷開發(SAFe Agile)實踐和心得</a> – Rain</h3><p>如果你已經習慣於融入大型開發團隊的一員，高效迭代、快速行軍的敏捷開發 (Agile) 對你來說也許就像另個世界的玩笑。他也許受到了許多規模及溝通的限制，無法完全落實於大型團隊，但確實能帶來些值得借鏡的改變。</p>
+<h3 id="掘竅-為什麼要使用-rel-quot-noreferrer-quot-，談-target-quot-blank-quot-的安全性風險-–-gholk"><a href="#掘竅-為什麼要使用-rel-quot-noreferrer-quot-，談-target-quot-blank-quot-的安全性風險-–-gholk" class="headerlink" title="[掘竅] 為什麼要使用 rel=&quot;noreferrer&quot;，談 target=&quot;_blank&quot; 的安全性風險 – gholk"></a><a target="_blank" rel="noopener" href="https://pjchender.blogspot.com/2020/05/relnoreferrer-targetblank.html">[掘竅] 為什麼要使用 <code>rel=&quot;noreferrer&quot;</code>，談 <code>target=&quot;_blank&quot;</code> 的安全性風險</a> – gholk</h3><p>透過 <code>&lt;a target=&quot;_blank&quot;&gt;</code> 開啟連結，會造成新開啟的網頁，可以透過 <code>window.opener</code> 存取原網頁的 window 物件。另外一則有趣的知識則是，透過 target 屬性，即可控制另一個從該連結開啟的分頁，參見另一篇文章 <a target="_blank" rel="noopener" href="https://www.leavesongs.com/PENETRATION/use-target-to-spoof-fishing.html">前端黑魔法之远程控制地址栏</a> 與其內文連結。</p>
+
+    </div>
+
+    
+    
+    <hr>
+<p>這是由成大網路愛好社 CCNS 所推出的週刊，目前為雙週更新一次，裡面的文章都是由本社團裡面的編輯們自己所撰寫的文章，或在週刊發行期間內所挑選出來的優質文章，加上由編輯們撰寫的註解及評論，文章主要與科技相關，不過如果有編輯覺得值得推薦的非科技相關文章也會刊載，如果有任何建議，歡迎發送 E-Mail 到 <a href="mailto:weekly@ccns.ncku.edu.tw">weekly@ccns.ncku.edu.tw</a>，或是直接私訊到 <a href="https://www.facebook.com/ncku.ccns/" target="_blank" rel="noopener">CCNS 電腦與網路愛好社</a>，最後，歡迎分享此週刊！</p>
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>作者： </strong>NCKU CCNS
+  </li>
+  <li class="post-copyright-link">
+    <strong>文章連結：</strong>
+    <a href="http://weekly.ccns.io/week4/" title="Week #4 - 一種名為變數名稱選擇困難的病">http://weekly.ccns.io/week4/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-SA</a> 許可協議。轉載請註明出處！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/weekly/" rel="tag"># weekly</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/week3/" rel="prev" title="Week #3 - 期末將近，社團呼籲大家出去逛街挺商家，不要去期末考">
+      <i class="fa fa-chevron-left"></i> Week #3 - 期末將近，社團呼籲大家出去逛街挺商家，不要去期末考
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/week5/" rel="next" title="Week #5 - 科技三定律之三: 所有我35歲後發展的技術都是違反直覺要遭天譴的">
+      Week #5 - 科技三定律之三: 所有我35歲後發展的技術都是違反直覺要遭天譴的 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%88%E6%AC%84-%E9%9B%BB%E5%AD%90%E5%B8%83%E5%91%8A%E6%AC%84%E7%B3%BB%E7%B5%B1%E8%88%87%E8%BF%91%E4%BB%A3%E7%B6%B2%E8%B7%AF%E6%AC%A1%E6%96%87%E5%8C%96%E7%99%BC%E5%B1%95%E5%8F%B2"><span class="nav-number">1.</span> <span class="nav-text">[專欄] 電子布告欄系統與近代網路次文化發展史</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%9E%E6%96%87%E7%AB%A0%E7%B6%B2%E5%9D%80%E6%A0%BC%E5%BC%8F%E6%8F%AA%E5%87%BA%E5%81%87%E5%86%92-ptt-%E7%B6%B2%E7%AB%99%E7%9A%84%E6%A5%AD%E9%85%8D%E6%96%87-%E2%80%93-r2"><span class="nav-number">1.1.</span> <span class="nav-text">從文章網址格式揪出假冒 ptt 網站的業配文 – r2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A5-js-%E5%AF%A6%E4%BD%9C-ptt-%E6%96%87%E7%AB%A0-id-%E5%88%B0%E7%B6%B2%E5%9D%80%E7%9A%84%E8%A7%A3%E7%A2%BC%E5%99%A8-%E2%80%93-gholk"><span class="nav-number">1.2.</span> <span class="nav-text">以 js 實作 ptt 文章 id 到網址的解碼器 – gholk</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%A8%E6%A9%9F%E6%80%A7%E6%8A%80%E8%A1%93%E9%9A%A8%E7%AD%86"><span class="nav-number">2.</span> <span class="nav-text">隨機性技術隨筆</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%9E%E4%BB%8A%E5%A4%A9%E9%96%8B%E5%A7%8B%E8%87%AA%E5%B9%B9%E9%87%91%E6%89%8B%E6%8C%87-%E2%80%93-HexRabbit"><span class="nav-number">2.1.</span> <span class="nav-text">從今天開始自幹金手指 – HexRabbit</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E5%88%86%E4%BA%AB"><span class="nav-number">3.</span> <span class="nav-text">文章分享</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8B%B9%E6%9E%9C%E5%BE%80%E4%BA%8B%EF%BC%9A%E4%B9%94%E5%B8%83%E6%96%AF%E5%92%8C-iPod-%E7%9A%84%E8%AF%9E%E7%94%9F-%E2%80%93-gholk"><span class="nav-number">3.1.</span> <span class="nav-text">苹果往事：乔布斯和 iPod 的诞生 – gholk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS-blocklist-to-block-unnecessary-connections-to-Xiaomi-%E2%80%93-DC"><span class="nav-number">3.2.</span> <span class="nav-text">DNS blocklist to block unnecessary connections to Xiaomi – DC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UX%E6%96%BC%E5%A4%A7%E8%A6%8F%E6%A8%A1%E6%95%8F%E6%8D%B7%E9%96%8B%E7%99%BC-SAFe-Agile-%E5%AF%A6%E8%B8%90%E5%92%8C%E5%BF%83%E5%BE%97-%E2%80%93-Rain"><span class="nav-number">3.3.</span> <span class="nav-text">UX於大規模敏捷開發(SAFe Agile)實踐和心得 – Rain</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%98%E7%AB%85-%E7%82%BA%E4%BB%80%E9%BA%BC%E8%A6%81%E4%BD%BF%E7%94%A8-rel-quot-noreferrer-quot-%EF%BC%8C%E8%AB%87-target-quot-blank-quot-%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7%E9%A2%A8%E9%9A%AA-%E2%80%93-gholk"><span class="nav-number">3.4.</span> <span class="nav-text">[掘竅] 為什麼要使用 rel&#x3D;&quot;noreferrer&quot;，談 target&#x3D;&quot;_blank&quot; 的安全性風險 – gholk</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">NCKU CCNS</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+        
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">標籤</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ccns" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ccns" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/ncku.ccns" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ncku.ccns" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+  #mc_embed_signup{clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+  /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+ *      We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://ccns.us8.list-manage.com/subscribe/post?u=d6a78e94df88bbc944951a330&amp;id=79c325117e" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+  <label for="mce-EMAIL">訂閱 CCNS Weekly</label>
+  <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_d6a78e94df88bbc944951a330_79c325117e" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">NCKU CCNS</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>CCNS 週刊</title>
+    <link>http://weekly.ccns.io/</link>
+    
+    <atom:link href="http://weekly.ccns.io/rss2.xml" rel="self" type="application/rss+xml"/>
+    
+    <description></description>
+    <pubDate>Mon, 05 Jul 2021 12:48:49 GMT</pubDate>
+    <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Week #28 - 來到 CCNS 的第 28 周，我覺得自己和社員們都很純樸</title>
+      <link>http://weekly.ccns.io/week28/</link>
+      <guid>http://weekly.ccns.io/week28/</guid>
+      <pubDate>Sun, 04 Jul 2021 15:59:59 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;本周由於存稿不足，原創文章只選了二篇舊文。歡迎參與過 ccns 活動的舊雨新知投稿雙周刊！&lt;/p&gt;
+&lt;h2 id=&quot;專欄-電子布告欄系統與近代網路次文化發展史&quot;&gt;&lt;a href=&quot;#專欄-電子布告欄系統與近代網路次文化發展史&quot; class=&quot;headerlink&quot; titl</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<p>本周由於存稿不足，原創文章只選了二篇舊文。歡迎參與過 ccns 活動的舊雨新知投稿雙周刊！</p><h2 id="專欄-電子布告欄系統與近代網路次文化發展史"><a href="#專欄-電子布告欄系統與近代網路次文化發展史" class="headerlink" title="[專欄] 電子布告欄系統與近代網路次文化發展史"></a>[專欄] 電子布告欄系統與近代網路次文化發展史</h2><h3 id="Ptt-Ptt2-近期對於-SSH-連線實作的更動-—-r2"><a href="#Ptt-Ptt2-近期對於-SSH-連線實作的更動-—-r2" class="headerlink" title="Ptt/Ptt2 近期對於 SSH 連線實作的更動 — r2"></a><a href="https://blog.clam.ml/2021/07/04/ptt-is-testing-new-sshd/">Ptt/Ptt2 近期對於 SSH 連線實作的更動</a> — r2</h3><p>本篇文章將以使用者與 BBS 程式測試者的角度觀察，最近 PttBBS 對於 SSH 連線提供服務方式的更動，以及對於一般使用者可能造成的影響。<br>近幾年以來發生尖峰時間 Ptt 無法正常登入的負載問題頻率愈來愈高，尤其在近幾個月來更是出現一般使用者認為中規模的事件，如：小區域地震、三級警戒以來每天召開的防疫記者會，Ptt 也仍因過載而持續發生無法登入的窘況。引發各看板，包含 SYSOP 站務板大大小小的抱怨。<br>對此站方有什麼積極應對解決的方案呢？其實是有的。本篇文章根據初步觀察大概分成四個階段：觀察、分析、嘗試方案、解決(正式上線)，並一併討論 SSH 連線實作的更動會如何改善這樣的問題。</p><h2 id="隨機性技術隨筆"><a href="#隨機性技術隨筆" class="headerlink" title="隨機性技術隨筆"></a>隨機性技術隨筆</h2><h3 id="從舊手機備份中拷貝遊戲的存檔-—-gholk"><a href="#從舊手機備份中拷貝遊戲的存檔-—-gholk" class="headerlink" title="從舊手機備份中拷貝遊戲的存檔 — gholk"></a><a href="http://gholk.github.io/android-copy-game-save-data.html">從舊手機備份中拷貝遊戲的存檔</a> — gholk</h3><p>最近比較閒，把一些以前玩過的 android 遊戲裝回來玩。很多遊戲都沒有內建存檔轉移機制，所以以前玩的進度沒了。只好自立自強從以前手機的備份映象檔中，找回以前遊戲的存檔，放到現在手機的資料目錄中。<br>Android 手機的備份檔案，常見的有 tar，也有整個檔案系統的映像檔，而後者的格式可能是古老的 yaffs 或是近年的 ext4。至於直接把存檔從手機裡拉出來及送進去，用 root 可以簡單做到，而用 adb backup 搭配 adb backup extractor 也可以。</p><h2 id="文章分享"><a href="#文章分享" class="headerlink" title="文章分享"></a>文章分享</h2><h3 id="2020-21-趨勢：中國遊戲正在跳過臺灣？-—-gholk"><a href="#2020-21-趨勢：中國遊戲正在跳過臺灣？-—-gholk" class="headerlink" title="2020-21 趨勢：中國遊戲正在跳過臺灣？ — gholk"></a><a href="http://www.u-acg.com/archives/25160">2020-21 趨勢：中國遊戲正在跳過臺灣？</a> — gholk</h3><blockquote><p>今天下午舉行六月分享會，邀請了熊大總經理來聊聊他作為玩家，也作為營運廠商對於台灣產業遊戲的心得。<br>[…]<br>在整場討論中，有一個關鍵點是我們提到了<strong>「中國遊戲正在退出（精確地說，是跳過）台灣市場」</strong>，這一話題讓許多朋友私訊來問我，甚至還有媒體記者來詢問，所以我就簡單寫了這篇來說明。更詳細的討論，請參考八月 RainReader 在《數位時代》或其他地方的專欄。</p></blockquote><blockquote><p>[…] 2020 年大量的中國遊戲跳過臺灣，直接進入韓國和日本，乃至於全球市場。這些中國遊戲在韓、日或全球市場上取得非常亮眼成績在幾年前幾乎是不可想像的事。這些中國遊戲直接省略在台灣市場測試的時間，自然就讓許多靠代理中國遊戲為生的中小型營運廠商面對很大的挑戰。</p></blockquote><blockquote><p>上述的情況之所以會在這幾年內產生，其中一個關鍵的原因是乃至政治上的對立氛圍。本文並不打算討論政治，但兩岸政治的緊張已經深刻影響到所有領域，幾個有名的事件可以作為例證：</p></blockquote><ul><li>2020 年 4 月 4 日 的網銀與西山居事件</li><li>Hololive 與華碩 ROG 小編在脖子架著刀事件</li><li>赤燭的《還願》</li></ul><h3 id="Debian-套件打包教學指南-—-r2"><a href="#Debian-套件打包教學指南-—-r2" class="headerlink" title="Debian 套件打包教學指南 — r2"></a><a href="https://www.debian.org/doc/manuals/packaging-tutorial/packaging-tutorial.zh_TW.pdf">Debian 套件打包教學指南</a> — r2</h3><p>繼 <a href="/week26">week26</a> 介紹如何用簡易方式快速打包 Debian package 後，這邊再分享一個如何「正確」打包 Debian 套件的官方指南。該指引也理應適用於所有 Debian 衍生發行版，例如 Ubuntu、MX Linux 等。這本官方手冊的優點有：1. 為正體中文版；2. 有持續被維護；3. 翻譯者為臺灣的 Debian developer — <a href="https://www.linkedin.com/in/szlin">SZ Lin</a>，在臺灣其他開源社群也十分活躍。有了這樣的資源，相信要瞭解正確的套件打包知識，並且將其觀念與其他發行版對照而理解活用，將會容易許多。</p><h3 id="Bedtime-Stories-For-Children-Storage-Engines-pub-ver-—-Rain"><a href="#Bedtime-Stories-For-Children-Storage-Engines-pub-ver-—-Rain" class="headerlink" title="Bedtime Stories For Children: Storage Engines (pub-ver) — Rain"></a><a href="https://docs.google.com/presentation/d/14KkpQamsTSxhvliYUUXOGAQ_C61v0BHsefZ344HUGB8/edit?fbclid=IwAR2neFF1P8kcdk_afCYRGljXuqLIOnI_cAEANwGoVHx7X-RtJ0LxWcwU0E0#slide=id.p">Bedtime Stories For Children: Storage Engines (pub-ver)</a> — Rain</h3><p>還在把 database 當作儲藏室在用嗎？其底層儲存資料的原理其實大有學問。本篇作者將以幼稚園小孩床邊故事的風格來深入淺出地介紹 storage engine 的發展以及在各個情境下的取捨。</p>]]></content:encoded>
+      
+      
+      
+      <category domain="http://weekly.ccns.io/tags/weekly/">weekly</category>
+      
+      
+      <comments>http://weekly.ccns.io/week28/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Week #27 - 人工數據大智慧田字薯餅佐鳳梨鮭魚沙拉</title>
+      <link>http://weekly.ccns.io/week27/</link>
+      <guid>http://weekly.ccns.io/week27/</guid>
+      <pubDate>Mon, 21 Jun 2021 03:48:15 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h2 id=&quot;專欄-Random-Life-Journal&quot;&gt;&lt;a href=&quot;#專欄-Random-Life-Journal&quot; class=&quot;headerlink&quot; title=&quot;[專欄] Random Life Journal&quot;&gt;&lt;/a&gt;[專欄] Random Life J</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h2 id="專欄-Random-Life-Journal"><a href="#專欄-Random-Life-Journal" class="headerlink" title="[專欄] Random Life Journal"></a>[專欄] Random Life Journal</h2><h3 id="The-Advanced-Challenge-of-Load-Balancing-–-Rain"><a href="#The-Advanced-Challenge-of-Load-Balancing-–-Rain" class="headerlink" title="The Advanced Challenge of Load Balancing – Rain"></a><a href="https://medium.com/geekculture/the-advanced-challenge-of-load-balancing-6f6ef5f36ec4?source=friends_link&sk=c4fda7731a4d115c07b0693f43492101">The Advanced Challenge of Load Balancing</a> – Rain</h3><p>這幾年處理 Load Balancing 相關問題的一些心得，若要能實現任意的分配流量的話必須滿足一些前提，其中一個就是所有 server 都必須是 stateless，如此一來一個 request 在每一台 server 的處理邏輯才會相同。然而很多用於提昇效能的技術如 Session 和 WebSocket 都會增加一些變數，直接套用市面上常見的 Load Balancer 而沒有進一步去研讀文件的話，很可能會忽略一些關鍵問題，進而導致服務運作異常的潛在風險。</p><h2 id="隨機性技術隨筆"><a href="#隨機性技術隨筆" class="headerlink" title="隨機性技術隨筆"></a>隨機性技術隨筆</h2><h3 id="matrix-菜鳥使用心得-–-gholk"><a href="#matrix-菜鳥使用心得-–-gholk" class="headerlink" title="matrix 菜鳥使用心得 – gholk"></a><a href="http://gholk.github.io/ccns-matrix-luser-review.html">matrix 菜鳥使用心得</a> – gholk</h3><p>一直想架一個自由的即時通訊軟體， 之前 <a href="http://gholk.github.io/instant-message-app-future-work.html">大概研究了幾個自由的 im</a> ， 最後因為有社團的資源可以蹭，所以架了聯邦制的 im matrix。matrix 在架構上介於 discord（或 slack）與 irc 的中間， 但因為聯邦制和注重隱私，又多了一些不便。 加上很多功能還在開發中，會少一些功能，需要手動操作。 目前要直接從 discord 搬過來 matrix 會不太方便。 本文介紹了 matrix 的基本概念、使用經驗、與 discord 的比較， 最後是如何以 restful api 管理伺服器。</p><h3 id="PyGMT-在-Python-製圖領域推廣-GMT-的利器-我-ok-你先用-–-r2"><a href="#PyGMT-在-Python-製圖領域推廣-GMT-的利器-我-ok-你先用-–-r2" class="headerlink" title="PyGMT, 在 Python 製圖領域推廣 GMT 的利器? 我 ok, 你先用? – r2"></a><a href="https://sean0921.github.io/2021/06/21/pygmt-2021-6-feedback/">PyGMT, 在 Python 製圖領域推廣 GMT 的利器? 我 ok, 你先用?</a> – r2</h3><p>Generic Mapping Tools，通用製圖工具，官方以及常見的簡稱為 GMT，是在地球科學領域廣泛使用的地理製圖工具之一。它可以在各種平臺結合 Shell Script (bash、csh)，Batch file(Windows) 的特性以及第三方工具(如: awk)，撰寫腳本以進行空間資訊的數據處理及高度客製化的地圖、圖表繪製。PyGMT 於 2020 年 5 月釋出，作為 GMT 在 Python 的 API。究竟這樣的專案對於 GMT 的使用族群而言有什麼可利用之處呢？以下分享個人的使用心得。</p><h2 id="文章分享"><a href="#文章分享" class="headerlink" title="文章分享"></a>文章分享</h2><h3 id="英文-聯邦制的權限管理：以-gnome-社群的-matrix-為例-–-gholk"><a href="#英文-聯邦制的權限管理：以-gnome-社群的-matrix-為例-–-gholk" class="headerlink" title="[英文] 聯邦制的權限管理：以 gnome 社群的 matrix 為例 – gholk"></a><a href="https://blog.ergaster.org/post/20210610-sovereignty-federated-system-gnome/">[英文] 聯邦制的權限管理：以 gnome 社群的 matrix 為例</a> – gholk</h3><p>gnome 社群並沒有定義出正式的聊天平台。 最近他們決定架設 matrix，但在管理上碰到了一些問題。 他們的 matrix 是開放註冊的，不屬於 gnome 社群的人也可以註冊， 取得一個 <code>@xxxxx:gnome.org</code> 的帳號，帶來了身份識別問題。 他們一開始也並未限制頻道地址命名空間， 所有使用者都能建立 <code>#xxxxx:gnome.org</code> 的頻道。 他們還遭遇了某些頻道自治的問題。 最後，他們遷移到了 matrix 的託管平台 EMS 上。</p><p>該部落格還有一些有關 gnome matrix 的文章。</p><h3 id="rootfs-淺談-–-r2"><a href="#rootfs-淺談-–-r2" class="headerlink" title="rootfs 淺談 – r2"></a><a href="https://docs.google.com/presentation/d/1v7ScSVk00PVfthV8E-dEeT3o7YcV29Hm2qdDKxHlo-Y/edit#slide=id.p">rootfs 淺談</a> – r2</h3><p>本篇技術簡報分享主要介紹了 rootfs 在 Linux 組成、Linux 開機的地位，以及如何用 FHS (檔案系統階層標準) 規範 rootfs 的架構，從各個發行版的既有資源建立 rootfs，藉由 chroot 進入 rootfs 的方式。概念看似基本，但對於想要理解容器化基礎，或是建立更為客製化的 Linux 發行版，瞭解並對照其他 Unix 家族組成架構的來說，卻是不可或缺的。另外理解 chroot 的概念也能在本地 console 操作的 Linux 機器無法開機時，快速嘗試出有效的救援方案。</p><h3 id="Alpine-Slim-Stretch-Buster-Jessie-Bullseye-—-What-are-the-Differences-in-Docker-Images-–-Rain"><a href="#Alpine-Slim-Stretch-Buster-Jessie-Bullseye-—-What-are-the-Differences-in-Docker-Images-–-Rain" class="headerlink" title="Alpine, Slim, Stretch, Buster, Jessie, Bullseye — What are the Differences in Docker Images? – Rain"></a><a href="https://medium.com/swlh/alpine-slim-stretch-buster-jessie-bullseye-bookworm-what-are-the-differences-in-docker-62171ed4531d">Alpine, Slim, Stretch, Buster, Jessie, Bullseye — What are the Differences in Docker Images?</a> – Rain</h3><p>如果你也是一名熟悉容器化服務的開發者，那麼你肯定曾經遇過打包 image 時該如何選用 base image 的問題，有些已經幫你裝了許多好用的工具讓你打包速度提升不少，但也因此體積較為龐大，有些則是有著非常小的體積，但也因為對他的不熟悉而不確定裡面是不是缺了什麼重要的工具。以 Go 語言的 docker image 來說，official 的完整版是 800+ MB，如果你是用一些公有雲提供商的免費額度虛擬機器，那麼相當於直接把可用儲存空間佔掉一半左右，選擇另個更輕量的肯定是明智之舉。本篇作者會分享常見的 docker image tag 後綴意涵，幫助大家更好的選擇需要的 base image。</p>]]></content:encoded>
+      
+      
+      
+      <category domain="http://weekly.ccns.io/tags/weekly/">weekly</category>
+      
+      
+      <comments>http://weekly.ccns.io/week27/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Week #26 - 我們都知道區塊鏈是問題的答案，但還不知道問題是什麼</title>
+      <link>http://weekly.ccns.io/week26/</link>
+      <guid>http://weekly.ccns.io/week26/</guid>
+      <pubDate>Sun, 06 Jun 2021 11:44:44 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h2 id=&quot;專欄-電子布告欄系統與近代網路次文化發展史&quot;&gt;&lt;a href=&quot;#專欄-電子布告欄系統與近代網路次文化發展史&quot; class=&quot;headerlink&quot; title=&quot;[專欄] 電子布告欄系統與近代網路次文化發展史&quot;&gt;&lt;/a&gt;[專欄] 電子布告欄系統與近代網路次文化發</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h2 id="專欄-電子布告欄系統與近代網路次文化發展史"><a href="#專欄-電子布告欄系統與近代網路次文化發展史" class="headerlink" title="[專欄] 電子布告欄系統與近代網路次文化發展史"></a>[專欄] 電子布告欄系統與近代網路次文化發展史</h2><h3 id="夢之大地新式密碼加密原理分享-–-IID"><a href="#夢之大地新式密碼加密原理分享-–-IID" class="headerlink" title="夢之大地新式密碼加密原理分享 – IID"></a><a href="https://github.com/ccns/dreambbs/wiki/new_encrypt_way">夢之大地新式密碼加密原理分享</a> – IID</h3><p>夢之大地在 v1.x 之前與其他多數 BBS 系統一樣，使用的密碼加密方式都是 DES，而在現代有了加密強度不夠的問題。從夢大 v2.0 開始，已啟用新的密碼加密系統，使用了 SHA-256。注意本文稱呼的「密碼加密」，是利用密碼 hash 函數來儲存與驗證密碼的方法。</p><h2 id="專欄-Random-Life-Journal"><a href="#專欄-Random-Life-Journal" class="headerlink" title="[專欄] Random Life Journal"></a>[專欄] Random Life Journal</h2><h3 id="The-concepts-behind-the-built-in-indexes-of-PostgreSQL-–-Rain"><a href="#The-concepts-behind-the-built-in-indexes-of-PostgreSQL-–-Rain" class="headerlink" title="The concepts behind the built-in indexes of PostgreSQL – Rain"></a><a href="https://medium.com/random-life-journal/the-concepts-behind-the-built-in-indexes-of-postgresql-e5a35c63098b?source=friends_link&sk=b3fe287920e06a7f961122e58b38a0cc">The concepts behind the built-in indexes of PostgreSQL</a> – Rain</h3><p>記得兩三年前第一次接觸 database 時，面對 query 速度過慢的問題總是會反射性回應「建立 index」。當時一直以為 index 就只有 binary search tree 一種實作方式而已。後來看過越來越多不同的產品及案例，各自的資料庫內所儲存的資料都有所不同，因此意識到 binary search tree 並不是萬用解法，並開始研究各種不同 index 背後的設計思維。</p><h2 id="隨機性技術隨筆"><a href="#隨機性技術隨筆" class="headerlink" title="隨機性技術隨筆"></a>隨機性技術隨筆</h2><h3 id="在-Debian-Ubuntu-等-Linux-發行版下簡易打包軟體-–-以-SAC-為例-–-r2"><a href="#在-Debian-Ubuntu-等-Linux-發行版下簡易打包軟體-–-以-SAC-為例-–-r2" class="headerlink" title="在 Debian/Ubuntu 等 Linux 發行版下簡易打包軟體 – 以 SAC 為例 – r2"></a><a href="https://sean0921.github.io/2021/06/06/sac-debian-packaging/">在 Debian/Ubuntu 等 Linux 發行版下簡易打包軟體 – 以 SAC 為例</a> – r2</h3><p>Linux 發行版基本上就是一個「拼裝車」，將各個不同來源的專案原始碼組合成一個多用途的「通用作業系統」。我們將以地震學軟體 SAC 為例，說明如何簡單利用「套件打包」的機制，藉由既有的軟體打包管理工具，來更有秩序地管理發行版內的軟體。</p><h2 id="文章分享"><a href="#文章分享" class="headerlink" title="文章分享"></a>文章分享</h2><h3 id="Lessons-from-Building-Observability-Tools-at-Netflix-–-Rain"><a href="#Lessons-from-Building-Observability-Tools-at-Netflix-–-Rain" class="headerlink" title="Lessons from Building Observability Tools at Netflix – Rain"></a><a href="https://netflixtechblog.com/lessons-from-building-observability-tools-at-netflix-7cfafed6ab17">Lessons from Building Observability Tools at Netflix</a> – Rain</h3><p>越是複雜的系統，行為追蹤上就越有挑戰，尤其是版圖橫跨世界的 Big Tech companies 所建構的系統，連企業內部的資深員工在演講時也多次坦言沒有任何一位工程師能理解整個系統架構。在面對這樣的一個近似於黑箱的龐大服務時，該如何準確擷取關鍵資訊，並將其轉換成有助於判斷當下情況的資訊，是個非常值得研究的課題。本文作者將針對 log ingestion, request tracing, metrics analysis 等等方面來分享在打造工具時所遭遇的難點與對應的解決方案。</p><h3 id="從-Freenode-脫離以及-IRC-新秀-Libera-Chat-–-gholk"><a href="#從-Freenode-脫離以及-IRC-新秀-Libera-Chat-–-gholk" class="headerlink" title="從 Freenode 脫離以及 IRC 新秀 Libera.Chat – gholk"></a><a href="https://gugod.org/2021/05/freenode-exodus-and-libera-chat/">從 Freenode 脫離以及 IRC 新秀 Libera.Chat</a> – gholk</h3><p>freenode 是長年以來被多數開源與自由軟體社群所用的 IRC 網，也是 g0v 當初起創之時的所在地。不過最近顯然經歷了不少風雨。在 5/19 時天地變色。</p><p>12 位工作人員在當天發表辭職聲明。主要大意都是對於 freenode ltd 被全數賣給 Andrew Lee 這位人物。買賣成立之後這位 Andrew Lee 似乎決定要對他新買來的公司的商轉方式伸手伸腳，而這一點與他所給的承諾前後不一。多數工作人員似乎覺得這為新來的作風很有問題，與 freenode 創辦初衷方向偏離，所以離職。 </p><p>而在 5/19 同一天，這些工作人員所設立的新網絡 Libera.chat 出現。這整件事也公表於世。一群共事十幾年的人脫離舊公司後跳出來再開設一間業務一模一樣的新公司，他們顯然十分喜歡做這件事。也是還真是謝謝他們在這近二十年間提供服務，讓 freenode 長年能為免費且與監視資本主義沾不上邊。之後會演變成怎麼樣呢。</p><h3 id="英文-研究宣稱比特幣消耗的能源小於傳統金融業-–-gholk"><a href="#英文-研究宣稱比特幣消耗的能源小於傳統金融業-–-gholk" class="headerlink" title="[英文] 研究宣稱比特幣消耗的能源小於傳統金融業 – gholk"></a><a href="https://www.independent.co.uk/life-style/gadgets-and-tech/bitcoin-mining-environment-climate-crypto-b1849211.html">[英文] 研究宣稱比特幣消耗的能源小於傳統金融業</a> – gholk</h3><p>加密貨幣使用電腦進行大量計算以 <strong>開採</strong> 與 <strong>記錄</strong> 交易過程，因此常被批評消耗過多能源在沒有意義的事上，特斯拉執行長馬斯克即因此決定取消特斯拉透過比特幣支付的銷售管道。但一項新研究估計了全世界在比特幣上所消耗的能源，為 113.89 tera watts，尚少於全世界傳統銀行業的耗能 263.73 tera watts，與金礦開採的耗能 240.61 tera watts。</p><p>但考量目前比特幣仍屬於發展期，耗能也許還沒到達頂峰，而目前銀行業的耗能，已經是實際支撐全球使用規模的結果；要以此斷言比特幣較傳統金融業節約能源並不合理。</p>]]></content:encoded>
+      
+      
+      
+      <category domain="http://weekly.ccns.io/tags/weekly/">weekly</category>
+      
+      
+      <comments>http://weekly.ccns.io/week26/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Week #25 - 現在不渴未來也是會渴，所以我現在喝是為了預防未來</title>
+      <link>http://weekly.ccns.io/week25/</link>
+      <guid>http://weekly.ccns.io/week25/</guid>
+      <pubDate>Mon, 24 May 2021 02:40:01 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h2 id=&quot;專欄-電子布告欄系統與近代網路次文化發展史&quot;&gt;&lt;a href=&quot;#專欄-電子布告欄系統與近代網路次文化發展史&quot; class=&quot;headerlink&quot; title=&quot;[專欄] 電子布告欄系統與近代網路次文化發展史&quot;&gt;&lt;/a&gt;[專欄] 電子布告欄系統與近代網路次文化發</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h2 id="專欄-電子布告欄系統與近代網路次文化發展史"><a href="#專欄-電子布告欄系統與近代網路次文化發展史" class="headerlink" title="[專欄] 電子布告欄系統與近代網路次文化發展史"></a>[專欄] 電子布告欄系統與近代網路次文化發展史</h2><h3 id="夢之大地-Maple3-的-BRH-看板閱讀紀錄系統-–-IID-Iweidieng-Iep"><a href="#夢之大地-Maple3-的-BRH-看板閱讀紀錄系統-–-IID-Iweidieng-Iep" class="headerlink" title="夢之大地(Maple3) 的 BRH 看板閱讀紀錄系統 – IID (Iweidieng Iep)"></a><a href="https://github.com/ccns/dreambbs/wiki/BoardReadingHistory-zh_tw">夢之大地(Maple3) 的 BRH 看板閱讀紀錄系統</a> – IID (Iweidieng Iep)</h3><p>BRH 看板閱讀紀錄系統是 MapleBBS 3 所使用的看板閱讀紀錄系統，而 BRH 是此系統所使用的資料結構。在 BBS 使用者目錄下的 .BRH 檔是匯集了此使用者閱讀的所有看板的 BRH 的輸出。MapleBBS 3.00a 時，開發者在 BRH 相關函式誤用了 <code>memcpy</code> 來移動記憶體範圍可能重疊的 BRH 資料，產生 undefined behavior 而未加以修正。使得在較新的作業系統上運作時，會因為 memcpy 最佳化的 undefined behavior 而出現 BRHs 損壞的現象。本篇文章作者已經將相關細節記錄在文章中並實作在現行的夢之大地 BBS 上，希望對其他嘗試移植系統到較新平臺的 Maple3 BBS 站臺開發人員有所幫助，進而增加類似系統至今能夠持續被維護的可能。</p><h2 id="隨機性技術隨筆"><a href="#隨機性技術隨筆" class="headerlink" title="隨機性技術隨筆"></a>隨機性技術隨筆</h2><h3 id="對下一代即時通訊系統的想像-–-gholk"><a href="#對下一代即時通訊系統的想像-–-gholk" class="headerlink" title="對下一代即時通訊系統的想像 – gholk"></a><a href="http://gholk.github.io/instant-message-app-future-work.html">對下一代即時通訊系統的想像</a> – gholk</h3><p>現代智慧型手機上的即時通訊軟體都有許多體制上的缺陷， 包含不自由、不安全、侵犯隱私、依賴中心伺服器等。 自由軟體界蠻重視這些議題，也都有提出對應的解決方法， 本文介紹我自己的理解與對應的軟體。</p><h3 id="筆記-API-設計概念-下篇-LanKuDot"><a href="#筆記-API-設計概念-下篇-LanKuDot" class="headerlink" title="[筆記] API 設計概念 - 下篇 - LanKuDot"></a><a href="https://airfishqi.blogspot.com/2020/07/api_12.html">[筆記] API 設計概念 - 下篇</a> - LanKuDot</h3><p>之前為了 python 專案要提供 module API 給使用者使用，而去搜尋相關資料，找到這場 Google 的演講 - 「How To Design A Good API and Why it Matters」。當中提到平常寫程式就是一種 API 設計，因而覺得演講中的概念對於寫程式的觀念相當有幫助，所以將其整理成兩篇筆記。延續<a href="https://weekly.ccns.io/week9/">上篇</a>，本篇為下篇，記錄演講下半場的內容，主要為類別設計與函式設計的概念。</p><h2 id="文章分享"><a href="#文章分享" class="headerlink" title="文章分享"></a>文章分享</h2><h3 id="翻譯-即時通大戰-Chat-Wars-上篇-–-gholk"><a href="#翻譯-即時通大戰-Chat-Wars-上篇-–-gholk" class="headerlink" title="[翻譯] 即時通大戰 Chat Wars(上篇) – gholk"></a><a href="https://www.ptt.cc/bbs/Translate-CS/M.1398461158.A.34D.html">[翻譯] 即時通大戰 Chat Wars(上篇)</a> – gholk</h3><blockquote><p>這篇文章主要是在談早期 MSN vs AOL 的大戰。這場大戰其實結果還滿清楚的，MSN 打倒了 AOL Instant Messenger(AIM)，成為未來十年內最成功的 IM(Instant Messenger)。這篇文章提到的不止是商場策略，而且還提到了許多技術方面的東西，尤其是 Microsoft 怎麼「破解」AOL Service Server。</p></blockquote><p>這不是我翻的，只是分享。也不要問我下篇在哪，太監了（下面沒有了），自己去看原文。</p><h3 id="System-Design-—-AWS-SNS-–-Rain"><a href="#System-Design-—-AWS-SNS-–-Rain" class="headerlink" title="System Design — AWS SNS – Rain"></a><a href="https://medium.com/swlh/system-design-creating-aws-sns-2aa1b2393577">System Design — AWS SNS</a> – Rain</h3><p>Message broker 作為一個應對無法及時消化工作量的解決方案，在流量難以預測的情境中給了我們不少幫助，但我們往往很少去深究其內部究竟是如何實現的。本篇文章中作者將會以 AWS SNS 作為示範，從比較口語上的可靠性與可用性，到細節上儲存空間與網路帶寬需求來一一討論各種考量要點。</p>]]></content:encoded>
+      
+      
+      
+      <category domain="http://weekly.ccns.io/tags/weekly/">weekly</category>
+      
+      
+      <comments>http://weekly.ccns.io/week25/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Week #24 - 慟！CCNS 雙周刊面臨斷更危機，內部辛酸文件流出</title>
+      <link>http://weekly.ccns.io/week24/</link>
+      <guid>http://weekly.ccns.io/week24/</guid>
+      <pubDate>Mon, 10 May 2021 05:33:33 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;本期周刊因為稿件不足，因此原創文章只選了二篇，故再多選一篇分享湊足六篇。&lt;/p&gt;
+&lt;p&gt;另外本期開始，我們在周刊網站增加了搜尋功能，搜尋功能位在導欄列的右側，可進行歷期周刊內文的全文搜尋；搜尋前會下載 100K 左右的全文內容，有流量限制的讀者可能要注意。&lt;/p&gt;
+&lt;h2 </description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<p>本期周刊因為稿件不足，因此原創文章只選了二篇，故再多選一篇分享湊足六篇。</p><p>另外本期開始，我們在周刊網站增加了搜尋功能，搜尋功能位在導欄列的右側，可進行歷期周刊內文的全文搜尋；搜尋前會下載 100K 左右的全文內容，有流量限制的讀者可能要注意。</p><h2 id="隨機性技術隨筆"><a href="#隨機性技術隨筆" class="headerlink" title="隨機性技術隨筆"></a>隨機性技術隨筆</h2><h3 id="用-steam-的-proton-執行-windows-exe-–-gholk"><a href="#用-steam-的-proton-執行-windows-exe-–-gholk" class="headerlink" title="用 steam 的 proton 執行 windows exe – gholk"></a><a href="http://gholk.github.io/linux-proton-wine-outside-steam.html">用 steam 的 proton 執行 windows exe</a> – gholk</h3><p>偶爾會用 wine 在 linux 下跑 exe 玩遊戲，但相容性還是有些問題。steam 之前為了推 steam linux， 在 wine 之上改良了一個 proton，相容性好很多，適合拿來玩遊戲。 我是裝 steam for linux 後，再用 steam 裝了 proton。 如果想不透過 steam 用 proton 跑 exe 檔案， 可以直接執行 proton 執行檔： <code>&quot;~/.steam/steam/steamapps/common/Proton 5.13/proton&quot; run game.exe</code> ， 另外要再設一個環境變數 <code>STEAM_COMPAT_DATA_PATH</code> 指定 proton 存資料的資料夾。</p><h3 id="CCNS-鏡像站使用說明-r2"><a href="#CCNS-鏡像站使用說明-r2" class="headerlink" title="CCNS 鏡像站使用說明 - r2"></a><a href="https://mirror.ccns.ncku.edu.tw/">CCNS 鏡像站使用說明</a> - r2</h3><p>CCNS 鏡像站成立已經有好一陣子，也陸續回報至各開源社群分享給有需要的人。有鑑於週遭的人仍然還是不太清楚如何善用此服務，目前初步使用 mkdocs 文件生成器搭配 readthedocs 主題建立了一個基本的使用說明頁面，有待有興趣利用此服務的成大學生或各界人士有一個可以摸索的依據。</p><h2 id="文章分享"><a href="#文章分享" class="headerlink" title="文章分享"></a>文章分享</h2><h3 id="不要大喊大叫-–-gholk"><a href="#不要大喊大叫-–-gholk" class="headerlink" title="不要大喊大叫 – gholk"></a><a href="https://type.cyhsu.xyz/2021/03/do-not-shout/">不要大喊大叫</a> – gholk</h3><p>目前中文网络上一种流行的做法——用方头括号、书名号、直角引号等符号标点标示关键字词，生怕你不知道【这段话】【真的】【很重要】。这种现象的背后是信息之间竞争越发激烈的社交媒体环境，有如一群人互相「大喊大叫」。在音乐行业发生的响度战争（loudness war）就是一例：唱片公司、作曲者在争夺听众耳朵的竞争压力下，依靠粗暴放大声波振幅达到提高音量感知的效果，但代价则是损害听众的听力健康，音乐作品也日渐动态范围收窄、细节损失。</p><p>此外，一些平台上也開始出現使用不符合語意的 html 標記，只求誇張渲染效果的用法。例如將預強調的文字放在 code block 語法內，以期將文字以 code block 的醒目樣式渲染，而無顧文字本身並非程式碼，根本不符合 code block 的使用場景。</p><h3 id="Rocky-Linux-8-3-RC1-Available-Now-r2"><a href="#Rocky-Linux-8-3-RC1-Available-Now-r2" class="headerlink" title="Rocky Linux 8.3 RC1 Available Now - r2"></a><a href="https://rockylinux.org/news/rocky-linux-8-3-rc1-release/">Rocky Linux 8.3 RC1 Available Now</a> - r2</h3><p>由當初的 CentOS Project 創立者再次發起，以取代 CentOS 地位目的，繼承傳統 CentOS 精神的 RockyLinux，終於釋出 8.3-RC1 測試版本了！ 需要注意的是目前仍處於測試階段，套件發布的部分目前仍以 Rocky Linux 自己的 CDN 為散佈的管道(官方表示歡迎申請 mirror)。 之後於何時發行正式版本，以及相關容器、雲端映像檔，仍待後續官方發布！有興趣的 Linux 使用者歡迎協助測試以及參與社群回饋！</p><h3 id="Serverless-Architecture-Patterns-in-AWS-–-Rain"><a href="#Serverless-Architecture-Patterns-in-AWS-–-Rain" class="headerlink" title="Serverless Architecture Patterns in AWS – Rain"></a><a href="https://waswani.medium.com/serverless-architecture-patterns-in-aws-edeab0e46a32">Serverless Architecture Patterns in AWS</a> – Rain</h3><p>具有高擴展彈性與低維護成本的 Serverless 技術在這個需要持續緊跟市場腳步的時代越來越吸引軟體工程界的關注，作者在本篇文章中會簡單列出七個常見的 Serverless 架構並簡述其適合情境。</p><h3 id="WhatsApp-and-most-alternatives-share-the-same-problem-–-gholk"><a href="#WhatsApp-and-most-alternatives-share-the-same-problem-–-gholk" class="headerlink" title="WhatsApp and most alternatives share the same problem – gholk"></a><a href="https://stuker.com/2021/whatsapp-and-most-alternatives-share-the-same-problem/">WhatsApp and most alternatives share the same problem</a> – gholk</h3><p>手機上各類即時通訊軟體的共同問題，就是都只支援在同一個軟體中的使用者互相溝通；對照下，不管你是用 yahoo 或 google 的 email，都可以互相寄信；或者是無論用中華電信或台灣大哥大，都可以互相撥打電話與傳送簡訊。文中提到了 matrix 這個聯邦式的開放協議，理論上只要同樣使用 matrix，不同的 app 與 server 間仍可以互通。法國與德國政府均有計劃開發基於 matrix 的 app。類似的協議還有 xmpp。</p>]]></content:encoded>
+      
+      
+      
+      <category domain="http://weekly.ccns.io/tags/weekly/">weekly</category>
+      
+      
+      <comments>http://weekly.ccns.io/week24/#disqus_thread</comments>
+      
+    </item>
+    
+  </channel>
+</rss>

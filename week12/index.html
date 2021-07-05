@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ccns-weekly">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/ccns-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/ccns-icon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/ccns-icon-16x16.png">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"weekly.ccns.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="[專欄] (Neo)vim你應該擴充的 text object – amikaivim 高效率編輯的背後，operator, motion, text object 的配合功不可沒。operator 是編輯的動作，text object 就是文字區塊，motion 是跳轉到文件點，透過三者的按鍵配合，就能達到所想及所得的編輯方式。 如果你有看過別人使用 vim，通常會有這種想法：怎麼隨便按幾個鍵就">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Week #12 - 巨匠之前，我是一個停車場管理員；巨匠之後，我是會用 :wq 退出 vim 的停車場管理員。">
+<meta property="og:url" content="http://weekly.ccns.io/week12/index.html">
+<meta property="og:site_name" content="CCNS 週刊">
+<meta property="og:description" content="[專欄] (Neo)vim你應該擴充的 text object – amikaivim 高效率編輯的背後，operator, motion, text object 的配合功不可沒。operator 是編輯的動作，text object 就是文字區塊，motion 是跳轉到文件點，透過三者的按鍵配合，就能達到所想及所得的編輯方式。 如果你有看過別人使用 vim，通常會有這種想法：怎麼隨便按幾個鍵就">
+<meta property="og:locale">
+<meta property="og:image" content="http://weekly.ccns.io/images/ccns-icon-180x180.png">
+<meta property="article:published_time" content="2020-10-05T01:00:00.000Z">
+<meta property="article:modified_time" content="2021-07-05T12:48:49.330Z">
+<meta property="article:author" content="NCKU CCNS">
+<meta property="article:tag" content="weekly">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://weekly.ccns.io/images/ccns-icon-180x180.png">
+
+<link rel="canonical" href="http://weekly.ccns.io/week12/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'ccns-weekly'
+  };
+</script>
+
+  <title>Week #12 - 巨匠之前，我是一個停車場管理員；巨匠之後，我是會用 :wq 退出 vim 的停車場管理員。 | CCNS 週刊</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165012295-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-165012295-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="CCNS 週刊" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="CCNS 週刊" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">CCNS 週刊</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>最新一期</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives" rel="section"><i class="fa fa-archive fa-fw"></i>歷史期數</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ccns-weekly">
+    <link itemprop="mainEntityOfPage" href="http://weekly.ccns.io/week12/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="NCKU CCNS">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CCNS 週刊">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Week #12 - 巨匠之前，我是一個停車場管理員；巨匠之後，我是會用 :wq 退出 vim 的停車場管理員。
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-10-05 09:00:00" itemprop="dateCreated datePublished" datetime="2020-10-05T09:00:00+08:00">2020-10-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-07-05 20:48:49" itemprop="dateModified" datetime="2021-07-05T20:48:49+08:00">2021-07-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="專欄-Neo-vim"><a href="#專欄-Neo-vim" class="headerlink" title="[專欄] (Neo)vim"></a>[專欄] (Neo)vim</h2><h3 id="你應該擴充的-text-object-–-amikai"><a href="#你應該擴充的-text-object-–-amikai" class="headerlink" title="你應該擴充的 text object – amikai"></a><a target="_blank" rel="noopener" href="https://amikai.github.io/2020/09/22/vim-text-object/">你應該擴充的 text object</a> – amikai</h3><p>vim 高效率編輯的背後，operator, motion, text object 的配合功不可沒。operator 是編輯的動作，text object 就是文字區塊，motion 是跳轉到文件點，透過三者的按鍵配合，就能達到所想及所得的編輯方式。</p>
+<p>如果你有看過別人使用 vim，通常會有這種想法：怎麼隨便按幾個鍵就刪這裡刪那裡複製這複製那，速度快到看不懂在幹嘛，而且還不會出錯，因為只要想好要做什麼，按鍵按下去就對了，這也是為什麼會高效率。說了一堆，反正就是 <del><strong>耍潮必備</strong></del>。</p>
+<h2 id="專欄-Random-Life-Journal"><a href="#專欄-Random-Life-Journal" class="headerlink" title="[專欄] Random Life Journal"></a>[專欄] Random Life Journal</h2><h3 id="Quickly-experience-GraphQL-with-graphene-and-Django-–-Rain"><a href="#Quickly-experience-GraphQL-with-graphene-and-Django-–-Rain" class="headerlink" title="Quickly experience GraphQL with graphene and Django – Rain"></a><a target="_blank" rel="noopener" href="https://medium.com/random-life-journal/quickly-experience-graphql-with-graphene-and-django-193873de4d4e?source=friends_link&sk=7ad75865257cf946aee62d98309ed290">Quickly experience GraphQL with graphene and Django</a> – Rain</h3><p>During my search for job opportunities in the past few weeks, I found that the frequency of the keyword “GraphQL” appears in the description of vacancies has become much higher than last year. Although I am an engineer accustomed to REST, my strong curiosity still drives me to give it a try.</p>
+<h2 id="隨機性技術隨筆"><a href="#隨機性技術隨筆" class="headerlink" title="隨機性技術隨筆"></a>隨機性技術隨筆</h2><h3 id="Entropy、Cross-Entropy-與-KL-Divergence-1-–-DC"><a href="#Entropy、Cross-Entropy-與-KL-Divergence-1-–-DC" class="headerlink" title="Entropy、Cross-Entropy 與 KL-Divergence (1)  – DC"></a><a target="_blank" rel="noopener" href="https://blog.danielchen.cc/2019/06/19/entropy-cross-entropy-and-KL-divergence-1/">Entropy、Cross-Entropy 與 KL-Divergence (1) </a> – DC</h3><p>Cross-Entropy 在 ML 中是一個常見的損失評估函數，本文從 Entropy 開始探討資訊熵背後的動機，延伸至 Cross-Entroy，並解釋為何 Cross-Entropy 為何常被使用作 Loss function。</p>
+<h2 id="文章分享"><a href="#文章分享" class="headerlink" title="文章分享"></a>文章分享</h2><h3 id="【PM總動員】如何為產品注入玩心？Fourdesire-遊戲化設計的五個心法-–-Rain"><a href="#【PM總動員】如何為產品注入玩心？Fourdesire-遊戲化設計的五個心法-–-Rain" class="headerlink" title="【PM總動員】如何為產品注入玩心？Fourdesire 遊戲化設計的五個心法 – Rain"></a><a target="_blank" rel="noopener" href="https://medium.com/3pm-lab/%E5%A6%82%E4%BD%95%E7%82%BA%E7%94%A2%E5%93%81%E6%B3%A8%E5%85%A5%E7%8E%A9%E5%BF%83-%E4%BA%94%E5%80%8B%E5%BF%83%E6%B3%95%E5%88%86%E4%BA%AB-e73b40d3113e">【PM總動員】如何為產品注入玩心？Fourdesire 遊戲化設計的五個心法</a> – Rain</h3><p>透過獎勵機制、視覺刺激、成就感驅動等等遊戲機制的手法，在日常生活中可說是越來越常見、包括賣場會員消費集點換取折扣、健身房大螢幕投影所有飛輪使用者的卡路里消耗量、尊榮會員獨享贈品等等。文中採訪了 Fourdesire 團隊中負責經營《記帳城市》的製作人，描述他在工作中關於在產品注入遊戲化機制的心法。</p>
+<h3 id="英文-關閉-ssh-連線時的公鑰檢查-–-gholk"><a href="#英文-關閉-ssh-連線時的公鑰檢查-–-gholk" class="headerlink" title="[英文] 關閉 ssh 連線時的公鑰檢查 – gholk"></a><a target="_blank" rel="noopener" href="https://www.shellhacks.com/disable-ssh-host-key-checking/">[英文] 關閉 ssh 連線時的公鑰檢查</a> – gholk</h3><p>ssh 連線為了防止中間人攻擊，預設會檢查對方主機的公鑰以驗證身份，若本機的資料庫中沒有對方的公鑰供檢查，則會主動詢問使用者是否確定該公鑰正確，才進行連線，並將該公鑰加入本機資料庫，以防止未來可能的中間人攻擊。但在使用 ssh 進行 port forwarding 時，常會將對方的伺服器轉發到 localhost 位址，導致 ssh 將 localhost 加入本機的資料庫中。文中使用 ssh_config 中 Host 的萬用字元匹配，來關閉 ssh 對特定位址連線的驗證。</p>
+<p>除了文中介紹的在 Host 中使用萬用字元匹配：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Host 192.168.* localhost</span><br><span class="line">StrictHostKeyChecking no</span><br><span class="line">UserKnownHostsFile /dev/null</span><br></pre></td></tr></table></figure>
+
+<p>也可以使用 alias 來建立不檢查公鑰的 ssh 命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> f is <span class="keyword">for</span> -f like ln -f, meaning <span class="keyword">do</span> not warning or ask.</span></span><br><span class="line">alias sshf=&#x27;ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null&#x27;</span><br></pre></td></tr></table></figure>
+
+<h3 id="函數式程式設計風格-–-gholk"><a href="#函數式程式設計風格-–-gholk" class="headerlink" title="函數式程式設計風格 – gholk"></a><a target="_blank" rel="noopener" href="http://coolshell.cn/articles/10822.html">函數式程式設計風格</a> – gholk</h3><p>近年吹起了一股函數式程式設計風潮，主要是硬體的進步，讓過去已十分完善的理論能實作。文內介紹了各大主流語言中實作的函數式風格，下次不妨嘗試，用函數的方式去思考；描述幹什麼，而非怎麼幹。</p>
+
+    </div>
+
+    
+    
+    <hr>
+<p>這是由成大網路愛好社 CCNS 所推出的週刊，目前為雙週更新一次，裡面的文章都是由本社團裡面的編輯們自己所撰寫的文章，或在週刊發行期間內所挑選出來的優質文章，加上由編輯們撰寫的註解及評論，文章主要與科技相關，不過如果有編輯覺得值得推薦的非科技相關文章也會刊載，如果有任何建議，歡迎發送 E-Mail 到 <a href="mailto:weekly@ccns.ncku.edu.tw">weekly@ccns.ncku.edu.tw</a>，或是直接私訊到 <a href="https://www.facebook.com/ncku.ccns/" target="_blank" rel="noopener">CCNS 電腦與網路愛好社</a>，最後，歡迎分享此週刊！</p>
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>作者： </strong>NCKU CCNS
+  </li>
+  <li class="post-copyright-link">
+    <strong>文章連結：</strong>
+    <a href="http://weekly.ccns.io/week12/" title="Week #12 - 巨匠之前，我是一個停車場管理員；巨匠之後，我是會用 :wq 退出 vim 的停車場管理員。">http://weekly.ccns.io/week12/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-SA</a> 許可協議。轉載請註明出處！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/weekly/" rel="tag"># weekly</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/week11/" rel="prev" title="Week #11 - 加入 CCNS 前，我是只能吃 480p 狗糧的動畫廢宅；加入 CCNS 後……">
+      <i class="fa fa-chevron-left"></i> Week #11 - 加入 CCNS 前，我是只能吃 480p 狗糧的動畫廢宅；加入 CCNS 後……
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/week13/" rel="next" title="Week #13 - 任何 bug 或 feature 在被觀察前，都處在 feature 與 bug 的疊加態中">
+      Week #13 - 任何 bug 或 feature 在被觀察前，都處在 feature 與 bug 的疊加態中 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%88%E6%AC%84-Neo-vim"><span class="nav-number">1.</span> <span class="nav-text">[專欄] (Neo)vim</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%A0%E6%87%89%E8%A9%B2%E6%93%B4%E5%85%85%E7%9A%84-text-object-%E2%80%93-amikai"><span class="nav-number">1.1.</span> <span class="nav-text">你應該擴充的 text object – amikai</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%88%E6%AC%84-Random-Life-Journal"><span class="nav-number">2.</span> <span class="nav-text">[專欄] Random Life Journal</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Quickly-experience-GraphQL-with-graphene-and-Django-%E2%80%93-Rain"><span class="nav-number">2.1.</span> <span class="nav-text">Quickly experience GraphQL with graphene and Django – Rain</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%A8%E6%A9%9F%E6%80%A7%E6%8A%80%E8%A1%93%E9%9A%A8%E7%AD%86"><span class="nav-number">3.</span> <span class="nav-text">隨機性技術隨筆</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Entropy%E3%80%81Cross-Entropy-%E8%88%87-KL-Divergence-1-%E2%80%93-DC"><span class="nav-number">3.1.</span> <span class="nav-text">Entropy、Cross-Entropy 與 KL-Divergence (1)  – DC</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E5%88%86%E4%BA%AB"><span class="nav-number">4.</span> <span class="nav-text">文章分享</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90PM%E7%B8%BD%E5%8B%95%E5%93%A1%E3%80%91%E5%A6%82%E4%BD%95%E7%82%BA%E7%94%A2%E5%93%81%E6%B3%A8%E5%85%A5%E7%8E%A9%E5%BF%83%EF%BC%9FFourdesire-%E9%81%8A%E6%88%B2%E5%8C%96%E8%A8%AD%E8%A8%88%E7%9A%84%E4%BA%94%E5%80%8B%E5%BF%83%E6%B3%95-%E2%80%93-Rain"><span class="nav-number">4.1.</span> <span class="nav-text">【PM總動員】如何為產品注入玩心？Fourdesire 遊戲化設計的五個心法 – Rain</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8B%B1%E6%96%87-%E9%97%9C%E9%96%89-ssh-%E9%80%A3%E7%B7%9A%E6%99%82%E7%9A%84%E5%85%AC%E9%91%B0%E6%AA%A2%E6%9F%A5-%E2%80%93-gholk"><span class="nav-number">4.2.</span> <span class="nav-text">[英文] 關閉 ssh 連線時的公鑰檢查 – gholk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B8%E5%BC%8F%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E9%A2%A8%E6%A0%BC-%E2%80%93-gholk"><span class="nav-number">4.3.</span> <span class="nav-text">函數式程式設計風格 – gholk</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">NCKU CCNS</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+        
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">標籤</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ccns" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ccns" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/ncku.ccns" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ncku.ccns" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+  #mc_embed_signup{clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+  /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+ *      We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://ccns.us8.list-manage.com/subscribe/post?u=d6a78e94df88bbc944951a330&amp;id=79c325117e" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+  <label for="mce-EMAIL">訂閱 CCNS Weekly</label>
+  <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_d6a78e94df88bbc944951a330_79c325117e" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">NCKU CCNS</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

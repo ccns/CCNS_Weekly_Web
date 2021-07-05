@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="ccns-weekly">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/ccns-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/ccns-icon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/ccns-icon-16x16.png">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"weekly.ccns.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="本期周刊因為稿件不足，因此原創文章只選了二篇，故再多選一篇分享湊足六篇。 另外本期開始，我們在周刊網站增加了搜尋功能，搜尋功能位在導欄列的右側，可進行歷期周刊內文的全文搜尋；搜尋前會下載 100K 左右的全文內容，有流量限制的讀者可能要注意。 隨機性技術隨筆用 steam 的 proton 執行 windows exe – gholk偶爾會用 wine 在 linux 下跑 exe 玩遊戲，但相容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Week #24 - 慟！CCNS 雙周刊面臨斷更危機，內部辛酸文件流出">
+<meta property="og:url" content="http://weekly.ccns.io/week24/index.html">
+<meta property="og:site_name" content="CCNS 週刊">
+<meta property="og:description" content="本期周刊因為稿件不足，因此原創文章只選了二篇，故再多選一篇分享湊足六篇。 另外本期開始，我們在周刊網站增加了搜尋功能，搜尋功能位在導欄列的右側，可進行歷期周刊內文的全文搜尋；搜尋前會下載 100K 左右的全文內容，有流量限制的讀者可能要注意。 隨機性技術隨筆用 steam 的 proton 執行 windows exe – gholk偶爾會用 wine 在 linux 下跑 exe 玩遊戲，但相容">
+<meta property="og:locale">
+<meta property="og:image" content="http://weekly.ccns.io/images/ccns-icon-180x180.png">
+<meta property="article:published_time" content="2021-05-10T05:33:33.000Z">
+<meta property="article:modified_time" content="2021-07-05T12:48:49.330Z">
+<meta property="article:author" content="NCKU CCNS">
+<meta property="article:tag" content="weekly">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://weekly.ccns.io/images/ccns-icon-180x180.png">
+
+<link rel="canonical" href="http://weekly.ccns.io/week24/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'ccns-weekly'
+  };
+</script>
+
+  <title>Week #24 - 慟！CCNS 雙周刊面臨斷更危機，內部辛酸文件流出 | CCNS 週刊</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165012295-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-165012295-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="CCNS 週刊" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="CCNS 週刊" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">CCNS 週刊</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>最新一期</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives" rel="section"><i class="fa fa-archive fa-fw"></i>歷史期數</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ccns-weekly">
+    <link itemprop="mainEntityOfPage" href="http://weekly.ccns.io/week24/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="NCKU CCNS">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CCNS 週刊">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Week #24 - 慟！CCNS 雙周刊面臨斷更危機，內部辛酸文件流出
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-05-10 13:33:33" itemprop="dateCreated datePublished" datetime="2021-05-10T13:33:33+08:00">2021-05-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-07-05 20:48:49" itemprop="dateModified" datetime="2021-07-05T20:48:49+08:00">2021-07-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本期周刊因為稿件不足，因此原創文章只選了二篇，故再多選一篇分享湊足六篇。</p>
+<p>另外本期開始，我們在周刊網站增加了搜尋功能，搜尋功能位在導欄列的右側，可進行歷期周刊內文的全文搜尋；搜尋前會下載 100K 左右的全文內容，有流量限制的讀者可能要注意。</p>
+<h2 id="隨機性技術隨筆"><a href="#隨機性技術隨筆" class="headerlink" title="隨機性技術隨筆"></a>隨機性技術隨筆</h2><h3 id="用-steam-的-proton-執行-windows-exe-–-gholk"><a href="#用-steam-的-proton-執行-windows-exe-–-gholk" class="headerlink" title="用 steam 的 proton 執行 windows exe – gholk"></a><a target="_blank" rel="noopener" href="http://gholk.github.io/linux-proton-wine-outside-steam.html">用 steam 的 proton 執行 windows exe</a> – gholk</h3><p>偶爾會用 wine 在 linux 下跑 exe 玩遊戲，但相容性還是有些問題。steam 之前為了推 steam linux， 在 wine 之上改良了一個 proton，相容性好很多，適合拿來玩遊戲。 我是裝 steam for linux 後，再用 steam 裝了 proton。 如果想不透過 steam 用 proton 跑 exe 檔案， 可以直接執行 proton 執行檔： <code>&quot;~/.steam/steam/steamapps/common/Proton 5.13/proton&quot; run game.exe</code> ， 另外要再設一個環境變數 <code>STEAM_COMPAT_DATA_PATH</code> 指定 proton 存資料的資料夾。</p>
+<h3 id="CCNS-鏡像站使用說明-r2"><a href="#CCNS-鏡像站使用說明-r2" class="headerlink" title="CCNS 鏡像站使用說明 - r2"></a><a target="_blank" rel="noopener" href="https://mirror.ccns.ncku.edu.tw/">CCNS 鏡像站使用說明</a> - r2</h3><p>CCNS 鏡像站成立已經有好一陣子，也陸續回報至各開源社群分享給有需要的人。有鑑於週遭的人仍然還是不太清楚如何善用此服務，目前初步使用 mkdocs 文件生成器搭配 readthedocs 主題建立了一個基本的使用說明頁面，有待有興趣利用此服務的成大學生或各界人士有一個可以摸索的依據。</p>
+<h2 id="文章分享"><a href="#文章分享" class="headerlink" title="文章分享"></a>文章分享</h2><h3 id="不要大喊大叫-–-gholk"><a href="#不要大喊大叫-–-gholk" class="headerlink" title="不要大喊大叫 – gholk"></a><a target="_blank" rel="noopener" href="https://type.cyhsu.xyz/2021/03/do-not-shout/">不要大喊大叫</a> – gholk</h3><p>目前中文网络上一种流行的做法——用方头括号、书名号、直角引号等符号标点标示关键字词，生怕你不知道【这段话】【真的】【很重要】。这种现象的背后是信息之间竞争越发激烈的社交媒体环境，有如一群人互相「大喊大叫」。在音乐行业发生的响度战争（loudness war）就是一例：唱片公司、作曲者在争夺听众耳朵的竞争压力下，依靠粗暴放大声波振幅达到提高音量感知的效果，但代价则是损害听众的听力健康，音乐作品也日渐动态范围收窄、细节损失。</p>
+<p>此外，一些平台上也開始出現使用不符合語意的 html 標記，只求誇張渲染效果的用法。例如將預強調的文字放在 code block 語法內，以期將文字以 code block 的醒目樣式渲染，而無顧文字本身並非程式碼，根本不符合 code block 的使用場景。</p>
+<h3 id="Rocky-Linux-8-3-RC1-Available-Now-r2"><a href="#Rocky-Linux-8-3-RC1-Available-Now-r2" class="headerlink" title="Rocky Linux 8.3 RC1 Available Now - r2"></a><a target="_blank" rel="noopener" href="https://rockylinux.org/news/rocky-linux-8-3-rc1-release/">Rocky Linux 8.3 RC1 Available Now</a> - r2</h3><p>由當初的 CentOS Project 創立者再次發起，以取代 CentOS 地位目的，繼承傳統 CentOS 精神的 RockyLinux，終於釋出 8.3-RC1 測試版本了！ 需要注意的是目前仍處於測試階段，套件發布的部分目前仍以 Rocky Linux 自己的 CDN 為散佈的管道(官方表示歡迎申請 mirror)。 之後於何時發行正式版本，以及相關容器、雲端映像檔，仍待後續官方發布！有興趣的 Linux 使用者歡迎協助測試以及參與社群回饋！</p>
+<h3 id="Serverless-Architecture-Patterns-in-AWS-–-Rain"><a href="#Serverless-Architecture-Patterns-in-AWS-–-Rain" class="headerlink" title="Serverless Architecture Patterns in AWS – Rain"></a><a target="_blank" rel="noopener" href="https://waswani.medium.com/serverless-architecture-patterns-in-aws-edeab0e46a32">Serverless Architecture Patterns in AWS</a> – Rain</h3><p>具有高擴展彈性與低維護成本的 Serverless 技術在這個需要持續緊跟市場腳步的時代越來越吸引軟體工程界的關注，作者在本篇文章中會簡單列出七個常見的 Serverless 架構並簡述其適合情境。</p>
+<h3 id="WhatsApp-and-most-alternatives-share-the-same-problem-–-gholk"><a href="#WhatsApp-and-most-alternatives-share-the-same-problem-–-gholk" class="headerlink" title="WhatsApp and most alternatives share the same problem – gholk"></a><a target="_blank" rel="noopener" href="https://stuker.com/2021/whatsapp-and-most-alternatives-share-the-same-problem/">WhatsApp and most alternatives share the same problem</a> – gholk</h3><p>手機上各類即時通訊軟體的共同問題，就是都只支援在同一個軟體中的使用者互相溝通；對照下，不管你是用 yahoo 或 google 的 email，都可以互相寄信；或者是無論用中華電信或台灣大哥大，都可以互相撥打電話與傳送簡訊。文中提到了 matrix 這個聯邦式的開放協議，理論上只要同樣使用 matrix，不同的 app 與 server 間仍可以互通。法國與德國政府均有計劃開發基於 matrix 的 app。類似的協議還有 xmpp。</p>
+
+    </div>
+
+    
+    
+    <hr>
+<p>這是由成大網路愛好社 CCNS 所推出的週刊，目前為雙週更新一次，裡面的文章都是由本社團裡面的編輯們自己所撰寫的文章，或在週刊發行期間內所挑選出來的優質文章，加上由編輯們撰寫的註解及評論，文章主要與科技相關，不過如果有編輯覺得值得推薦的非科技相關文章也會刊載，如果有任何建議，歡迎發送 E-Mail 到 <a href="mailto:weekly@ccns.ncku.edu.tw">weekly@ccns.ncku.edu.tw</a>，或是直接私訊到 <a href="https://www.facebook.com/ncku.ccns/" target="_blank" rel="noopener">CCNS 電腦與網路愛好社</a>，最後，歡迎分享此週刊！</p>
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>作者： </strong>NCKU CCNS
+  </li>
+  <li class="post-copyright-link">
+    <strong>文章連結：</strong>
+    <a href="http://weekly.ccns.io/week24/" title="Week #24 - 慟！CCNS 雙周刊面臨斷更危機，內部辛酸文件流出">http://weekly.ccns.io/week24/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-SA</a> 許可協議。轉載請註明出處！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/weekly/" rel="tag"># weekly</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/week23/" rel="prev" title="Week #23 - Hey! My Friend! 修 code 路比寫 code 還難～">
+      <i class="fa fa-chevron-left"></i> Week #23 - Hey! My Friend! 修 code 路比寫 code 還難～
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/week25/" rel="next" title="Week #25 - 現在不渴未來也是會渴，所以我現在喝是為了預防未來">
+      Week #25 - 現在不渴未來也是會渴，所以我現在喝是為了預防未來 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%A8%E6%A9%9F%E6%80%A7%E6%8A%80%E8%A1%93%E9%9A%A8%E7%AD%86"><span class="nav-number">1.</span> <span class="nav-text">隨機性技術隨筆</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8-steam-%E7%9A%84-proton-%E5%9F%B7%E8%A1%8C-windows-exe-%E2%80%93-gholk"><span class="nav-number">1.1.</span> <span class="nav-text">用 steam 的 proton 執行 windows exe – gholk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CCNS-%E9%8F%A1%E5%83%8F%E7%AB%99%E4%BD%BF%E7%94%A8%E8%AA%AA%E6%98%8E-r2"><span class="nav-number">1.2.</span> <span class="nav-text">CCNS 鏡像站使用說明 - r2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E5%88%86%E4%BA%AB"><span class="nav-number">2.</span> <span class="nav-text">文章分享</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E8%A6%81%E5%A4%A7%E5%96%8A%E5%A4%A7%E5%8F%AB-%E2%80%93-gholk"><span class="nav-number">2.1.</span> <span class="nav-text">不要大喊大叫 – gholk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rocky-Linux-8-3-RC1-Available-Now-r2"><span class="nav-number">2.2.</span> <span class="nav-text">Rocky Linux 8.3 RC1 Available Now - r2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Serverless-Architecture-Patterns-in-AWS-%E2%80%93-Rain"><span class="nav-number">2.3.</span> <span class="nav-text">Serverless Architecture Patterns in AWS – Rain</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WhatsApp-and-most-alternatives-share-the-same-problem-%E2%80%93-gholk"><span class="nav-number">2.4.</span> <span class="nav-text">WhatsApp and most alternatives share the same problem – gholk</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">NCKU CCNS</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+        
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">標籤</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ccns" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ccns" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/ncku.ccns" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ncku.ccns" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+  #mc_embed_signup{clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+  /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+ *      We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://ccns.us8.list-manage.com/subscribe/post?u=d6a78e94df88bbc944951a330&amp;id=79c325117e" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+  <label for="mce-EMAIL">訂閱 CCNS Weekly</label>
+  <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_d6a78e94df88bbc944951a330_79c325117e" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">NCKU CCNS</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

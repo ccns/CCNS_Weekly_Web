@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="ccns-weekly">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/ccns-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/ccns-icon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/ccns-icon-16x16.png">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"weekly.ccns.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="[專欄] Random Life Journal[English] Integrate Stripe with Python Django Elegantly – RainRecently I was responsible for the integration of Stripe online payment service, and take some notes about workflo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Week #17 - Unix 是簡單的，但只有天才才能理解這種簡單">
+<meta property="og:url" content="http://weekly.ccns.io/week17/index.html">
+<meta property="og:site_name" content="CCNS 週刊">
+<meta property="og:description" content="[專欄] Random Life Journal[English] Integrate Stripe with Python Django Elegantly – RainRecently I was responsible for the integration of Stripe online payment service, and take some notes about workflo">
+<meta property="og:locale">
+<meta property="og:image" content="http://weekly.ccns.io/images/ccns-icon-180x180.png">
+<meta property="article:published_time" content="2020-12-14T02:00:00.000Z">
+<meta property="article:modified_time" content="2021-07-05T12:48:49.330Z">
+<meta property="article:author" content="NCKU CCNS">
+<meta property="article:tag" content="weekly">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://weekly.ccns.io/images/ccns-icon-180x180.png">
+
+<link rel="canonical" href="http://weekly.ccns.io/week17/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'ccns-weekly'
+  };
+</script>
+
+  <title>Week #17 - Unix 是簡單的，但只有天才才能理解這種簡單 | CCNS 週刊</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165012295-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-165012295-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="CCNS 週刊" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="CCNS 週刊" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">CCNS 週刊</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>最新一期</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives" rel="section"><i class="fa fa-archive fa-fw"></i>歷史期數</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ccns-weekly">
+    <link itemprop="mainEntityOfPage" href="http://weekly.ccns.io/week17/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="NCKU CCNS">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CCNS 週刊">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Week #17 - Unix 是簡單的，但只有天才才能理解這種簡單
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-12-14 10:00:00" itemprop="dateCreated datePublished" datetime="2020-12-14T10:00:00+08:00">2020-12-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-07-05 20:48:49" itemprop="dateModified" datetime="2021-07-05T20:48:49+08:00">2021-07-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="專欄-Random-Life-Journal"><a href="#專欄-Random-Life-Journal" class="headerlink" title="[專欄] Random Life Journal"></a>[專欄] Random Life Journal</h2><h3 id="English-Integrate-Stripe-with-Python-Django-Elegantly-–-Rain"><a href="#English-Integrate-Stripe-with-Python-Django-Elegantly-–-Rain" class="headerlink" title="[English] Integrate Stripe with Python Django Elegantly – Rain"></a><a target="_blank" rel="noopener" href="https://medium.com/random-life-journal/integrate-stripe-with-python-django-elegantly-f0c4848f2b13?source=friends_link&sk=e9dbec14fe7048c04d0db90d8b8df296">[English] Integrate Stripe with Python Django Elegantly</a> – Rain</h3><p>Recently I was responsible for the integration of Stripe online payment service, and take some notes about workflow planning and SDK usage details. Stripe would be highly recommended for the payment tasks due to its software-engineering-friendly SDK, the succinct interface and complete documentation also helpful during my development.</p>
+<h2 id="專欄-Game"><a href="#專欄-Game" class="headerlink" title="[專欄] Game"></a>[專欄] Game</h2><h3 id="來作遊戲阿-EP-1-系列簡介-LanKuDot"><a href="#來作遊戲阿-EP-1-系列簡介-LanKuDot" class="headerlink" title="來作遊戲阿 - EP. 1 系列簡介 - LanKuDot"></a><a target="_blank" rel="noopener" href="https://youtu.be/SAM1_CcvPDI">來作遊戲阿 - EP. 1 系列簡介</a> - LanKuDot</h3><p>在朋友的建議下，嘗試使用影片來紀錄這次開發遊戲的過程與心得，用教學的方式，介紹元件與如何在遊戲中使用。本集簡介「來作遊戲啊」這系列的內容：以製作 NieR 9S 的駭客小遊戲為主題，紀錄遊戲開發過程，也藉此分享 Unity 的使用心得</p>
+<h2 id="隨機性技術隨筆"><a href="#隨機性技術隨筆" class="headerlink" title="隨機性技術隨筆"></a>隨機性技術隨筆</h2><h3 id="CentOS-再見，但，CentOS-Stream-真有那麼不堪嗎-–-r2"><a href="#CentOS-再見，但，CentOS-Stream-真有那麼不堪嗎-–-r2" class="headerlink" title="CentOS 再見，但，CentOS Stream 真有那麼不堪嗎? – r2"></a><a target="_blank" rel="noopener" href="https://sean0921.github.io/2020/12/10/centos-stream-replace-centos-8/">CentOS 再見，但，CentOS Stream 真有那麼不堪嗎?</a> – r2</h3><p>自從 2020/12/8 CentOS blog 和 Mailing list 相繼宣佈將要轉移開發重心到 CentOS Stream 上，並計劃要讓 CentOS 8.x (有版號的 release) 提前退休後，網路上罵聲一片。甚至有報導直接了當評論紅帽做了錯誤的舉動。本篇文章將從 RHEL/CentOS 版號意義，更新流程來釐清社群對於 CentOS Stream 的相關疑慮，以及這樣改變的必要性</p>
+<h2 id="文章分享"><a href="#文章分享" class="headerlink" title="文章分享"></a>文章分享</h2><h3 id="真．資料團隊與分工-–-DC"><a href="#真．資料團隊與分工-–-DC" class="headerlink" title="真．資料團隊與分工 – DC"></a><a target="_blank" rel="noopener" href="https://blog.v123582.tw/2020/10/31/%E7%9C%9F%E3%83%BB%E8%B3%87%E6%96%99%E5%9C%98%E9%9A%8A%E8%88%87%E5%88%86%E5%B7%A5/">真．資料團隊與分工</a> – DC</h3><p>在整個資料科學/機器學習商業應用的情境中通常橫跨了不同的領域與專業，因此在實際的環境下一個專案需要比一般的應用更多的人合作來完成，本文介紹了根據作者自己本身經驗所統整出的資料科學團隊分工。</p>
+<h3 id="tinyTorrent-从头写一个-Deno-的-BitTorrent-下载器-–-gholk"><a href="#tinyTorrent-从头写一个-Deno-的-BitTorrent-下载器-–-gholk" class="headerlink" title="tinyTorrent: 从头写一个 Deno 的 BitTorrent 下载器 – gholk"></a><a target="_blank" rel="noopener" href="https://cjting.me/2020/10/31/tinytorrent-a-deno-bt-downloader/">tinyTorrent: 从头写一个 Deno 的 BitTorrent 下载器</a> – gholk</h3><p>bit torrent 是一種 p2p 的檔案分享協議，可以解決中心伺服器在下載量過大時頻寬負擔過重的問題。Jesse Li 的 <a target="_blank" rel="noopener" href="https://blog.jse.li/posts/torrent/">Building a BitTorrent client from the ground up in Go</a> 讲述了如何用 Go 开发一个 BT 的下载器。内容涉及到 BT 协议以及下载器的代码设计，思路清晰，值得一读。作者因此受到啟發，也自己用 deno 開發了一個 bit torrent 下載器，練習 deno 的使用。</p>
+<h3 id="金融保險科技公司-OneDegree-工作半年心得-–-Rain"><a href="#金融保險科技公司-OneDegree-工作半年心得-–-Rain" class="headerlink" title="金融保險科技公司 OneDegree 工作半年心得 – Rain"></a><a target="_blank" rel="noopener" href="https://hulitw.medium.com/working-at-onedegree-378a0401130e">金融保險科技公司 OneDegree 工作半年心得</a> – Rain</h3><p>作者 Huli 為已有多年經驗的前端工程師，時常透過寫作分享在軟體工程成長之路上的所見所聞。即使對於技術已經頗有深入研究，其文筆仍能寫的淺顯易懂讓各個等級的讀者都頗有共鳴，強烈推薦對於工作煩惱或是職涯發展議題感興趣的讀者閱讀。</p>
+
+    </div>
+
+    
+    
+    <hr>
+<p>這是由成大網路愛好社 CCNS 所推出的週刊，目前為雙週更新一次，裡面的文章都是由本社團裡面的編輯們自己所撰寫的文章，或在週刊發行期間內所挑選出來的優質文章，加上由編輯們撰寫的註解及評論，文章主要與科技相關，不過如果有編輯覺得值得推薦的非科技相關文章也會刊載，如果有任何建議，歡迎發送 E-Mail 到 <a href="mailto:weekly@ccns.ncku.edu.tw">weekly@ccns.ncku.edu.tw</a>，或是直接私訊到 <a href="https://www.facebook.com/ncku.ccns/" target="_blank" rel="noopener">CCNS 電腦與網路愛好社</a>，最後，歡迎分享此週刊！</p>
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>作者： </strong>NCKU CCNS
+  </li>
+  <li class="post-copyright-link">
+    <strong>文章連結：</strong>
+    <a href="http://weekly.ccns.io/week17/" title="Week #17 - Unix 是簡單的，但只有天才才能理解這種簡單">http://weekly.ccns.io/week17/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-SA</a> 許可協議。轉載請註明出處！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/weekly/" rel="tag"># weekly</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/week16/" rel="prev" title="Week #16 - 會在 Linux/MacOS 用 PuTTY 的都是什麼人">
+      <i class="fa fa-chevron-left"></i> Week #16 - 會在 Linux/MacOS 用 PuTTY 的都是什麼人
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/week18/" rel="next" title="Week #18 - 延期機率沒有達到百分之五十的周刊是沒有未來的">
+      Week #18 - 延期機率沒有達到百分之五十的周刊是沒有未來的 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%88%E6%AC%84-Random-Life-Journal"><span class="nav-number">1.</span> <span class="nav-text">[專欄] Random Life Journal</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#English-Integrate-Stripe-with-Python-Django-Elegantly-%E2%80%93-Rain"><span class="nav-number">1.1.</span> <span class="nav-text">[English] Integrate Stripe with Python Django Elegantly – Rain</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%88%E6%AC%84-Game"><span class="nav-number">2.</span> <span class="nav-text">[專欄] Game</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%86%E4%BD%9C%E9%81%8A%E6%88%B2%E9%98%BF-EP-1-%E7%B3%BB%E5%88%97%E7%B0%A1%E4%BB%8B-LanKuDot"><span class="nav-number">2.1.</span> <span class="nav-text">來作遊戲阿 - EP. 1 系列簡介 - LanKuDot</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%A8%E6%A9%9F%E6%80%A7%E6%8A%80%E8%A1%93%E9%9A%A8%E7%AD%86"><span class="nav-number">3.</span> <span class="nav-text">隨機性技術隨筆</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CentOS-%E5%86%8D%E8%A6%8B%EF%BC%8C%E4%BD%86%EF%BC%8CCentOS-Stream-%E7%9C%9F%E6%9C%89%E9%82%A3%E9%BA%BC%E4%B8%8D%E5%A0%AA%E5%97%8E-%E2%80%93-r2"><span class="nav-number">3.1.</span> <span class="nav-text">CentOS 再見，但，CentOS Stream 真有那麼不堪嗎? – r2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E5%88%86%E4%BA%AB"><span class="nav-number">4.</span> <span class="nav-text">文章分享</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9C%9F%EF%BC%8E%E8%B3%87%E6%96%99%E5%9C%98%E9%9A%8A%E8%88%87%E5%88%86%E5%B7%A5-%E2%80%93-DC"><span class="nav-number">4.1.</span> <span class="nav-text">真．資料團隊與分工 – DC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tinyTorrent-%E4%BB%8E%E5%A4%B4%E5%86%99%E4%B8%80%E4%B8%AA-Deno-%E7%9A%84-BitTorrent-%E4%B8%8B%E8%BD%BD%E5%99%A8-%E2%80%93-gholk"><span class="nav-number">4.2.</span> <span class="nav-text">tinyTorrent: 从头写一个 Deno 的 BitTorrent 下载器 – gholk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%91%E8%9E%8D%E4%BF%9D%E9%9A%AA%E7%A7%91%E6%8A%80%E5%85%AC%E5%8F%B8-OneDegree-%E5%B7%A5%E4%BD%9C%E5%8D%8A%E5%B9%B4%E5%BF%83%E5%BE%97-%E2%80%93-Rain"><span class="nav-number">4.3.</span> <span class="nav-text">金融保險科技公司 OneDegree 工作半年心得 – Rain</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">NCKU CCNS</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+        
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">標籤</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ccns" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ccns" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/ncku.ccns" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ncku.ccns" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+  #mc_embed_signup{clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+  /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+ *      We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://ccns.us8.list-manage.com/subscribe/post?u=d6a78e94df88bbc944951a330&amp;id=79c325117e" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+  <label for="mce-EMAIL">訂閱 CCNS Weekly</label>
+  <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_d6a78e94df88bbc944951a330_79c325117e" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">NCKU CCNS</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

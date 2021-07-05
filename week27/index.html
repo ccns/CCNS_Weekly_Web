@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="ccns-weekly">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/ccns-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/ccns-icon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/ccns-icon-16x16.png">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"weekly.ccns.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="[專欄] Random Life JournalThe Advanced Challenge of Load Balancing – Rain這幾年處理 Load Balancing 相關問題的一些心得，若要能實現任意的分配流量的話必須滿足一些前提，其中一個就是所有 server 都必須是 stateless，如此一來一個 request 在每一台 server 的處理邏輯才會相同。然而很多用於提">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Week #27 - 人工數據大智慧田字薯餅佐鳳梨鮭魚沙拉">
+<meta property="og:url" content="http://weekly.ccns.io/week27/index.html">
+<meta property="og:site_name" content="CCNS 週刊">
+<meta property="og:description" content="[專欄] Random Life JournalThe Advanced Challenge of Load Balancing – Rain這幾年處理 Load Balancing 相關問題的一些心得，若要能實現任意的分配流量的話必須滿足一些前提，其中一個就是所有 server 都必須是 stateless，如此一來一個 request 在每一台 server 的處理邏輯才會相同。然而很多用於提">
+<meta property="og:locale">
+<meta property="og:image" content="http://weekly.ccns.io/images/ccns-icon-180x180.png">
+<meta property="article:published_time" content="2021-06-21T03:48:15.000Z">
+<meta property="article:modified_time" content="2021-07-05T12:48:49.330Z">
+<meta property="article:author" content="NCKU CCNS">
+<meta property="article:tag" content="weekly">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://weekly.ccns.io/images/ccns-icon-180x180.png">
+
+<link rel="canonical" href="http://weekly.ccns.io/week27/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'ccns-weekly'
+  };
+</script>
+
+  <title>Week #27 - 人工數據大智慧田字薯餅佐鳳梨鮭魚沙拉 | CCNS 週刊</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165012295-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-165012295-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="CCNS 週刊" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="CCNS 週刊" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">CCNS 週刊</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>最新一期</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives" rel="section"><i class="fa fa-archive fa-fw"></i>歷史期數</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ccns-weekly">
+    <link itemprop="mainEntityOfPage" href="http://weekly.ccns.io/week27/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="NCKU CCNS">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CCNS 週刊">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Week #27 - 人工數據大智慧田字薯餅佐鳳梨鮭魚沙拉
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-06-21 11:48:15" itemprop="dateCreated datePublished" datetime="2021-06-21T11:48:15+08:00">2021-06-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-07-05 20:48:49" itemprop="dateModified" datetime="2021-07-05T20:48:49+08:00">2021-07-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="專欄-Random-Life-Journal"><a href="#專欄-Random-Life-Journal" class="headerlink" title="[專欄] Random Life Journal"></a>[專欄] Random Life Journal</h2><h3 id="The-Advanced-Challenge-of-Load-Balancing-–-Rain"><a href="#The-Advanced-Challenge-of-Load-Balancing-–-Rain" class="headerlink" title="The Advanced Challenge of Load Balancing – Rain"></a><a target="_blank" rel="noopener" href="https://medium.com/geekculture/the-advanced-challenge-of-load-balancing-6f6ef5f36ec4?source=friends_link&sk=c4fda7731a4d115c07b0693f43492101">The Advanced Challenge of Load Balancing</a> – Rain</h3><p>這幾年處理 Load Balancing 相關問題的一些心得，若要能實現任意的分配流量的話必須滿足一些前提，其中一個就是所有 server 都必須是 stateless，如此一來一個 request 在每一台 server 的處理邏輯才會相同。然而很多用於提昇效能的技術如 Session 和 WebSocket 都會增加一些變數，直接套用市面上常見的 Load Balancer 而沒有進一步去研讀文件的話，很可能會忽略一些關鍵問題，進而導致服務運作異常的潛在風險。</p>
+<h2 id="隨機性技術隨筆"><a href="#隨機性技術隨筆" class="headerlink" title="隨機性技術隨筆"></a>隨機性技術隨筆</h2><h3 id="matrix-菜鳥使用心得-–-gholk"><a href="#matrix-菜鳥使用心得-–-gholk" class="headerlink" title="matrix 菜鳥使用心得 – gholk"></a><a target="_blank" rel="noopener" href="http://gholk.github.io/ccns-matrix-luser-review.html">matrix 菜鳥使用心得</a> – gholk</h3><p>一直想架一個自由的即時通訊軟體， 之前 <a target="_blank" rel="noopener" href="http://gholk.github.io/instant-message-app-future-work.html">大概研究了幾個自由的 im</a> ， 最後因為有社團的資源可以蹭，所以架了聯邦制的 im matrix。matrix 在架構上介於 discord（或 slack）與 irc 的中間， 但因為聯邦制和注重隱私，又多了一些不便。 加上很多功能還在開發中，會少一些功能，需要手動操作。 目前要直接從 discord 搬過來 matrix 會不太方便。 本文介紹了 matrix 的基本概念、使用經驗、與 discord 的比較， 最後是如何以 restful api 管理伺服器。</p>
+<h3 id="PyGMT-在-Python-製圖領域推廣-GMT-的利器-我-ok-你先用-–-r2"><a href="#PyGMT-在-Python-製圖領域推廣-GMT-的利器-我-ok-你先用-–-r2" class="headerlink" title="PyGMT, 在 Python 製圖領域推廣 GMT 的利器? 我 ok, 你先用? – r2"></a><a target="_blank" rel="noopener" href="https://sean0921.github.io/2021/06/21/pygmt-2021-6-feedback/">PyGMT, 在 Python 製圖領域推廣 GMT 的利器? 我 ok, 你先用?</a> – r2</h3><p>Generic Mapping Tools，通用製圖工具，官方以及常見的簡稱為 GMT，是在地球科學領域廣泛使用的地理製圖工具之一。它可以在各種平臺結合 Shell Script (bash、csh)，Batch file(Windows) 的特性以及第三方工具(如: awk)，撰寫腳本以進行空間資訊的數據處理及高度客製化的地圖、圖表繪製。PyGMT 於 2020 年 5 月釋出，作為 GMT 在 Python 的 API。究竟這樣的專案對於 GMT 的使用族群而言有什麼可利用之處呢？以下分享個人的使用心得。</p>
+<h2 id="文章分享"><a href="#文章分享" class="headerlink" title="文章分享"></a>文章分享</h2><h3 id="英文-聯邦制的權限管理：以-gnome-社群的-matrix-為例-–-gholk"><a href="#英文-聯邦制的權限管理：以-gnome-社群的-matrix-為例-–-gholk" class="headerlink" title="[英文] 聯邦制的權限管理：以 gnome 社群的 matrix 為例 – gholk"></a><a target="_blank" rel="noopener" href="https://blog.ergaster.org/post/20210610-sovereignty-federated-system-gnome/">[英文] 聯邦制的權限管理：以 gnome 社群的 matrix 為例</a> – gholk</h3><p>gnome 社群並沒有定義出正式的聊天平台。 最近他們決定架設 matrix，但在管理上碰到了一些問題。 他們的 matrix 是開放註冊的，不屬於 gnome 社群的人也可以註冊， 取得一個 <code>@xxxxx:gnome.org</code> 的帳號，帶來了身份識別問題。 他們一開始也並未限制頻道地址命名空間， 所有使用者都能建立 <code>#xxxxx:gnome.org</code> 的頻道。 他們還遭遇了某些頻道自治的問題。 最後，他們遷移到了 matrix 的託管平台 EMS 上。</p>
+<p>該部落格還有一些有關 gnome matrix 的文章。</p>
+<h3 id="rootfs-淺談-–-r2"><a href="#rootfs-淺談-–-r2" class="headerlink" title="rootfs 淺談 – r2"></a><a target="_blank" rel="noopener" href="https://docs.google.com/presentation/d/1v7ScSVk00PVfthV8E-dEeT3o7YcV29Hm2qdDKxHlo-Y/edit#slide=id.p">rootfs 淺談</a> – r2</h3><p>本篇技術簡報分享主要介紹了 rootfs 在 Linux 組成、Linux 開機的地位，以及如何用 FHS (檔案系統階層標準) 規範 rootfs 的架構，從各個發行版的既有資源建立 rootfs，藉由 chroot 進入 rootfs 的方式。概念看似基本，但對於想要理解容器化基礎，或是建立更為客製化的 Linux 發行版，瞭解並對照其他 Unix 家族組成架構的來說，卻是不可或缺的。另外理解 chroot 的概念也能在本地 console 操作的 Linux 機器無法開機時，快速嘗試出有效的救援方案。</p>
+<h3 id="Alpine-Slim-Stretch-Buster-Jessie-Bullseye-—-What-are-the-Differences-in-Docker-Images-–-Rain"><a href="#Alpine-Slim-Stretch-Buster-Jessie-Bullseye-—-What-are-the-Differences-in-Docker-Images-–-Rain" class="headerlink" title="Alpine, Slim, Stretch, Buster, Jessie, Bullseye — What are the Differences in Docker Images? – Rain"></a><a target="_blank" rel="noopener" href="https://medium.com/swlh/alpine-slim-stretch-buster-jessie-bullseye-bookworm-what-are-the-differences-in-docker-62171ed4531d">Alpine, Slim, Stretch, Buster, Jessie, Bullseye — What are the Differences in Docker Images?</a> – Rain</h3><p>如果你也是一名熟悉容器化服務的開發者，那麼你肯定曾經遇過打包 image 時該如何選用 base image 的問題，有些已經幫你裝了許多好用的工具讓你打包速度提升不少，但也因此體積較為龐大，有些則是有著非常小的體積，但也因為對他的不熟悉而不確定裡面是不是缺了什麼重要的工具。以 Go 語言的 docker image 來說，official 的完整版是 800+ MB，如果你是用一些公有雲提供商的免費額度虛擬機器，那麼相當於直接把可用儲存空間佔掉一半左右，選擇另個更輕量的肯定是明智之舉。本篇作者會分享常見的 docker image tag 後綴意涵，幫助大家更好的選擇需要的 base image。</p>
+
+    </div>
+
+    
+    
+    <hr>
+<p>這是由成大網路愛好社 CCNS 所推出的週刊，目前為雙週更新一次，裡面的文章都是由本社團裡面的編輯們自己所撰寫的文章，或在週刊發行期間內所挑選出來的優質文章，加上由編輯們撰寫的註解及評論，文章主要與科技相關，不過如果有編輯覺得值得推薦的非科技相關文章也會刊載，如果有任何建議，歡迎發送 E-Mail 到 <a href="mailto:weekly@ccns.ncku.edu.tw">weekly@ccns.ncku.edu.tw</a>，或是直接私訊到 <a href="https://www.facebook.com/ncku.ccns/" target="_blank" rel="noopener">CCNS 電腦與網路愛好社</a>，最後，歡迎分享此週刊！</p>
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>作者： </strong>NCKU CCNS
+  </li>
+  <li class="post-copyright-link">
+    <strong>文章連結：</strong>
+    <a href="http://weekly.ccns.io/week27/" title="Week #27 - 人工數據大智慧田字薯餅佐鳳梨鮭魚沙拉">http://weekly.ccns.io/week27/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-SA</a> 許可協議。轉載請註明出處！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/weekly/" rel="tag"># weekly</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/week26/" rel="prev" title="Week #26 - 我們都知道區塊鏈是問題的答案，但還不知道問題是什麼">
+      <i class="fa fa-chevron-left"></i> Week #26 - 我們都知道區塊鏈是問題的答案，但還不知道問題是什麼
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/week28/" rel="next" title="Week #28 - 來到 CCNS 的第 28 周，我覺得自己和社員們都很純樸">
+      Week #28 - 來到 CCNS 的第 28 周，我覺得自己和社員們都很純樸 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%88%E6%AC%84-Random-Life-Journal"><span class="nav-number">1.</span> <span class="nav-text">[專欄] Random Life Journal</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Advanced-Challenge-of-Load-Balancing-%E2%80%93-Rain"><span class="nav-number">1.1.</span> <span class="nav-text">The Advanced Challenge of Load Balancing – Rain</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%A8%E6%A9%9F%E6%80%A7%E6%8A%80%E8%A1%93%E9%9A%A8%E7%AD%86"><span class="nav-number">2.</span> <span class="nav-text">隨機性技術隨筆</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#matrix-%E8%8F%9C%E9%B3%A5%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97-%E2%80%93-gholk"><span class="nav-number">2.1.</span> <span class="nav-text">matrix 菜鳥使用心得 – gholk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PyGMT-%E5%9C%A8-Python-%E8%A3%BD%E5%9C%96%E9%A0%98%E5%9F%9F%E6%8E%A8%E5%BB%A3-GMT-%E7%9A%84%E5%88%A9%E5%99%A8-%E6%88%91-ok-%E4%BD%A0%E5%85%88%E7%94%A8-%E2%80%93-r2"><span class="nav-number">2.2.</span> <span class="nav-text">PyGMT, 在 Python 製圖領域推廣 GMT 的利器? 我 ok, 你先用? – r2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E5%88%86%E4%BA%AB"><span class="nav-number">3.</span> <span class="nav-text">文章分享</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8B%B1%E6%96%87-%E8%81%AF%E9%82%A6%E5%88%B6%E7%9A%84%E6%AC%8A%E9%99%90%E7%AE%A1%E7%90%86%EF%BC%9A%E4%BB%A5-gnome-%E7%A4%BE%E7%BE%A4%E7%9A%84-matrix-%E7%82%BA%E4%BE%8B-%E2%80%93-gholk"><span class="nav-number">3.1.</span> <span class="nav-text">[英文] 聯邦制的權限管理：以 gnome 社群的 matrix 為例 – gholk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rootfs-%E6%B7%BA%E8%AB%87-%E2%80%93-r2"><span class="nav-number">3.2.</span> <span class="nav-text">rootfs 淺談 – r2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Alpine-Slim-Stretch-Buster-Jessie-Bullseye-%E2%80%94-What-are-the-Differences-in-Docker-Images-%E2%80%93-Rain"><span class="nav-number">3.3.</span> <span class="nav-text">Alpine, Slim, Stretch, Buster, Jessie, Bullseye — What are the Differences in Docker Images? – Rain</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">NCKU CCNS</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+        
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">標籤</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ccns" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ccns" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/ncku.ccns" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ncku.ccns" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+  #mc_embed_signup{clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+  /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+ *      We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://ccns.us8.list-manage.com/subscribe/post?u=d6a78e94df88bbc944951a330&amp;id=79c325117e" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+  <label for="mce-EMAIL">訂閱 CCNS Weekly</label>
+  <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_d6a78e94df88bbc944951a330_79c325117e" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">NCKU CCNS</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

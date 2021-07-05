@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="ccns-weekly">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/ccns-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/ccns-icon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/ccns-icon-16x16.png">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"weekly.ccns.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="[專欄] Game來作遊戲阿 - EP. 2 思考遊戲機制，找出功能 - LanKuDot在上一集確定遊戲製作的目標後，接著就是找出實現遊戲機制所需要的功能，但別急著想到什麼就作什麼，先坐下來，好好規劃，找出要作的功能，才方便規劃實作順序 隨機性技術隨筆在 shell 中管理檔案描述符 – gholklinux shell 中可以使用 0 到 9 的 file descriptor 檔案描述符來控">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Week #18 - 延期機率沒有達到百分之五十的周刊是沒有未來的">
+<meta property="og:url" content="http://weekly.ccns.io/week18/index.html">
+<meta property="og:site_name" content="CCNS 週刊">
+<meta property="og:description" content="[專欄] Game來作遊戲阿 - EP. 2 思考遊戲機制，找出功能 - LanKuDot在上一集確定遊戲製作的目標後，接著就是找出實現遊戲機制所需要的功能，但別急著想到什麼就作什麼，先坐下來，好好規劃，找出要作的功能，才方便規劃實作順序 隨機性技術隨筆在 shell 中管理檔案描述符 – gholklinux shell 中可以使用 0 到 9 的 file descriptor 檔案描述符來控">
+<meta property="og:locale">
+<meta property="og:image" content="http://weekly.ccns.io/images/ccns-icon-180x180.png">
+<meta property="article:published_time" content="2020-12-28T01:51:34.000Z">
+<meta property="article:modified_time" content="2021-07-05T12:48:49.330Z">
+<meta property="article:author" content="NCKU CCNS">
+<meta property="article:tag" content="weekly">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://weekly.ccns.io/images/ccns-icon-180x180.png">
+
+<link rel="canonical" href="http://weekly.ccns.io/week18/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'ccns-weekly'
+  };
+</script>
+
+  <title>Week #18 - 延期機率沒有達到百分之五十的周刊是沒有未來的 | CCNS 週刊</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165012295-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-165012295-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="CCNS 週刊" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="CCNS 週刊" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">CCNS 週刊</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>最新一期</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives" rel="section"><i class="fa fa-archive fa-fw"></i>歷史期數</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ccns-weekly">
+    <link itemprop="mainEntityOfPage" href="http://weekly.ccns.io/week18/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="NCKU CCNS">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CCNS 週刊">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Week #18 - 延期機率沒有達到百分之五十的周刊是沒有未來的
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-12-28 09:51:34" itemprop="dateCreated datePublished" datetime="2020-12-28T09:51:34+08:00">2020-12-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-07-05 20:48:49" itemprop="dateModified" datetime="2021-07-05T20:48:49+08:00">2021-07-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="專欄-Game"><a href="#專欄-Game" class="headerlink" title="[專欄] Game"></a>[專欄] Game</h2><h3 id="來作遊戲阿-EP-2-思考遊戲機制，找出功能-LanKuDot"><a href="#來作遊戲阿-EP-2-思考遊戲機制，找出功能-LanKuDot" class="headerlink" title="來作遊戲阿 - EP. 2 思考遊戲機制，找出功能 - LanKuDot"></a><a target="_blank" rel="noopener" href="https://youtu.be/AgCrHtz2yOs">來作遊戲阿 - EP. 2 思考遊戲機制，找出功能</a> - LanKuDot</h3><p>在上一集確定遊戲製作的目標後，接著就是找出實現遊戲機制所需要的功能，但別急著想到什麼就作什麼，先坐下來，好好規劃，找出要作的功能，才方便規劃實作順序</p>
+<h2 id="隨機性技術隨筆"><a href="#隨機性技術隨筆" class="headerlink" title="隨機性技術隨筆"></a>隨機性技術隨筆</h2><h3 id="在-shell-中管理檔案描述符-–-gholk"><a href="#在-shell-中管理檔案描述符-–-gholk" class="headerlink" title="在 shell 中管理檔案描述符 – gholk"></a><a target="_blank" rel="noopener" href="http://gholk.github.io/shell-file-descriptor-eval.html">在 shell 中管理檔案描述符</a> – gholk</h3><p>linux shell 中可以使用 0 到 9 的 file descriptor 檔案描述符來控制程式的輸入與輸出，但一些使用並不好理解。 例如重導向的順序不好理解，要將 fd 存在變數時得用到 eval， 或要測試一個 fd 有無被佔用時，只能直接嘗試重導向檢查有無錯誤。</p>
+<h3 id="在-neo-vim-裡-C-語言程式碼導覽技巧-–-amikai"><a href="#在-neo-vim-裡-C-語言程式碼導覽技巧-–-amikai" class="headerlink" title="在 (neo) vim 裡 C 語言程式碼導覽技巧 – amikai"></a><a target="_blank" rel="noopener" href="https://amikai.github.io/2020/11/28/vim-c-env-move/">在 (neo) vim 裡 C 語言程式碼導覽技巧</a> – amikai</h3><p>現代的專案開發，很少在從無到有打造，大部分都是基於現有的程式之上繼續開發或維護，進入專案之後，通常第一件事就是大量閱讀程式碼理清專案的整個脈絡，才開始著手寫 code，所以好的程式碼導覽技巧將會帶你上天堂。此篇文章將程式碼導覽情境大致拆成了三種情況，並一一去討論，希望能快速帶你學會 C 語言程式碼導覽。</p>
+<h2 id="文章分享"><a href="#文章分享" class="headerlink" title="文章分享"></a>文章分享</h2><h3 id="電死人-是電壓還是電流-觸電推理-–-gholk"><a href="#電死人-是電壓還是電流-觸電推理-–-gholk" class="headerlink" title="電死人 是電壓還是電流? 觸電推理 – gholk"></a><a target="_blank" rel="noopener" href="https://www.strongpilab.com/current-kills-people/">電死人 是電壓還是電流? 觸電推理</a> – gholk</h3><p>每過一段時間總會有人提問，到底是電壓還是電流會 電死人? 這個題目很簡單，只是答案不簡單，有好幾個層面可以討論。從表層討論到核心，答案可能都會不太一樣，這次我會直接討論核心，之後再從核心的結論往表層推論，這樣就可以得到那些看起來似乎不同的答案，其實骨子裡都是一樣的東西。</p>
+<p>由於討論的過程中所牽涉到的實作，都是用看的就可以知道的結論，所以我們不需要真的去做，只需要用想像的就足夠，因此看起來會有點偏理論，準備好的話，那我們就開始囉，先來聽聽各派的說法。</p>
+<h3 id="Minimal-safe-Bash-script-template-–-Rain"><a href="#Minimal-safe-Bash-script-template-–-Rain" class="headerlink" title="Minimal safe Bash script template – Rain"></a><a target="_blank" rel="noopener" href="https://betterdev.blog/minimal-safe-bash-script-template/?fbclid=IwAR17YYI1q8pwTZ0wky-en_vx8iQa8QHFsN4S6lZ5FsRpFFypIm7jTwpy9rA">Minimal safe Bash script template</a> – Rain</h3><p>Bach scripts 對於工程師來說可說是輕量又方便的工具，不論是連接不同程式的輸入與輸出、在 CI CD 中連接多個步驟之間的膠水程式、或是把一連串啟動程式的指令打包好都相當的實用。但是 Bash scripts 在撰寫上並沒有太過於嚴格的規範，大多數人也都僅止於執行結果正確的階段而已，但這很可能在不知不覺中對系統持續造成負面影響，比如沒有被好好處理的錯誤以及四散的中間產物檔案等等。作者透過一個簡潔的 Bash scripts template 來舉例，一一探討在撰寫時有哪些需要注意的細節。</p>
+<h3 id="神奇的-lambda-表達式-–-gholk"><a href="#神奇的-lambda-表達式-–-gholk" class="headerlink" title="神奇的 &lambda; 表達式 – gholk"></a><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/e7db2f50b012">神奇的 &lambda; 表達式</a> – gholk</h3><p>&lambda; 表達式是函數式程式設計中的核心觀念。在 &lambda; 系統中，每個表達式都是一個函數，也只接受一個函數作為參數，並返回一個單參的函數。透過 &lambda; 表達式，邱奇在 1936 年證明出 <strong>判定性問題</strong> 是無法解決的。（以上文字參考自維基百科，但不要看維基的解釋，那不是學數學或程式語言的根本看不懂。）讓我們透過本文一窺如何利用 &lambda; 表達式描述、證明問題。</p>
+
+    </div>
+
+    
+    
+    <hr>
+<p>這是由成大網路愛好社 CCNS 所推出的週刊，目前為雙週更新一次，裡面的文章都是由本社團裡面的編輯們自己所撰寫的文章，或在週刊發行期間內所挑選出來的優質文章，加上由編輯們撰寫的註解及評論，文章主要與科技相關，不過如果有編輯覺得值得推薦的非科技相關文章也會刊載，如果有任何建議，歡迎發送 E-Mail 到 <a href="mailto:weekly@ccns.ncku.edu.tw">weekly@ccns.ncku.edu.tw</a>，或是直接私訊到 <a href="https://www.facebook.com/ncku.ccns/" target="_blank" rel="noopener">CCNS 電腦與網路愛好社</a>，最後，歡迎分享此週刊！</p>
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>作者： </strong>NCKU CCNS
+  </li>
+  <li class="post-copyright-link">
+    <strong>文章連結：</strong>
+    <a href="http://weekly.ccns.io/week18/" title="Week #18 - 延期機率沒有達到百分之五十的周刊是沒有未來的">http://weekly.ccns.io/week18/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-SA</a> 許可協議。轉載請註明出處！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/weekly/" rel="tag"># weekly</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/week17/" rel="prev" title="Week #17 - Unix 是簡單的，但只有天才才能理解這種簡單">
+      <i class="fa fa-chevron-left"></i> Week #17 - Unix 是簡單的，但只有天才才能理解這種簡單
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/sp1/" rel="next" title="Sp #1 - CCNS 2020 回顧">
+      Sp #1 - CCNS 2020 回顧 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%88%E6%AC%84-Game"><span class="nav-number">1.</span> <span class="nav-text">[專欄] Game</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%86%E4%BD%9C%E9%81%8A%E6%88%B2%E9%98%BF-EP-2-%E6%80%9D%E8%80%83%E9%81%8A%E6%88%B2%E6%A9%9F%E5%88%B6%EF%BC%8C%E6%89%BE%E5%87%BA%E5%8A%9F%E8%83%BD-LanKuDot"><span class="nav-number">1.1.</span> <span class="nav-text">來作遊戲阿 - EP. 2 思考遊戲機制，找出功能 - LanKuDot</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%A8%E6%A9%9F%E6%80%A7%E6%8A%80%E8%A1%93%E9%9A%A8%E7%AD%86"><span class="nav-number">2.</span> <span class="nav-text">隨機性技術隨筆</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8-shell-%E4%B8%AD%E7%AE%A1%E7%90%86%E6%AA%94%E6%A1%88%E6%8F%8F%E8%BF%B0%E7%AC%A6-%E2%80%93-gholk"><span class="nav-number">2.1.</span> <span class="nav-text">在 shell 中管理檔案描述符 – gholk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8-neo-vim-%E8%A3%A1-C-%E8%AA%9E%E8%A8%80%E7%A8%8B%E5%BC%8F%E7%A2%BC%E5%B0%8E%E8%A6%BD%E6%8A%80%E5%B7%A7-%E2%80%93-amikai"><span class="nav-number">2.2.</span> <span class="nav-text">在 (neo) vim 裡 C 語言程式碼導覽技巧 – amikai</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E5%88%86%E4%BA%AB"><span class="nav-number">3.</span> <span class="nav-text">文章分享</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%BB%E6%AD%BB%E4%BA%BA-%E6%98%AF%E9%9B%BB%E5%A3%93%E9%82%84%E6%98%AF%E9%9B%BB%E6%B5%81-%E8%A7%B8%E9%9B%BB%E6%8E%A8%E7%90%86-%E2%80%93-gholk"><span class="nav-number">3.1.</span> <span class="nav-text">電死人 是電壓還是電流? 觸電推理 – gholk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Minimal-safe-Bash-script-template-%E2%80%93-Rain"><span class="nav-number">3.2.</span> <span class="nav-text">Minimal safe Bash script template – Rain</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A5%9E%E5%A5%87%E7%9A%84-lambda-%E8%A1%A8%E9%81%94%E5%BC%8F-%E2%80%93-gholk"><span class="nav-number">3.3.</span> <span class="nav-text">神奇的 λ 表達式 – gholk</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">NCKU CCNS</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+        
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">標籤</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ccns" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ccns" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/ncku.ccns" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ncku.ccns" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+  #mc_embed_signup{clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+  /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+ *      We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://ccns.us8.list-manage.com/subscribe/post?u=d6a78e94df88bbc944951a330&amp;id=79c325117e" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+  <label for="mce-EMAIL">訂閱 CCNS Weekly</label>
+  <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_d6a78e94df88bbc944951a330_79c325117e" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">NCKU CCNS</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="ccns-weekly">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/ccns-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/ccns-icon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/ccns-icon-16x16.png">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"weekly.ccns.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="本週帶來的是 ROS + Gazebo、pygame 碰撞偵測、如何中止 Unix 管道以及 Co-Opetition 的分享。另外暑假期間 CCNS 預計會舉辦 Rust 讀書會，詳細資訊後續會再公告在社團粉專，或加入 Discord 和我們一起討論！ [專欄] Robotic Operating System[English] RaceOn Note - Simulation – DC這次的文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Week #6 - 若人們不相信數學簡單，只因他們未意識到生命之複雜">
+<meta property="og:url" content="http://weekly.ccns.io/week6/index.html">
+<meta property="og:site_name" content="CCNS 週刊">
+<meta property="og:description" content="本週帶來的是 ROS + Gazebo、pygame 碰撞偵測、如何中止 Unix 管道以及 Co-Opetition 的分享。另外暑假期間 CCNS 預計會舉辦 Rust 讀書會，詳細資訊後續會再公告在社團粉專，或加入 Discord 和我們一起討論！ [專欄] Robotic Operating System[English] RaceOn Note - Simulation – DC這次的文">
+<meta property="og:locale">
+<meta property="og:image" content="http://weekly.ccns.io/images/ccns-icon-180x180.png">
+<meta property="article:published_time" content="2020-07-13T01:00:00.000Z">
+<meta property="article:modified_time" content="2021-07-05T12:48:49.330Z">
+<meta property="article:author" content="NCKU CCNS">
+<meta property="article:tag" content="weekly">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://weekly.ccns.io/images/ccns-icon-180x180.png">
+
+<link rel="canonical" href="http://weekly.ccns.io/week6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'ccns-weekly'
+  };
+</script>
+
+  <title>Week #6 - 若人們不相信數學簡單，只因他們未意識到生命之複雜 | CCNS 週刊</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165012295-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-165012295-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="CCNS 週刊" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="CCNS 週刊" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">CCNS 週刊</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>最新一期</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives" rel="section"><i class="fa fa-archive fa-fw"></i>歷史期數</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ccns-weekly">
+    <link itemprop="mainEntityOfPage" href="http://weekly.ccns.io/week6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="NCKU CCNS">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CCNS 週刊">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Week #6 - 若人們不相信數學簡單，只因他們未意識到生命之複雜
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-07-13 09:00:00" itemprop="dateCreated datePublished" datetime="2020-07-13T09:00:00+08:00">2020-07-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-07-05 20:48:49" itemprop="dateModified" datetime="2021-07-05T20:48:49+08:00">2021-07-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本週帶來的是 ROS + Gazebo、pygame 碰撞偵測、如何中止 Unix 管道以及 Co-Opetition 的分享。另外暑假期間 CCNS 預計會舉辦 Rust 讀書會，詳細資訊後續會再公告在<a target="_blank" rel="noopener" href="https://www.facebook.com/ncku.ccns/">社團粉專</a>，或加入 <a target="_blank" rel="noopener" href="https://discord.gg/ktSHKSq">Discord</a> 和我們一起討論！</p>
+<h2 id="專欄-Robotic-Operating-System"><a href="#專欄-Robotic-Operating-System" class="headerlink" title="[專欄] Robotic Operating System"></a>[專欄] Robotic Operating System</h2><h3 id="English-RaceOn-Note-Simulation-–-DC"><a href="#English-RaceOn-Note-Simulation-–-DC" class="headerlink" title="[English] RaceOn Note - Simulation – DC"></a><a target="_blank" rel="noopener" href="https://blog.danielchen.cc/2020/03/10/RaceOn-Note-Simulation/">[English] RaceOn Note - Simulation</a> – DC</h3><p>這次的文章也是 <a target="_blank" rel="noopener" href="https://raceon.io/">RaceOn!</a> 相關，我用 <a target="_blank" rel="noopener" href="http://gazebosim.org/">Gazebo</a> 搭建了一個模擬真實賽道的虛擬環境，因為 Gazebo 和 ROS 有相當好的整合性，我將環境搭起來後可以把我原本跑在實體車上的 Code 原封不動 include 進來使用，於是我就能在模擬的環境中調整參數、實驗而不必和其他人排隊擠實體賽道測試，且模擬環境未來還有機會拿來做更進階的自走車控制演算法研究。這次文章介紹如何將我搭建的環境跑起來，並介紹我有用到的相關工具。</p>
+<h2 id="專欄-Random-Life-Journal"><a href="#專欄-Random-Life-Journal" class="headerlink" title="[專欄] Random Life Journal"></a>[專欄] Random Life Journal</h2><h3 id="Reading-Notes-Co-Opetition-–Rain"><a href="#Reading-Notes-Co-Opetition-–Rain" class="headerlink" title="[Reading Notes] Co-Opetition –Rain"></a><a target="_blank" rel="noopener" href="https://medium.com/random-life-journal/reading-notes-co-opetition-77f62d11a8d6">[Reading Notes] Co-Opetition</a> –Rain</h3><p>Co-Opetition is a book that analyzes the ideas behind and deduces the reasons for its success by studying the business strategies of many companies over the past few decades. Includes Intel, Nintendo, American Express, NutraSweet, American Airlines, and dozens of other companies that have been using the strategies of co-opetition to change the game of business to their benefit.</p>
+<h2 id="隨機性技術隨筆"><a href="#隨機性技術隨筆" class="headerlink" title="隨機性技術隨筆"></a>隨機性技術隨筆</h2><h3 id="手刻-pygame-矩形碰撞-上篇-碰撞偵測-–-LanKuDot"><a href="#手刻-pygame-矩形碰撞-上篇-碰撞偵測-–-LanKuDot" class="headerlink" title="手刻 pygame 矩形碰撞 (上篇) - 碰撞偵測 – LanKuDot"></a><a target="_blank" rel="noopener" href="https://airfishqi.blogspot.com/2019/01/blog-post.html">手刻 pygame 矩形碰撞 (上篇) - 碰撞偵測</a> – LanKuDot</h3><p>pygame 提供的矩形碰撞偵測函式並沒有包含兩矩形相切的情況，但由於視覺上的執著，覺得兩個矩形只要有相切，也要算有碰撞，於是就開始自幹碰撞偵測的不歸路。</p>
+<h3 id="終止一組管道的正確姿勢-–-gholk"><a href="#終止一組管道的正確姿勢-–-gholk" class="headerlink" title="終止一組管道的正確姿勢 – gholk"></a><a target="_blank" rel="noopener" href="http://gholk.github.io/shell-kill-pipe-process-group.html">終止一組管道的正確姿勢</a> – gholk</h3><p>管道是類 unix 系統中十分實用的概念，連接多支程序的輸入與輸出，發揮組合的力量。但你知道在使用 kill 終止一組管道時，實際發生什麼事嗎？如何正確的關閉管道出現的每一支程序？ linux 使用程序組的概念，將一組管道中的程序分為同一組，在慣例上若 kill 系統呼叫中使用負數，即代表關閉該程序組；而在 shell 中同樣可以使用 kill 與負數代表程序組 id ，終止一組管道中的所有程序。</p>
+<h2 id="文章分享"><a href="#文章分享" class="headerlink" title="文章分享"></a>文章分享</h2><h3 id="英文-SIGSEGV-的-V-是哪裡來的-–-DC"><a href="#英文-SIGSEGV-的-V-是哪裡來的-–-DC" class="headerlink" title="[英文] SIGSEGV 的 V 是哪裡來的? – DC"></a><a target="_blank" rel="noopener" href="https://blog.cloudflare.com/why-is-there-a-v-in-sigsegv-segmentation-fault/">[英文] SIGSEGV 的 V 是哪裡來的?</a> – DC</h3><p>熟悉 Linux 作業系統的人一定知道，當程式存取到不合法的記憶體區塊時作業系統會產生一個系統錯誤，稱為 Segmentation Fault，並向程式發送 SIGSEGV 訊號，但 SIGSEGV 中的 V 到底是哪迸出來的??? 不應該叫 SIGSEG<strong>F</strong> 嗎?</p>
+<h3 id="好的分類，是用戶體驗中不可或缺的一環-–-Rain"><a href="#好的分類，是用戶體驗中不可或缺的一環-–-Rain" class="headerlink" title="好的分類，是用戶體驗中不可或缺的一環 – Rain"></a><a target="_blank" rel="noopener" href="https://medium.com/growing-vision/how-to-classify-655469c14755">好的分類，是用戶體驗中不可或缺的一環</a> – Rain</h3><p>分類是人類大腦進行認知的一種途徑，也是化繁為簡的技巧。一個好的分類系統能貼近人類思考的分類直覺與本能，並有效降低使用時的思考負荷，進而在使用者體驗上脫穎而出。</p>
+<h3 id="Rust语言的编程范式-–-gholk"><a href="#Rust语言的编程范式-–-gholk" class="headerlink" title="Rust语言的编程范式 – gholk"></a><a target="_blank" rel="noopener" href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a> – gholk</h3><p>酷殼網是中國知名程式相關部落格，主要由陳皓經營。在中國有邀請名人發表評論的風氣，如知乎的邀請回答就是此類文化的具體實現，本文即為陳皓發表其對 rust 語言的整體評論。陳皓認為 rust 是為了改進 C++ 而出現的語言，在文章中將其與 Java 、 Go 類比，rust 的特色是使用了變數的所有權與 trait 等概念。文章可以讓不熟悉 rust 的讀者能有基本的認識，衡量是否適合自己學習。</p>
+
+    </div>
+
+    
+    
+    <hr>
+<p>這是由成大網路愛好社 CCNS 所推出的週刊，目前為雙週更新一次，裡面的文章都是由本社團裡面的編輯們自己所撰寫的文章，或在週刊發行期間內所挑選出來的優質文章，加上由編輯們撰寫的註解及評論，文章主要與科技相關，不過如果有編輯覺得值得推薦的非科技相關文章也會刊載，如果有任何建議，歡迎發送 E-Mail 到 <a href="mailto:weekly@ccns.ncku.edu.tw">weekly@ccns.ncku.edu.tw</a>，或是直接私訊到 <a href="https://www.facebook.com/ncku.ccns/" target="_blank" rel="noopener">CCNS 電腦與網路愛好社</a>，最後，歡迎分享此週刊！</p>
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>作者： </strong>NCKU CCNS
+  </li>
+  <li class="post-copyright-link">
+    <strong>文章連結：</strong>
+    <a href="http://weekly.ccns.io/week6/" title="Week #6 - 若人們不相信數學簡單，只因他們未意識到生命之複雜">http://weekly.ccns.io/week6/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-SA</a> 許可協議。轉載請註明出處！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/weekly/" rel="tag"># weekly</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/week5/" rel="prev" title="Week #5 - 科技三定律之三: 所有我35歲後發展的技術都是違反直覺要遭天譴的">
+      <i class="fa fa-chevron-left"></i> Week #5 - 科技三定律之三: 所有我35歲後發展的技術都是違反直覺要遭天譴的
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/week7/" rel="next" title="Week #7 - 善有善報，星有星爆；不是不爆，十秒未到。">
+      Week #7 - 善有善報，星有星爆；不是不爆，十秒未到。 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%88%E6%AC%84-Robotic-Operating-System"><span class="nav-number">1.</span> <span class="nav-text">[專欄] Robotic Operating System</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#English-RaceOn-Note-Simulation-%E2%80%93-DC"><span class="nav-number">1.1.</span> <span class="nav-text">[English] RaceOn Note - Simulation – DC</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%88%E6%AC%84-Random-Life-Journal"><span class="nav-number">2.</span> <span class="nav-text">[專欄] Random Life Journal</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Reading-Notes-Co-Opetition-%E2%80%93Rain"><span class="nav-number">2.1.</span> <span class="nav-text">[Reading Notes] Co-Opetition –Rain</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%A8%E6%A9%9F%E6%80%A7%E6%8A%80%E8%A1%93%E9%9A%A8%E7%AD%86"><span class="nav-number">3.</span> <span class="nav-text">隨機性技術隨筆</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%8B%E5%88%BB-pygame-%E7%9F%A9%E5%BD%A2%E7%A2%B0%E6%92%9E-%E4%B8%8A%E7%AF%87-%E7%A2%B0%E6%92%9E%E5%81%B5%E6%B8%AC-%E2%80%93-LanKuDot"><span class="nav-number">3.1.</span> <span class="nav-text">手刻 pygame 矩形碰撞 (上篇) - 碰撞偵測 – LanKuDot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B5%82%E6%AD%A2%E4%B8%80%E7%B5%84%E7%AE%A1%E9%81%93%E7%9A%84%E6%AD%A3%E7%A2%BA%E5%A7%BF%E5%8B%A2-%E2%80%93-gholk"><span class="nav-number">3.2.</span> <span class="nav-text">終止一組管道的正確姿勢 – gholk</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E5%88%86%E4%BA%AB"><span class="nav-number">4.</span> <span class="nav-text">文章分享</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8B%B1%E6%96%87-SIGSEGV-%E7%9A%84-V-%E6%98%AF%E5%93%AA%E8%A3%A1%E4%BE%86%E7%9A%84-%E2%80%93-DC"><span class="nav-number">4.1.</span> <span class="nav-text">[英文] SIGSEGV 的 V 是哪裡來的? – DC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A5%BD%E7%9A%84%E5%88%86%E9%A1%9E%EF%BC%8C%E6%98%AF%E7%94%A8%E6%88%B6%E9%AB%94%E9%A9%97%E4%B8%AD%E4%B8%8D%E5%8F%AF%E6%88%96%E7%BC%BA%E7%9A%84%E4%B8%80%E7%92%B0-%E2%80%93-Rain"><span class="nav-number">4.2.</span> <span class="nav-text">好的分類，是用戶體驗中不可或缺的一環 – Rain</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rust%E8%AF%AD%E8%A8%80%E7%9A%84%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F-%E2%80%93-gholk"><span class="nav-number">4.3.</span> <span class="nav-text">Rust语言的编程范式 – gholk</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">NCKU CCNS</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+        
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">標籤</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ccns" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ccns" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/ncku.ccns" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ncku.ccns" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+  #mc_embed_signup{clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+  /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+ *      We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://ccns.us8.list-manage.com/subscribe/post?u=d6a78e94df88bbc944951a330&amp;id=79c325117e" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+  <label for="mce-EMAIL">訂閱 CCNS Weekly</label>
+  <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_d6a78e94df88bbc944951a330_79c325117e" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">NCKU CCNS</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
