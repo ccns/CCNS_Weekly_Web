@@ -33,7 +33,7 @@ Android 手機的備份檔案，常見的有 tar，也有整個檔案系統的�
 
 ### [Debian 套件打包教學指南](https://www.debian.org/doc/manuals/packaging-tutorial/packaging-tutorial.zh_TW.pdf) --- r2
 
-繼 [week26](/week26) 介紹如何用簡易方式快速打包 Debian package 後，這邊再分享一個如何「正確」打包 Debian 套件的官方指南。該指引也理應適用於所有 Debian 衍生發行版，例如 Ubuntu、MX Linux 等。這本官方手冊的優點有：1. 為正體中文版；2. 有持續被維護；3. 翻譯者為臺灣的 Debian developer — [SZ Lin](https://www.linkedin.com/in/szlin)，在臺灣其他開源社群也十分活躍。有了這樣的資源，相信要瞭解正確的套件打包知識，並且將其觀念與其他發行版對照而理解活用，將會容易許多。
+繼 [week26](/week26) 介紹如何用簡易方式快速打包 Debian package 後，這邊再分享一個如何「正確」打包 Debian 套件的官方指南。該指引也理應適用於所有 Debian 衍生發行版，例如 Ubuntu、MX Linux 等。這本官方手冊的優點有：1. 為正體中文版；2. 有持續被維護；3. 翻譯者為臺灣的 Debian developer --- [SZ Lin](https://www.linkedin.com/in/szlin)，在臺灣其他開源社群也十分活躍。有了這樣的資源，相信要瞭解正確的套件打包知識，並且將其觀念與其他發行版對照而理解活用，將會容易許多。
 
 ### [Bedtime Stories For Children: Storage Engines (pub-ver)](https://docs.google.com/presentation/d/14KkpQamsTSxhvliYUUXOGAQ_C61v0BHsefZ344HUGB8/edit?fbclid=IwAR2neFF1P8kcdk_afCYRGljXuqLIOnI_cAEANwGoVHx7X-RtJ0LxWcwU0E0#slide=id.p) --- Rain
 
