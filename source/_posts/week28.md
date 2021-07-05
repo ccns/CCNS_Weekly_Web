@@ -30,3 +30,7 @@ date: 2021-07-04 23:59:59
 ### [Debian 套件打包教學指南](https://www.debian.org/doc/manuals/packaging-tutorial/packaging-tutorial.zh_TW.pdf) -- r2
 
 繼 [week26](/week26) 介紹如何用簡易方式快速打包 Debian Package 後，這邊再分享一個如何「正確」打包 Debian 套件的官方指南。同時該指引也應該要適用於所有 Debian 衍生發行版，例如 Ubuntu、MX Linux... 等。這本官方手冊的優點是：1. 有正體中文版 2. 持續被維護 3. 翻譯者為臺灣的 Debian Developer - [SZ Lin](https://www.linkedin.com/in/szlin)，在臺灣其他開源社群也十分活躍。有了這樣的資源，相信對於瞭解正確的套件打包知識，並且將其觀念對照其他發行版對照並理解活用，相信是相對變得容易許多的事情。
+
+### [Bedtime Stories For Children: Storage Engines (pub-ver)](https://docs.google.com/presentation/d/14KkpQamsTSxhvliYUUXOGAQ_C61v0BHsefZ344HUGB8/edit?fbclid=IwAR2neFF1P8kcdk_afCYRGljXuqLIOnI_cAEANwGoVHx7X-RtJ0LxWcwU0E0#slide=id.p) -- Rain
+
+還在把 Database 當作儲藏室在用嗎？其底層儲存資料的原理其實大有學問，本篇作者將以幼稚園小孩床邊故事的風格來深入淺出 storage engine 的發展以及各個情境的取捨。
