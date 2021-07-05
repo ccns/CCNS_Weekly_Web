@@ -6,4 +6,5 @@ updates:
       interval: "daily"
     target-branch: "preview"
     labels:
-      - "npm dependencies"
+      - "npm"
+      - "dependencies"
